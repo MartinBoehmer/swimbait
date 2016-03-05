@@ -14,7 +14,10 @@ namespace swimbait
         {
 
             IPEndPoint LocalEndPoint = new IPEndPoint(IPAddress.Any, 60000);
-            IPEndPoint MulticastEndPoint = new IPEndPoint(IPAddress.Parse("239.255.255.250"), 1900);
+
+            var endpointPort = 1900;
+            var endpointIp = "239.255.255.250";
+            IPEndPoint MulticastEndPoint = new IPEndPoint(IPAddress.Parse(endpointIp), endpointPort);
 
             Socket UdpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
@@ -26,7 +29,13 @@ namespace swimbait
 
             Console.WriteLine("UDP-Socket setup done...\r\n");
 
-            string SearchString = "M-SEARCH * HTTP/1.1\r\nHOST:239.255.255.250:1900\r\nMAN:\"ssdp:discover\"\r\nST:ssdp:all\r\nMX:3\r\n\r\n";
+            string SearchString = $@"M-SEARCH * HTTP/1.1
+HOST:{endpointIp}:{endpointPort}
+MAN:""ssdp:discover""
+MX:2
+ST: urn:schemas-upnp-org:device:MediaServer:1
+
+";
 
             UdpSocket.SendTo(Encoding.UTF8.GetBytes(SearchString), SocketFlags.None, MulticastEndPoint);
 
