@@ -1,0 +1,55 @@
+Hypertext Transfer Protocol
+    NOTIFY * HTTP/1.1\r\n
+    Host: 239.255.255.250:1900\r\n
+    Content-Length: 0\r\n
+    NT: upnp:rootdevice\r\n
+    NTS: ssdp:byebye\r\n
+    USN: uuid:9ab0c000-f668-11de-9976-00a0ded0e859::upnp:rootdevice\r\n
+
+Hypertext Transfer Protocol
+    NOTIFY * HTTP/1.1\r\n
+    Host: 239.255.255.250:1900\r\n
+    Content-Length: 0\r\n
+    NT: uuid:9ab0c000-f668-11de-9976-00a0ded0e859\r\n
+    NTS: ssdp:byebye\r\n
+    USN: uuid:9ab0c000-f668-11de-9976-00a0ded0e859\r\n
+    \r\n
+
+Hypertext Transfer Protocol
+    NOTIFY * HTTP/1.1\r\n
+    Host: 239.255.255.250:1900\r\n
+    Content-Length: 0\r\n
+    NT: urn:schemas-upnp-org:device:MediaRenderer:1\r\n
+    NTS: ssdp:byebye\r\n
+    USN: uuid:9ab0c000-f668-11de-9976-00a0ded0e859::urn:schemas-upnp-org:device:MediaRenderer:1\r\n
+
+Hypertext Transfer Protocol
+    NOTIFY * HTTP/1.1\r\n
+    Host: 239.255.255.250:1900\r\n
+    Content-Length: 0\r\n
+    NT: urn:schemas-upnp-org:service:AVTransport:1\r\n
+    NTS: ssdp:byebye\r\n
+    USN: uuid:9ab0c000-f668-11de-9976-00a0ded0e859::urn:schemas-upnp-org:service:AVTransport:1\r\n
+    \r\n
+
+Hypertext Transfer Protocol
+    NOTIFY * HTTP/1.1\r\n
+    Host: 239.255.255.250:1900\r\n
+    Content-Length: 0\r\n
+    NT: urn:schemas-upnp-org:service:RenderingControl:1\r\n
+    NTS: ssdp:byebye\r\n
+    USN: uuid:9ab0c000-f668-11de-9976-00a0ded0e859::urn:schemas-upnp-org:service:RenderingControl:1\r\n
+    \r\n
+    [Full request URI: http://239.255.255.250:1900*]
+
+Hypertext Transfer Protocol
+    NOTIFY * HTTP/1.1\r\n
+    Host: 239.255.255.250:1900\r\n
+    Content-Length: 0\r\n
+    NT: urn:schemas-upnp-org:service:ConnectionManager:1\r\n
+    NTS: ssdp:byebye\r\n
+    USN: uuid:9ab0c000-f668-11de-9976-00a0ded0e859::urn:schemas-upnp-org:service:ConnectionManager:1\r\n
+    \r\n
+    [Full request URI: http://239.255.255.250:1900*]
+
+

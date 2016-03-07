@@ -1,0 +1,21 @@
+http:80 server:: YamahaExtendedControl/v1/system/setNetworkName
+
+http://192.168.1.213:49154/MediaRenderer/desc.xml. 			is that port upnp av?
+http://192.168.1.213/YamahaExtendedControl/v1/system/getFeatures JSON response
+http://192.168.1.213/YamahaExtendedControl/v1/system/getLocationInfo
+http://192.168.1.213/YamahaExtendedControl/v1/system/getDeviceInfo
+http://192.168.1.213/YamahaExtendedControl/v1/system/getNameText
+http://192.168.1.213/YamahaExtendedControl/v1/system/getTag
+http://192.168.1.213/YamahaExtendedControl/v1/system/getDistributionInfo
+http://192.168.1.213/YamahaExtendedControl/v1/system/getFuncStatus
+http://192.168.1.213/YamahaExtendedControl/v1/main/getStatus
+http://192.168.1.213/YamahaExtendedControl/v1/netusb/getPresetInfo
+http://192.168.1.213/YamahaExtendedControl/v1/system/isNewFirmwareAvailable?type=network
+http://192.168.1.213/YamahaExtendedControl/v1/netusb/getPlayInfo
+http://192.168.1.213/YamahaExtendedControl/v1/dist/getDistributionInfo
+
+
+
+http://192.168.1.213/YamahaExtendedControl/secure/v1/netusb/getAccountStatus (binary)
+
+1039	75.417217	192.168.1.181	192.168.1.173	HTTP	315	GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1 

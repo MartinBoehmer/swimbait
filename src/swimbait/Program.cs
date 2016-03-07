@@ -34,7 +34,7 @@ Host: {endpointIp}:{endpointPort}
 Content-Length: 0
 MAN: ""ssdp:discover""
 MX: 2
-ST: urn:schemas-upnp-org:device:MediaServer:1
+ST: urn:schemas-upnp-org:device:MediaRenderer:1
 
 ";
 
