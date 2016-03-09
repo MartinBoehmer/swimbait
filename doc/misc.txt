@@ -1,5 +1,8 @@
 http:80 server:: YamahaExtendedControl/v1/system/setNetworkName
 
+DLNA - 41954
+Yamaha- 80
+
 http://192.168.1.213:49154/MediaRenderer/desc.xml. 			is that port upnp av?
 http://192.168.1.213/YamahaExtendedControl/v1/system/getFeatures JSON response
 http://192.168.1.213/YamahaExtendedControl/v1/system/getLocationInfo
@@ -13,9 +16,256 @@ http://192.168.1.213/YamahaExtendedControl/v1/netusb/getPresetInfo
 http://192.168.1.213/YamahaExtendedControl/v1/system/isNewFirmwareAvailable?type=network
 http://192.168.1.213/YamahaExtendedControl/v1/netusb/getPlayInfo
 http://192.168.1.213/YamahaExtendedControl/v1/dist/getDistributionInfo
-
+		    /YamahaExtendedControl/v1/main/getSignalInfo
 
 
 http://192.168.1.213/YamahaExtendedControl/secure/v1/netusb/getAccountStatus (binary)
+http://192.168.1.213/YamahaExtendedControl/secure/v1/system/getNetworkStatus
+http://192.168.1.213/YamahaExtendedControl/v1/main/setPower?power=standby
+				
+GET /YamahaExtendedControl/v1/netusb/setPlayback?playback=play
 
-1039	75.417217	192.168.1.181	192.168.1.173	HTTP	315	GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1 
+POST /YamahaExtendedControl/v1/system/setNameText HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Content-Type: application/x-www-form-urlencoded
+X-AppName: MusicCast/1.20(iOS)
+Content-Length: 34
+Connection: keep-alive
+User-Agent: MusicCast/1.20(iOS)
+
+{"id":"main","text":"Office-chew"}
+
+    GET /YamahaExtendedControl/v1/main/setPower?power=on HTTP/1.1\r\n
+    Host: 192.168.1.213:80\r\n
+    X-AppPort: 41100\r\n
+    Accept-Encoding: gzip, deflate\r\n
+    Accept: */*\r\n
+    Accept-Language: en-au\r\n
+    Connection: keep-alive\r\n
+    X-AppName: MusicCast/1.20(iOS)\r\n
+    User-Agent: MusicCast/1.20(iOS)\r\n
+    \r\n
+
+
+POST /AVTransport/ctrl HTTP/1.1
+Host: 192.168.1.213:49154
+Accept: */*
+Content-Type: text/xml; charset="utf-8"
+Content-Length: 1202
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+SOAPACTION: "urn:schemas-upnp-org:service:AVTransport:1#SetAVTransportURI"
+Connection: keep-alive
+User-Agent: MusicCast/1.20 (iOS)
+
+<?xml version="1.0" encoding="utf-8"?><s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><u:SetAVTransportURI xmlns:u="urn:schemas-upnp-org:service:AVTransport:1"><InstanceID>0</InstanceID><CurrentURI>http://192.168.1.181:50164/audio/177d6f5e37d9a9db</CurrentURI><CurrentURIMetaData>&lt;DIDL-Lite xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:upnp=&quot;urn:schemas-upnp-org:metadata-1-0/upnp/&quot;&gt;&lt;item id=&quot;1&quot; parentID=&quot;0&quot; restricted=&quot;1&quot;&gt;&lt;dc:title&gt;Money, Money, Money&lt;/dc:title&gt;&lt;upnp:artist&gt;ABBA&lt;/upnp:artist&gt;&lt;upnp:album&gt;&lt;/upnp:album&gt;
+&lt;upnp:class&gt;object.item&lt;/upnp:class&gt;&lt;res protocolInfo="http-get:*:audio/L16;rate=44100;channels=2:DLNA.ORG_PN=LPCM;DLNA.ORG_OP=00;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=01700000000000000000000000000000" sampleFrequency="44100" bitsPerSample="16" nrAudioChannels="2"&gt;http://192.168.1.181:50164/audio/177d6f5e37d9a9db&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</CurrentURIMetaData></u:SetAVTransportURI></s:Body></s:Envelope>
+
+POST /YamahaExtendedControl/v1/dist/setServerInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Content-Type: application/x-www-form-urlencoded
+X-AppName: MusicCast/1.20(iOS)
+Content-Length: 92
+Connection: keep-alive
+User-Agent: MusicCast/1.20(iOS)
+
+{"group_id":"546720e2b44144f493f6016568068610","type":"add","client_list":["192.168.1.173"]}HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}POST /YamahaExtendedControl/v1/dist/setServerInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Content-Type: application/x-www-form-urlencoded
+X-AppName: MusicCast/1.20(iOS)
+Content-Length: 80
+Connection: keep-alive
+User-Agent: MusicCast/1.20(iOS)
+
+{"group_id":"546720e2b44144f493f6016568068610","type":"remove","client_list":[]}HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/dist/startDistribution?num=0 HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 251
+
+{"response_code":0,"input":"server","playback":"stop","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":0,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 174
+
+{"response_code":0,"group_id":"546720e2b44144f493f6016568068610","group_name":"Office-chew","role":"server","client_list":[{"ip_address":"192.168.1.173","data_type":"base"}]}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 174
+
+{"response_code":0,"group_id":"546720e2b44144f493f6016568068610","group_name":"Office-chew","role":"server","client_list":[{"ip_address":"192.168.1.173","data_type":"base"}]}POST /YamahaExtendedControl/v1/dist/setGroupName HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Content-Type: application/x-www-form-urlencoded
+X-AppName: MusicCast/1.20(iOS)
+Content-Length: 30
+Connection: keep-alive
+User-Agent: MusicCast/1.20(iOS)
+
+{"name":"Office-chew +1 Room"}HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}POST /YamahaExtendedControl/v1/dist/setGroupName HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Content-Type: application/x-www-form-urlencoded
+X-AppName: MusicCast/1.20(iOS)
+Content-Length: 30
+Connection: keep-alive
+User-Agent: MusicCast/1.20(iOS)
+
+{"name":"Office-chew +1 Room"}HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 182
+
+{"response_code":0,"group_id":"546720e2b44144f493f6016568068610","group_name":"Office-chew +1 Room","role":"server","client_list":[{"ip_address":"192.168.1.173","data_type":"base"}]}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 182
+
+{"response_code":0,"group_id":"546720e2b44144f493f6016568068610","group_name":"Office-chew +1 Room","role":"server","client_list":[{"ip_address":"192.168.1.173","data_type":"base"}]}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 182
+
+{"response_code":0,"group_id":"546720e2b44144f493f6016568068610","group_name":"Office-chew +1 Room","role":"server","client_list":[{"ip_address":"192.168.1.173","data_type":"base"}]}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 182
+
+{"response_code":0,"group_id":"546720e2b44144f493f6016568068610","group_name":"Office-chew +1 Room","role":"server","client_list":[{"ip_address":"192.168.1.173","data_type":"base"}]}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppPort: 41100
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+X-AppName: MusicCast/1.20(iOS)
+User-Agent: MusicCast/1.20(iOS)
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 251
+
+{"response_code":0,"input":"server","playback":"stop","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":0,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}
