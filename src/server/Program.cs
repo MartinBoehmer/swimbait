@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Server.Kestrel;
-using swimbait_srv2.Multicast;
-using swimbait_srv2.Services;
+using Swimbait.Server.Multicast;
+using Swimbait.Server.Services;
 
-namespace ServersDemo
+namespace Swimbait.Server
 {
     public class Program
     {

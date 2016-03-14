@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using swimbait_srv2.Multicast.Requests;
+using Swimbait.Server.Multicast.Requests;
 
-namespace swimbait_srv2.Multicast
+namespace Swimbait.Server.Multicast
 {
     public class MulticastServer : IDisposable
     {

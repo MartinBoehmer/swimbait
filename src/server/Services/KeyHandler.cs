@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace swimbait_srv2.Services
+namespace Swimbait.Server.Services
 {
     public class ConsoleKeyEventArgs : EventArgs
     {

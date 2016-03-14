@@ -14,7 +14,7 @@ using System.Net;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 
 
-namespace ServersDemo
+namespace Swimbait.Server
 {
     public class Startup
     {

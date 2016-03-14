@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace swimbait_srv2.Multicast.Requests
+namespace Swimbait.Server.Multicast.Requests
 {
     public interface IMulticastRequest
     {
