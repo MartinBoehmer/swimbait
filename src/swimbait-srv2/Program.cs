@@ -6,12 +6,14 @@ using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Server.Kestrel;
 using swimbait_srv2.Multicast;
+using swimbait_srv2.Services;
 
 namespace ServersDemo
 {
     public class Program
     {
         private readonly IServiceProvider _serviceProvider;
+        private MulticastServer _multicastServer;
 
         public Program(IServiceProvider serviceProvider)
         {
@@ -20,7 +22,8 @@ namespace ServersDemo
 
         public Task<int> Main(string[] args)
         {
-            var multicastServer = new MulticastServer();
+            var keyHandler = new KeyHandler();
+            _multicastServer = new MulticastServer();
 
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
@@ -49,14 +52,28 @@ namespace ServersDemo
                 .Build()
                 .Start();
 
-            multicastServer.Start();
+            _multicastServer.Start();
 
-            Console.ReadLine();
+            keyHandler.KeyEvent += KeyHandler_KeyEvent;
+
+            keyHandler.WaitForExit();
 
             webHost1.Dispose();
             webHost2.Dispose();
+            _multicastServer.Dispose();
 
             return Task.FromResult(0);
+        }
+
+        private void KeyHandler_KeyEvent(object sender, ConsoleKeyEventArgs e)
+        {
+            switch (e.KeyInfo.Key)
+            {
+                case ConsoleKey.M:
+                    _multicastServer.SsdpDiscover();
+                    break;
+            }
+
         }
     }
 }
