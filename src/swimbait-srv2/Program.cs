@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Server.Kestrel;
+using swimbait_srv2.Multicast;
 
 namespace ServersDemo
 {
@@ -19,6 +20,8 @@ namespace ServersDemo
 
         public Task<int> Main(string[] args)
         {
+            var multicastServer = new MulticastServer();
+
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
             builder.AddCommandLine(args);
@@ -45,6 +48,8 @@ namespace ServersDemo
                 .UseServer("Microsoft.AspNet.Server.Kestrel")
                 .Build()
                 .Start();
+
+            multicastServer.Start();
 
             Console.ReadLine();
 

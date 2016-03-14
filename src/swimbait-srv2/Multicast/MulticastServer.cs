@@ -10,8 +10,14 @@ namespace swimbait_srv2.Multicast
 {
     public class MulticastServer
     {
+        public Task Start()
+        {
+            var task = new Task(SynchronousStart);
+            task.Start();
+            return task;
+        }
 
-        public void Start()
+        private void SynchronousStart()
         {
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 60000);
 
@@ -54,6 +60,9 @@ ST: urn:schemas-upnp-org:device:MediaRenderer:1
                     {
                         Console.WriteLine(Encoding.UTF8.GetString(receiveBuffer, 0, receivedBytes));
                     }
+
+
+                    //Task.Delay(50).ConfigureAwait(false);
                 }
             }
         }
