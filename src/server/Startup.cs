@@ -46,15 +46,14 @@ namespace Swimbait.Server
             }
 
             //var serverAddress = app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses.FirstOrDefault();
+            
 
-            //app.Run(async (context) =>
-            //{
-            //    var message = String.Format("Hello World from {0}", serverAddress);
-            //    await context.Response.WriteAsync(message);
-            //});
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            var loggingConfiguration = new ConfigurationBuilder()
+                .AddJsonFile("logging.json")
+                .Build();
+            loggerFactory.AddConsole(loggingConfiguration);
+            //loggerFactory.AddDebug();
+            loggingConfiguration.ReloadOnChanged("logging.json");
 
             //app.UseIISPlatformHandler();
 
@@ -62,7 +61,7 @@ namespace Swimbait.Server
 
             //app.UseApplicationInsightsExceptionTelemetry();
 
-           // app.UseStaticFiles();
+            // app.UseStaticFiles();
 
             app.UseMvc();
         }

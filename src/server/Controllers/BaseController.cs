@@ -7,26 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Swimbait.Server.Controllers
 {
-   
-
-    [Route("api/MusicCast")]
-    public class MusicCastController : Controller
+    public class BaseController : Controller
     {
-        public MusicCastController()
+        protected ILogger Log { get; private set; }
+
+        public BaseController(ILoggerFactory loggerFactory)
         {
-
+            Log = loggerFactory.CreateLogger<BaseController>();
         }
-
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
     }
-
 }
