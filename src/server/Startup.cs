@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Server;
 using System;
 using System.Linq;
 using System.Net;
+using Microsoft.AspNet.Diagnostics;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 
 
@@ -31,6 +32,7 @@ namespace Swimbait.Server
         }
 
         public IConfiguration Configuration { get; private set; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -63,7 +65,13 @@ namespace Swimbait.Server
 
             // app.UseStaticFiles();
 
+            //app.UseStatusCodePages(context => context.HttpContext.Response.SendAsync("Handler, status code: " + context.HttpContext.Response.StatusCode, "text/plain"));
+
+            //var o = new StatusCodePagesOptions();
+            //o.
+            app.UseStatusCodePagesWithReExecute("/Error/Status/{0}");
             app.UseMvc();
+            
         }
 
 

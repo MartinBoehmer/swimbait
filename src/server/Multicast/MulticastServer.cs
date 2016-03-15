@@ -43,12 +43,7 @@ namespace Swimbait.Server.Multicast
             _multicastEndPoint = new IPEndPoint(IPAddress.Parse(_endpointIp), _endpointPort);
 
             _udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
-            //  udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             _udpSocket.Bind(localEndPoint);
-            //udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(multicastEndPoint.Address, IPAddress.Any));
-            //udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.MulticastTimeToLive, 2);
-            //udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.MulticastLoopback, true);
 
             Console.WriteLine("UDP-Socket setup done...\r\n");
 
