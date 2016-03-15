@@ -14,6 +14,7 @@ namespace Swimbait.Server.Multicast
         private Socket _udpSocket;
         bool _disposed = false;
         const int _endpointPort = 1900;
+        const int _sourcePort = 44075;
         const string _endpointIp = "239.255.255.250";
         private IPEndPoint _multicastEndPoint;
 
@@ -31,6 +32,19 @@ namespace Swimbait.Server.Multicast
             Console.WriteLine("M-Search sent...\r\n");
         }
 
+        public void JoinGroup()
+        {
+            var multicastIp = IPAddress.Parse(_endpointIp);
+            var sourceIp = IPAddress.Parse("192.168.1.10");
+            var localIp = IPAddress.Parse(_endpointIp);
+
+            byte[] membershipAddresses = new byte[12]; // 3 IPs * 4 bytes (IPv4)
+            Buffer.BlockCopy(multicastIp.GetAddressBytes(), 0, membershipAddresses, 0, 4);
+            Buffer.BlockCopy(sourceIp.GetAddressBytes(), 0, membershipAddresses, 4, 4);
+            Buffer.BlockCopy(localIp.GetAddressBytes(), 0, membershipAddresses, 8, 4);
+            _udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddSourceMembership, membershipAddresses);
+        }
+
         private void Send(IMulticastRequest request)
         {
             _udpSocket.SendTo(request.AsBytes(), SocketFlags.None, _multicastEndPoint);
@@ -38,7 +52,7 @@ namespace Swimbait.Server.Multicast
 
         private void SynchronousStart()
         {
-            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 60000);
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, _sourcePort);
 
             _multicastEndPoint = new IPEndPoint(IPAddress.Parse(_endpointIp), _endpointPort);
 

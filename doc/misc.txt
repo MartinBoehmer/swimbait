@@ -1,5 +1,6 @@
 http:80 server:: YamahaExtendedControl/v1/system/setNetworkName
 
+41100 - udp json receiving
 DLNA - 41954
 Yamaha- 80
 

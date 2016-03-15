@@ -72,6 +72,9 @@ namespace Swimbait.Server
                 case ConsoleKey.M:
                     _multicastServer.SsdpDiscover();
                     break;
+                case ConsoleKey.J:
+                    _multicastServer.JoinGroup();
+                    break;
             }
 
         }
