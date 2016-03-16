@@ -34,15 +34,23 @@ namespace Swimbait.Server.Multicast
 
         public void JoinGroup()
         {
-            var multicastIp = IPAddress.Parse(_endpointIp);
+            //var multicastIp = IPAddress.Parse(_endpointIp);
+            var multicastIp = IPAddress.Parse("224.0.0.22");
             var sourceIp = IPAddress.Parse("192.168.1.10");
-            var localIp = IPAddress.Parse(_endpointIp);
+            var localIp = IPAddress.Parse("0.0.0.0");
 
             byte[] membershipAddresses = new byte[12]; // 3 IPs * 4 bytes (IPv4)
             Buffer.BlockCopy(multicastIp.GetAddressBytes(), 0, membershipAddresses, 0, 4);
             Buffer.BlockCopy(sourceIp.GetAddressBytes(), 0, membershipAddresses, 4, 4);
             Buffer.BlockCopy(localIp.GetAddressBytes(), 0, membershipAddresses, 8, 4);
+
+            //          var bytesTest = new byte[]{0x22, 0x00, 0xeb, 0x03, 0x00, 0x00, 0x00, 0x01, 0x03, 0x00, 0x00, 0x00, 0xef, 0xff, 0xff, 0xfa};
+            //            _udpSocket.SendTo(bytesTest, SocketFlags.None, _multicastEndPoint);
+
             _udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddSourceMembership, membershipAddresses);
+
+            //var option = new MulticastOption(multicastIp);
+            //_udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, option);
         }
 
         private void Send(IMulticastRequest request)
@@ -54,9 +62,12 @@ namespace Swimbait.Server.Multicast
         {
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, _sourcePort);
 
-            _multicastEndPoint = new IPEndPoint(IPAddress.Parse(_endpointIp), _endpointPort);
+             var multicastIp = IPAddress.Parse(_endpointIp);
+            _multicastEndPoint = new IPEndPoint(multicastIp, _endpointPort);
 
             _udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            var option = new MulticastOption(multicastIp);
+            _udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, option);
             _udpSocket.Bind(localEndPoint);
 
             Console.WriteLine("UDP-Socket setup done...\r\n");

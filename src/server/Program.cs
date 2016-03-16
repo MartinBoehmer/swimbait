@@ -14,10 +14,12 @@ namespace Swimbait.Server
     {
         private readonly IServiceProvider _serviceProvider;
         private MulticastServer _multicastServer;
+        private MulticastService _multicastService;
 
         public Program(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            _multicastService = new MulticastService();
         }
 
         public Task<int> Main(string[] args)
@@ -27,7 +29,7 @@ namespace Swimbait.Server
 
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
-            builder.AddCommandLine(args);
+            builder.AddCommandLine(new[] { "server.urls=http://localhost:80;http://localhost:41954" });
             var config = builder.Build();
 
             var webHost1 = new WebHostBuilder(config)
@@ -43,14 +45,14 @@ namespace Swimbait.Server
                 Console.WriteLine("Press any key to stop the server");
             }
 
-            builder = new ConfigurationBuilder();
-            builder.AddCommandLine(new[] { "server.urls=http://localhost:5004" });
-            config = builder.Build();
+            //builder = new ConfigurationBuilder();
+            //builder.AddCommandLine(new[] { "server.urls=http://localhost:5004" });
+            //config = builder.Build();
 
-            var webHost2 = new WebHostBuilder(config)
-                .UseServer("Microsoft.AspNet.Server.Kestrel")
-                .Build()
-                .Start();
+            //var webHost2 = new WebHostBuilder(config)
+            //    .UseServer("Microsoft.AspNet.Server.Kestrel")
+            //    .Build()
+            //    .Start();
 
             _multicastServer.Start();
 
@@ -59,7 +61,7 @@ namespace Swimbait.Server
             keyHandler.WaitForExit();
 
             webHost1.Dispose();
-            webHost2.Dispose();
+            //webHost2.Dispose();
             _multicastServer.Dispose();
 
             return Task.FromResult(0);
@@ -74,6 +76,9 @@ namespace Swimbait.Server
                     break;
                 case ConsoleKey.J:
                     _multicastServer.JoinGroup();
+                    break;
+                case ConsoleKey.C:
+                    _multicastService.SendPossiblyConnectUdp();
                     break;
             }
 

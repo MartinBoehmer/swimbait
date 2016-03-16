@@ -11,13 +11,19 @@ namespace Swimbait.Server.Multicast.Requests
         byte[] AsBytes();
     }
 
-    public abstract class MulticastRequest : IMulticastRequest
+    public class MulticastRequest : IMulticastRequest
     {
         protected StringBuilder RequestBuilder { get; private set; }
 
         protected MulticastRequest()
         {
             RequestBuilder = new StringBuilder();
+        }
+
+        public MulticastRequest(string content)
+        {
+            RequestBuilder = new StringBuilder();
+            RequestBuilder.Append(content);
         }
 
         public byte[] AsBytes()
