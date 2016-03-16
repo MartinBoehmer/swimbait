@@ -34,7 +34,7 @@ namespace Swimbait.Server.Services
 
         public void SendPossiblyConnectUdp2()
         {
-            var message = new MulticastRequest("{\"location\":\"http://192.168.1.3:49154/MediaRenderer/desc.xml\",\"ack\":\"http://192.168.1.3:51000/MusicCastNetwork/InitialJoinComplete\"}");
+            var message = new MulticastRequest("{\"location\":\"http://192.168.1.3:!!DlnaHostPort!!/MediaRenderer/desc.xml\",\"ack\":\"http://192.168.1.3:51000/MusicCastNetwork/InitialJoinComplete\"}".Replace("!!DlnaHostPort!!", MusicCastHost.DlnaHostPort.ToString()));
 
             IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.1.255"), 51100);
 

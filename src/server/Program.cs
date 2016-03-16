@@ -29,7 +29,7 @@ namespace Swimbait.Server
 
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
-            builder.AddCommandLine(new[] { "server.urls=http://192.168.1.3:80;http://192.168.1.3:49154;;http://192.168.1.3:51100" });
+            builder.AddCommandLine(new[] { $"server.urls=http://192.168.1.3:80;http://192.168.1.3:{MusicCastHost.DlnaHostPort};http://192.168.1.3:51100" });
             var config = builder.Build();
 
             var webHost1 = new WebHostBuilder(config)
