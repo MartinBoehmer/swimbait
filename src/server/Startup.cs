@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Server;
 using System;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Diagnostics;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 
@@ -43,8 +44,7 @@ namespace Swimbait.Server
             var webListenerInfo = app.ServerFeatures.Get<WebListener>();
             if (webListenerInfo != null)
             {
-                webListenerInfo.AuthenticationManager.AuthenticationSchemes =
-                    AuthenticationSchemes.AllowAnonymous;
+                webListenerInfo.AuthenticationManager.AuthenticationSchemes = AuthenticationSchemes.AllowAnonymous;
             }
 
             //var serverAddress = app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses.FirstOrDefault();
@@ -67,9 +67,17 @@ namespace Swimbait.Server
 
             //app.UseStatusCodePages(context => context.HttpContext.Response.SendAsync("Handler, status code: " + context.HttpContext.Response.StatusCode, "text/plain"));
 
-            //var o = new StatusCodePagesOptions();
-            //o.
-            app.UseStatusCodePagesWithReExecute("/Error/Status/{0}");
+            var o = new StatusCodePagesOptions();
+            o.HandleAsync = context =>
+            {
+                var log = loggerFactory.CreateLogger<Startup>();
+                log.LogWarning(context.HttpContext.Request.Path);
+                return Task.FromResult(0);
+            };
+
+            app.UseStatusCodePages(o);
+            
+            //app.UseStatusCodePages("/Error/Status/{0}");
             app.UseMvc();
             
         }
