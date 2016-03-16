@@ -3,6 +3,12 @@ http:80 server:: YamahaExtendedControl/v1/system/setNetworkName
 41100 - udp json receiving
 DLNA - 41954
 Yamaha- 80
+udp to 51200 - heartbeat broadcast
+51000 - initial join complete
+
+netsh advfirewall firewall add rule name="MusicCast 51100" dir=in action=allow protocol=TCP localport=51100
+netsh advfirewall firewall add rule name="MusicCast 49154" dir=in action=allow protocol=TCP localport=49154
+netsh advfirewall firewall add rule name="HTTP 80" dir=in action=allow protocol=TCP localport=80
 
 http://192.168.1.213:49154/MediaRenderer/desc.xml. 			is that port upnp av?
 http://192.168.1.213/YamahaExtendedControl/v1/system/getFeatures JSON response
@@ -18,10 +24,14 @@ http://192.168.1.213/YamahaExtendedControl/v1/system/isNewFirmwareAvailable?type
 http://192.168.1.213/YamahaExtendedControl/v1/netusb/getPlayInfo
 http://192.168.1.213/YamahaExtendedControl/v1/dist/getDistributionInfo
 		    /YamahaExtendedControl/v1/main/getSignalInfo
+			
+GET /YamahaExtendedControl/v1/system/startInitialJoin HTTP/1.1
 
 
 http://192.168.1.213/YamahaExtendedControl/secure/v1/netusb/getAccountStatus (binary)
 http://192.168.1.213/YamahaExtendedControl/secure/v1/system/getNetworkStatus
+GET /YamahaExtendedControl/secure/v1/system/getMusicCastTreeInfo HTTP/1.1
+
 http://192.168.1.213/YamahaExtendedControl/v1/main/setPower?power=standby
 				
 GET /YamahaExtendedControl/v1/netusb/setPlayback?playback=play
@@ -270,3 +280,5 @@ Content-Type: application/json
 Content-Length: 251
 
 {"response_code":0,"input":"server","playback":"stop","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":0,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}
+
+

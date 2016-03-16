@@ -22,8 +22,7 @@ namespace Swimbait.Server.Services
         public void SendPossiblyConnectUdp()
         {
             var message = new MulticastRequest("{\"main\":{\"power\":\"on\"}}{\"netusb\":{\"play_info_updated\":true}}{\"system\":{\"location_info_updated\":true,\"stereo_pair_info_updated\":true},\"netusb\":{\"account_updated\":true,\"play_info_updated\":true}}{\"system\":{\"stereo_pair_info_updated\":true}}{\"system\":{\"location_info_updated\":true},\"netusb\":{\"play_info_updated\":true}}{\"system\":{\"name_text_updated\":true}}");
-            //    _sender.Send("", 41100, message);
-
+            
             IPEndPoint RemoteEndPoint = new IPEndPoint(
             IPAddress.Parse(controllerIp), 41100);
 
@@ -31,10 +30,18 @@ namespace Swimbait.Server.Services
             
             var bytes = message.AsBytes();
             s.SendTo(bytes, bytes.Length, SocketFlags.None, RemoteEndPoint);
-
-            //server.SendTo(data, data.Length, SocketFlags.None, RemoteEndPoint);
         }
 
+        public void SendPossiblyConnectUdp2()
+        {
+            var message = new MulticastRequest("{\"location\":\"http://192.168.1.3:49154/MediaRenderer/desc.xml\",\"ack\":\"http://192.168.1.3:51000/MusicCastNetwork/InitialJoinComplete\"}");
 
+            IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.1.255"), 51100);
+
+            Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+            var bytes = message.AsBytes();
+            s.SendTo(bytes, bytes.Length, SocketFlags.None, RemoteEndPoint);
+        }
     }
 }
