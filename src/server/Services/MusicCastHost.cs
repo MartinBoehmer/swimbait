@@ -8,5 +8,6 @@ namespace Swimbait.Server.Services
     public class MusicCastHost
     {
         public const int DlnaHostPort = 51123;
+        public const string RelayHost = "192.168.1.213";
     }
 }

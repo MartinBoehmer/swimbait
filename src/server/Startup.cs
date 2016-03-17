@@ -11,10 +11,15 @@ using Microsoft.Net.Http.Server;
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights.AspNet.Extensions;
 using Microsoft.AspNet.Diagnostics;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
-
+using System.IO;
+using System.Text;
+using Microsoft.AspNet.Mvc;
+using Swimbait.Server.Services;
 
 namespace Swimbait.Server
 {
@@ -68,11 +73,40 @@ namespace Swimbait.Server
             //app.UseStatusCodePages(context => context.HttpContext.Response.SendAsync("Handler, status code: " + context.HttpContext.Response.StatusCode, "text/plain"));
 
             var o = new StatusCodePagesOptions();
-            o.HandleAsync = context =>
+            o.HandleAsync = async context =>
             {
                 var log = loggerFactory.CreateLogger<Startup>();
                 log.LogWarning(context.HttpContext.Request.Path);
-                return Task.FromResult(0);
+                var uri = context.HttpContext.Request.GetUri();
+
+                var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
+                
+                //var relayRequest = HttpWebRequest.Create(context.HttpContext.Request.GetUri());
+                //var relayResponse = relayRequest.GetResponse();
+                //relayResponse.
+
+                if (!isFavIcon)
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+
+
+                        var relayUri = new Uri($"http://{MusicCastHost.RelayHost}" + uri.PathAndQuery);
+
+                        var result = await httpClient.GetStringAsync(relayUri);
+
+                        var debugFolder = @"D:\Downloads\swimbait\replay";
+                        Directory.CreateDirectory(debugFolder);
+                        var debugFile = Path.Combine(debugFolder, uri.GetHashCode() + ".txt");
+
+                        var sb = new StringBuilder();
+                        sb.Append("Url=");
+                        sb.AppendLine(uri.AbsolutePath);
+                        sb.Append(result);
+
+                        File.WriteAllText(debugFile, sb.ToString());
+                    }
+                }
             };
 
             app.UseStatusCodePages(o);
