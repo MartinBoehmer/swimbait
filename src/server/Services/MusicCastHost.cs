@@ -9,5 +9,6 @@ namespace Swimbait.Server.Services
     {
         public const int DlnaHostPort = 51123;
         public const string RelayHost = "192.168.1.213";
+        public string LocationId => "7345174dcfd44df2834f10deadbeef00";
     }
 }

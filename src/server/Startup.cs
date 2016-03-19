@@ -105,6 +105,11 @@ namespace Swimbait.Server
                         sb.Append(result);
 
                         File.WriteAllText(debugFile, sb.ToString());
+
+                        if (!context.HttpContext.Response.HasStarted)
+                        {
+                            await context.HttpContext.Response.WriteAsync(result);
+                        }
                     }
                 }
             };
