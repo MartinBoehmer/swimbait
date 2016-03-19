@@ -90,8 +90,10 @@ namespace Swimbait.Server
                     using (var httpClient = new HttpClient())
                     {
 
+                        // remap the port since windows is using 49154
+                        var relayPort = uri.Port == MusicCastHost.DlnaHostPort ? 49154 : uri.Port;
 
-                        var relayUri = new Uri($"http://{MusicCastHost.RelayHost}" + uri.PathAndQuery);
+                        var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + uri.PathAndQuery);
 
                         var result = await httpClient.GetStringAsync(relayUri);
 
@@ -108,6 +110,8 @@ namespace Swimbait.Server
 
                         if (!context.HttpContext.Response.HasStarted)
                         {
+                            log.LogInformation($"Man in the middle! {relayUri}");
+                            context.HttpContext.Response.StatusCode = 200;
                             await context.HttpContext.Response.WriteAsync(result);
                         }
                     }
