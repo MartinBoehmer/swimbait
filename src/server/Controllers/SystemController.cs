@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Server;
+using Newtonsoft.Json;
 using Swimbait.Server.Controllers.Requests;
 using Swimbait.Server.Controllers.Responses;
 using Swimbait.Server.Services;
@@ -40,8 +42,10 @@ namespace Swimbait.Server.Controllers
         }
         
         [HttpPost("SetLocationName")]
-        public IActionResult SetLocationName([FromBody] SetLocationNameRequest request)
+        public IActionResult SetLocationName()
         {
+            var json = Request.Form.Keys.First();
+            var request = JsonConvert.DeserializeObject<SetLocationNameRequest>(json);
             Log.LogInformation($"Set name={request.name}");
             return Ok();
         }
