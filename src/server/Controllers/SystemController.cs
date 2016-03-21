@@ -40,7 +40,22 @@ namespace Swimbait.Server.Controllers
             response.id = _musicCastHost.LocationId;
             return new ObjectResult(response);
         }
-        
+
+        [HttpGet("getTag")]
+        public IActionResult GetTag()
+        {
+            var response = new GetTagResponse();
+            response.zone_list.Add(new TagZoneList {id= "main", tag=5});
+            response.AddInputList("bluetooth");
+            response.AddInputList("server");
+            response.AddInputList("net_radio");
+            response.AddInputList("pandora");
+            response.AddInputList("spotify");
+            response.AddInputList("airplay");
+            response.AddInputList("mc_link");
+            return new ObjectResult(response);
+        }
+
         [HttpPost("SetLocationName")]
         public IActionResult SetLocationName()
         {
