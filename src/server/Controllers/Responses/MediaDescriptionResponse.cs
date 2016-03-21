@@ -1,14 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Mvc;
+using Swimbait.Server.Services;
 
 namespace Swimbait.Server.Controllers.Responses
 {
-    public abstract class XmlResponse
+    public abstract class XmlResponse : IActionResult
     {
         protected string BaseXmlTemplate { get;  }
         public abstract string GetXml();
+
+        public async Task ExecuteResultAsync(ActionContext context)
+        {
+            var response = context.HttpContext.Response;
+            response.ContentType = "text/xml";
+            var xml = GetXml();
+            response.ContentLength = xml.Length;
+            using (var stream = StreamService.FromString(xml))
+            {
+
+                await stream.CopyToAsync(context.HttpContext.Response.Body);
+            }
+        }
     }
 
     public class MediaDescriptionResponse : XmlResponse
@@ -20,7 +37,6 @@ namespace Swimbait.Server.Controllers.Responses
         public string FriendlyName { get; set; }
 
         public string BaseXmlTemplate = @"
-<?xml version=""1.0"" encoding=""UTF-8""?>
 <root xmlns = ""urn:schemas-upnp-org:device-1-0"" xmlns:yamaha=""urn:schemas-yamaha-com:device-1-0"">
    <specVersion>
       <major>1</major>

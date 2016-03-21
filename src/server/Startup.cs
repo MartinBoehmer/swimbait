@@ -42,6 +42,14 @@ namespace Swimbait.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.Configure<MvcOptions>(options =>
+            {
+                //options.AddXmlDataContractSerializerFormatter();
+                //options.AddXmlDataContractSerializerFormatter();
+                //options.OutputFormatters.Add(new Formma());
+                //  options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IApplicationLifetime lifetime, ILoggerFactory loggerFactory)
@@ -122,7 +130,7 @@ namespace Swimbait.Server
             
             //app.UseStatusCodePages("/Error/Status/{0}");
             app.UseMvc();
-            
+
         }
 
 

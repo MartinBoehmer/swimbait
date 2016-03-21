@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Swimbait.Server.Controllers.Responses;
 using Swimbait.Server.Services;
 
@@ -21,6 +22,7 @@ namespace Swimbait.Server.Controllers
         }
 
         [Route("desc.xml")]
+        //[Produces("application/xml")]
         [HttpGet]
         public IActionResult GetDescription()
         {
@@ -29,8 +31,10 @@ namespace Swimbait.Server.Controllers
             response.Uuid = _host.Uuid;
             response.FriendlyName = _host.Name;
             response.SerialNumber = _host.SerialNumber;
-            Response.ContentType = "text/xml;";
-            return Ok(response.GetXml());
+            //Response.ContentType = "text/xml;";
+            //var result = Ok(response.GetXml());
+            //result.ContentTypes.Add(new MediaTypeHeaderValue("text/xml"));
+            return response;
         }
     }
 }
