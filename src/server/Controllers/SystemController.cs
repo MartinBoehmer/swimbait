@@ -25,14 +25,23 @@ namespace Swimbait.Server.Controllers
         {
             _musicCastHost = new MusicCastHost();
         }
-        
+
+        [HttpGet("getFuncStatus")]
+        public IActionResult GetFuncStatus()
+        {
+            var response = new FuncStatusResponse();
+            response.response_code = 0;
+            response.auto_power_standby = true;
+            return new ObjectResult(response);
+        }
+
         [HttpGet("GetFeatures")]
         public IActionResult GetFeatures()
         {
             var response = new FeaturesResponse();
             return new ObjectResult(response);
         }
-        
+
         [HttpGet("getLocationInfo")]
         public IActionResult GetLocationInfo()
         {
@@ -45,14 +54,14 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetTag()
         {
             var response = new GetTagResponse();
-            response.zone_list.Add(new TagZoneList {id= "main", tag=5});
-            response.AddInputList("bluetooth");
-            response.AddInputList("server");
-            response.AddInputList("net_radio");
-            response.AddInputList("pandora");
-            response.AddInputList("spotify");
-            response.AddInputList("airplay");
-            response.AddInputList("mc_link");
+            response.zone_list.Add(new IntegerInputList {id = "main", tag = 5});
+            response.input_list.Add("bluetooth", 0);
+            response.input_list.Add("server", 0);
+            response.input_list.Add("net_radio", 0);
+            response.input_list.Add("pandora", 0);
+            response.input_list.Add("spotify", 0);
+            response.input_list.Add("airplay", 0);
+            response.input_list.Add("mc_link", 0);
             return new ObjectResult(response);
         }
 
@@ -63,6 +72,47 @@ namespace Swimbait.Server.Controllers
             var request = JsonConvert.DeserializeObject<SetLocationNameRequest>(json);
             Log.LogInformation($"Set name={request.name}");
             return Ok();
+        }
+
+        [HttpGet("getNameText")]
+        public IActionResult GetNameText()
+        {
+            var response = new NameTextResponse();
+            response.zone_list.Add("main", _musicCastHost.Name);
+            response.input_list.Add("bluetooth", "Bluetooth");
+            response.input_list.Add("server", "Server");
+            response.input_list.Add("net_radio", "Net Radio");
+            response.input_list.Add("pandora", "Pandora");
+            response.input_list.Add("spotify", "Spotify");
+            response.input_list.Add("airplay", "Air Play");
+            response.input_list.Add("mc_link", "MC Link");
+            return new ObjectResult(response);
+        }
+
+        [HttpGet("getNetworkStandby")]
+        public IActionResult GetNetworkStandby()
+        {
+            var response = new NetworkStandbyResponse();
+            response.network_standby = "on";
+            return new ObjectResult(response);
+        }
+
+        [HttpGet("getDeviceInfo")]
+        public IActionResult GetDeviceInfo()
+        {
+            var response = new DeviceInfoResponse();
+            response.model_name = "WX-030";
+            response.destination = "A";
+            response.system_id = _musicCastHost.SerialNumber;
+            response.system_version = _musicCastHost.SystemVersion;
+            response.api_version = _musicCastHost.ApiVersion;
+            response.netmodule_version= "0516 ";
+            response.netmodule_checksum = "DF4473CE";
+            response.system_version = _musicCastHost.SystemVersion;
+            response.operation_mode = "normal";
+            response.update_error_code = "00000000";
+
+            return new ObjectResult(response);
         }
     }
 }

@@ -15,6 +15,10 @@ namespace Swimbait.Server.Services
 
         public string SerialNumber => "0F437000";
 
+        public decimal SystemVersion => 2.09m;
+
+        public decimal ApiVersion => 1.11m;
+        
         public string Name => "swimbait!";
     }
 }

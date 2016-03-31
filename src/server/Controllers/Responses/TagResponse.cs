@@ -5,33 +5,44 @@ using System.Threading.Tasks;
 
 namespace Swimbait.Server.Controllers.Requests
 {
-    public class TagZoneList
+    public static class InputListExtensions
+    {
+        public static void Add(this List<IntegerInputList> target, string id, int tag)
+        {
+            target.Add(new IntegerInputList { id = id, tag = tag });
+        }
+
+        public static void Add(this IList<InputList> target, string id, string tag)
+        {
+            target.Add(new InputList { id = id, tag = tag });
+        }
+    }
+
+    public class IntegerInputList
     {
         public string id { get; set; }
         public int tag { get; set; }
+
     }
 
     public class InputList
     {
         public string id { get; set; }
-        public int tag { get; set; }
+        public string tag { get; set; }
     }
 
     public class GetTagResponse
     {
         public int response_code { get; set; }
-        public List<TagZoneList> zone_list { get; set; }
-        public List<InputList> input_list { get; set; }
+        public List<IntegerInputList> zone_list { get; set; }
+        public List<IntegerInputList> input_list { get; set; }
 
         public GetTagResponse()
         {
-            zone_list = new List<TagZoneList>();
-            input_list = new List<InputList>();
+            zone_list = new List<IntegerInputList>();
+            input_list = new List<IntegerInputList>();
         }
 
-        public void AddInputList(string id, int tag = 0)
-        {
-            input_list.Add(new InputList {id=id,tag=tag});
-        }
+      
     }
 }
