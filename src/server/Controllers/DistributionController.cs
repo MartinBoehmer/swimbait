@@ -14,9 +14,9 @@ namespace Swimbait.Server.Controllers
     {
         private MusicCastHost _musicCastHost;
 
-        public DisttributionController(ILoggerFactory loggerFactory) : base(loggerFactory)
+        public DisttributionController(ILoggerFactory loggerFactory, MusicCastHost musicCastHost) : base(loggerFactory)
         {
-            _musicCastHost = new MusicCastHost();
+            _musicCastHost = musicCastHost;
         }
         
         [HttpGet("getDistributionInfo")]

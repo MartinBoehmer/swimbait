@@ -13,5 +13,12 @@ namespace Swimbait.Server.Controllers.Responses
         public IList<InputList> zone_list { get; set; }
         public IList<InputList> input_list { get; set; }
         public IList<object> sound_program_list { get; set; }
+
+        public NameTextResponse()
+        {
+            zone_list = new List<InputList>();
+            input_list = new List<InputList>();
+            sound_program_list = new List<object>();
+        }
     }
 }

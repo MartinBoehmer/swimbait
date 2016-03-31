@@ -14,13 +14,11 @@ namespace Swimbait.Server.Controllers
     {
         private MusicCastHost _musicCastHost;
 
-        public MainController(ILoggerFactory loggerFactory) : base(loggerFactory)
+        public MainController(ILoggerFactory loggerFactory, MusicCastHost musicCastHost) : base(loggerFactory)
         {
-            _musicCastHost = new MusicCastHost();
+            _musicCastHost = musicCastHost;
         }
-
-
-
+        
         [HttpGet("getStatus")]
         public IActionResult GetStatus()
         {

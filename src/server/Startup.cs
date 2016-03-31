@@ -18,6 +18,8 @@ using Microsoft.AspNet.Diagnostics;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 using System.IO;
 using System.Text;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNet.Mvc;
 using Swimbait.Server.Services;
 
@@ -39,17 +41,35 @@ namespace Swimbait.Server
 
         public IConfiguration Configuration { get; private set; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
             services.Configure<MvcOptions>(options =>
             {
-                //options.AddXmlDataContractSerializerFormatter();
-                //options.AddXmlDataContractSerializerFormatter();
-                //options.OutputFormatters.Add(new Formma());
-                //  options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
+            
+            var serviceProvider = BuildIoC(services);
+
+            return serviceProvider;
+        }
+
+
+        private IServiceProvider BuildIoC(IServiceCollection services)
+        {
+            var builder = new ContainerBuilder();
+            
+            builder.RegisterModule(new SwimbaitModule());
+
+            builder
+                .Register(c => Configuration)
+                .SingleInstance();
+
+            builder.Populate(services);
+            var container = builder.Build();
+
+            // Resolve and return the service provider
+            return container.Resolve<IServiceProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IApplicationLifetime lifetime, ILoggerFactory loggerFactory)

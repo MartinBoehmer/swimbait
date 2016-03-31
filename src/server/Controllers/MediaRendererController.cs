@@ -14,11 +14,11 @@ namespace Swimbait.Server.Controllers
     [Route("MediaRenderer")]
     public class MediaRendererController : BaseController
     {
-        private MusicCastHost _host;
+        private MusicCastHost _musicCastHost;
 
-        public MediaRendererController(ILoggerFactory loggerFactory) : base(loggerFactory)
+        public MediaRendererController(ILoggerFactory loggerFactory, MusicCastHost musicCastHost) : base(loggerFactory)
         {
-            _host = new MusicCastHost();
+            _musicCastHost = musicCastHost;
         }
 
         [Route("desc.xml")]
@@ -27,10 +27,10 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetDescription()
         {
             var response = new MediaDescriptionResponse();
-            response.IpAddress = _host.IpAddress;
-            response.Uuid = _host.Uuid;
-            response.FriendlyName = _host.Name;
-            response.SerialNumber = _host.SerialNumber;
+            response.IpAddress = _musicCastHost.IpAddress;
+            response.Uuid = _musicCastHost.Uuid;
+            response.FriendlyName = _musicCastHost.Name;
+            response.SerialNumber = _musicCastHost.SerialNumber;
             //Response.ContentType = "text/xml;";
             //var result = Ok(response.GetXml());
             //result.ContentTypes.Add(new MediaTypeHeaderValue("text/xml"));
