@@ -80,26 +80,13 @@ namespace Swimbait.Server
                 webListenerInfo.AuthenticationManager.AuthenticationSchemes = AuthenticationSchemes.AllowAnonymous;
             }
 
-            //var serverAddress = app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses.FirstOrDefault();
             
-
             var loggingConfiguration = new ConfigurationBuilder()
                 .AddJsonFile("logging.json")
                 .Build();
             loggerFactory.AddConsole(loggingConfiguration);
-            //loggerFactory.AddDebug();
             loggingConfiguration.ReloadOnChanged("logging.json");
-
-            //app.UseIISPlatformHandler();
-
-            //app.UseApplicationInsightsRequestTelemetry();
-
-            //app.UseApplicationInsightsExceptionTelemetry();
-
-            // app.UseStaticFiles();
-
-            //app.UseStatusCodePages(context => context.HttpContext.Response.SendAsync("Handler, status code: " + context.HttpContext.Response.StatusCode, "text/plain"));
-
+            
             var o = new StatusCodePagesOptions();
             o.HandleAsync = async context =>
             {
@@ -109,10 +96,6 @@ namespace Swimbait.Server
 
                 var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
                 
-                //var relayRequest = HttpWebRequest.Create(context.HttpContext.Request.GetUri());
-                //var relayResponse = relayRequest.GetResponse();
-                //relayResponse.
-
                 if (!isFavIcon)
                 {
                     using (var httpClient = new HttpClient())
@@ -148,13 +131,8 @@ namespace Swimbait.Server
 
             app.UseStatusCodePages(o);
             
-            //app.UseStatusCodePages("/Error/Status/{0}");
             app.UseMvc();
 
         }
-
-
-        // Entry point for the application.
-       // public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

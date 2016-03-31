@@ -75,12 +75,15 @@ namespace Swimbait.Server
                     _multicastServer.SsdpDiscover();
                     break;
                 case ConsoleKey.J:
+                    Console.WriteLine("JoinGroup");
                     _multicastServer.JoinGroup();
                     break;
                 case ConsoleKey.C:
+                    Console.WriteLine("SendPossiblyConnectUdp");
                     _multicastService.SendPossiblyConnectUdp();
                     break;
                 case ConsoleKey.V:
+                    Console.WriteLine("SendPossiblyConnectUdp2");
                     _multicastService.SendPossiblyConnectUdp2();
                     break;
             }
