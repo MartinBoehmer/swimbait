@@ -65,14 +65,43 @@ namespace Swimbait.Server.Controllers
             return new ObjectResult(response);
         }
 
+        [HttpPost("SetNameText")]
+        public IActionResult SetNameText()
+        {
+            var json = Request.Form.Keys.First();
+            var request = JsonConvert.DeserializeObject<SetNameTextRequest>(json);
+            _musicCastHost.Name = request.text;
+            Log.LogInformation($"Set nameText={request.text}");
+            return MusicCastOk();
+        }
+
         [HttpPost("SetLocationName")]
         public IActionResult SetLocationName()
         {
             var json = Request.Form.Keys.First();
             var request = JsonConvert.DeserializeObject<SetLocationNameRequest>(json);
             Log.LogInformation($"Set name={request.name}");
-            return Ok();
+            return MusicCastOk();
         }
+
+        [HttpPost("SetLocationId")]
+        public IActionResult SetLocationId()
+        {
+            var json = Request.Form.Keys.First();
+            var request = JsonConvert.DeserializeObject<SetLocationIdRequest>(json);
+            Log.LogInformation($"Set id={request.id}");
+            return MusicCastOk();
+        }
+
+
+        [HttpGet("setTag")]
+        public IActionResult SetTag(string id, string tag)
+        {
+            Log.LogInformation($"Set tag={tag}");
+            return MusicCastOk();
+        }
+
+
 
         [HttpGet("getNameText")]
         public IActionResult GetNameText()

@@ -88,11 +88,19 @@ namespace Swimbait.Server
             loggingConfiguration.ReloadOnChanged("logging.json");
             
             var o = new StatusCodePagesOptions();
-            o.HandleAsync = async context =>
+            o.HandleAsync = async statusCodeContext =>
             {
+                var request = statusCodeContext.HttpContext.Request;
+                var context = statusCodeContext.HttpContext;
                 var log = loggerFactory.CreateLogger<Startup>();
-                log.LogWarning(context.HttpContext.Request.Path);
-                var uri = context.HttpContext.Request.GetUri();
+                log.LogWarning(request.Path);
+                var uri = request.GetUri();
+                
+                var body = "<not decoded>";
+                if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post")
+                {
+                    body = request.Form.Keys.First();
+                }
 
                 var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
                 
@@ -105,7 +113,7 @@ namespace Swimbait.Server
                         var relayPort = uri.Port == MusicCastHost.DlnaHostPort ? 49154 : uri.Port;
 
                         var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + uri.PathAndQuery);
-
+                        
                         var result = await httpClient.GetStringAsync(relayUri);
 
                         var debugFolder = @"D:\Downloads\swimbait\replay";
@@ -113,17 +121,17 @@ namespace Swimbait.Server
                         var debugFile = Path.Combine(debugFolder, uri.GetHashCode() + ".txt");
 
                         var sb = new StringBuilder();
-                        sb.Append("Url=");
-                        sb.AppendLine(uri.AbsolutePath);
+                        sb.AppendLine($"Request.Url={uri.ToString()}");
+                        sb.AppendLine($"Request.Body:{body}");
                         sb.Append(result);
 
                         File.WriteAllText(debugFile, sb.ToString());
 
-                        if (!context.HttpContext.Response.HasStarted)
+                        if (!context.Response.HasStarted)
                         {
                             log.LogInformation($"Man in the middle! {relayUri}");
-                            context.HttpContext.Response.StatusCode = 200;
-                            await context.HttpContext.Response.WriteAsync(result);
+                            context.Response.StatusCode = 200;
+                            await context.Response.WriteAsync(result);
                         }
                     }
                 }

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Swimbait.Server.Controllers.Responses
 {
-    public class DeviceInfoResponse
+    public class DeviceInfoResponse  : BasicResponse
     {
-        public int response_code { get; set; }
         public string model_name { get; set; }
         public string destination { get; set; }
         public string system_id { get; set; }

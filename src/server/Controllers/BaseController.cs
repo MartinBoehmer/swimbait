@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
+using Swimbait.Server.Controllers.Responses;
 
 namespace Swimbait.Server.Controllers
 {
@@ -18,6 +19,11 @@ namespace Swimbait.Server.Controllers
         public BaseController(ILoggerFactory loggerFactory)
         {
             Log = loggerFactory.CreateLogger<BaseController>();
+        }
+
+        public ObjectResult MusicCastOk()
+        {
+            return new ObjectResult(new BasicResponse());
         }
     }
 }

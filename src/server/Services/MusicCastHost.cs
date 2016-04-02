@@ -19,6 +19,11 @@ namespace Swimbait.Server.Services
 
         public decimal ApiVersion => 1.11m;
         
-        public string Name => "swimbait!";
+        public string Name { get; set; }
+
+        public MusicCastHost()
+        {
+            Name = "Swimbait!";
+        }
     }
 }
