@@ -27,7 +27,7 @@ namespace Swimbait.Server.Controllers.Responses
         {
             response_code = 0;
             stereo_pair_status = "none";
-            name = "home";
+            name = "Home";
             zone_list = new ZoneList();
         }
     }
