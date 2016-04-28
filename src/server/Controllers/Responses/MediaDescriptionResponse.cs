@@ -11,7 +11,7 @@ namespace Swimbait.Server.Controllers.Responses
 {
     public abstract class XmlResponse : IActionResult
     {
-        protected string BaseXmlTemplate { get;  }
+        protected abstract string BaseXmlTemplate { get;  }
         public abstract string GetXml();
 
         public async Task ExecuteResultAsync(ActionContext context)
@@ -36,7 +36,7 @@ namespace Swimbait.Server.Controllers.Responses
 
         public string FriendlyName { get; set; }
 
-        public string BaseXmlTemplate = @"
+        protected override string BaseXmlTemplate => @"
 <root xmlns = ""urn:schemas-upnp-org:device-1-0"" xmlns:yamaha=""urn:schemas-yamaha-com:device-1-0"">
    <specVersion>
       <major>1</major>

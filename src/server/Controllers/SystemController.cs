@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Server;
@@ -19,7 +15,7 @@ namespace Swimbait.Server.Controllers
     [Route("YamahaExtendedControl/v1/system")]
     public class SystemController : BaseController
     {
-        private MusicCastHost _musicCastHost;
+        private readonly MusicCastHost _musicCastHost;
 
         public SystemController(ILoggerFactory loggerFactory, MusicCastHost musicCastHost) : base(loggerFactory)
         {
