@@ -27,11 +27,8 @@ namespace Swimbait.Server
 {
     public class Startup
     {
-
-        public Startup(IHostingEnvironment env,
-            IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
-            // Setup configuration sources.
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(appEnv.ApplicationBasePath)
                 .AddEnvironmentVariables();
@@ -45,9 +42,7 @@ namespace Swimbait.Server
         {
             services.AddMvc();
 
-            services.Configure<MvcOptions>(options =>
-            {
-            });
+            services.Configure<MvcOptions>(options => {});
             
             var serviceProvider = BuildIoC(services);
 
@@ -66,6 +61,7 @@ namespace Swimbait.Server
                 .SingleInstance();
 
             builder.Populate(services);
+
             var container = builder.Build();
 
             // Resolve and return the service provider
@@ -80,13 +76,13 @@ namespace Swimbait.Server
                 webListenerInfo.AuthenticationManager.AuthenticationSchemes = AuthenticationSchemes.AllowAnonymous;
             }
 
-            
             var loggingConfiguration = new ConfigurationBuilder()
                 .AddJsonFile("logging.json")
                 .Build();
+
             loggerFactory.AddConsole(loggingConfiguration);
             loggingConfiguration.ReloadOnChanged("logging.json");
-            
+
             var o = new StatusCodePagesOptions();
             o.HandleAsync = async statusCodeContext =>
             {
@@ -95,7 +91,7 @@ namespace Swimbait.Server
                 var log = loggerFactory.CreateLogger<Startup>();
                 log.LogWarning(request.Path);
                 var uri = request.GetUri();
-                
+
                 var body = "<not decoded>";
                 if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post")
                 {
@@ -103,7 +99,7 @@ namespace Swimbait.Server
                 }
 
                 var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
-                
+
                 if (!isFavIcon)
                 {
                     using (var httpClient = new HttpClient())
@@ -113,7 +109,7 @@ namespace Swimbait.Server
                         var relayPort = uri.Port == MusicCastHost.DlnaHostPort ? 49154 : uri.Port;
 
                         var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + uri.PathAndQuery);
-                        
+
                         var result = await httpClient.GetStringAsync(relayUri);
 
                         var debugFolder = @"D:\Downloads\swimbait\replay";
@@ -138,7 +134,9 @@ namespace Swimbait.Server
             };
 
             app.UseStatusCodePages(o);
-            
+
+            app.UseHeadersMiddleware();
+
             app.UseMvc();
 
         }

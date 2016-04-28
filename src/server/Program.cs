@@ -37,22 +37,8 @@ namespace Swimbait.Server
                 .Build()
                 .Start();
 
-
-
-            //using ()
-            {
-                Console.WriteLine("Started the server..");
-                Console.WriteLine("Press any key to stop the server");
-            }
-
-            //builder = new ConfigurationBuilder();
-            //builder.AddCommandLine(new[] { "server.urls=http://localhost:5004" });
-            //config = builder.Build();
-
-            //var webHost2 = new WebHostBuilder(config)
-            //    .UseServer("Microsoft.AspNet.Server.Kestrel")
-            //    .Build()
-            //    .Start();
+            Console.WriteLine("Started the server..");
+            Console.WriteLine("Press any key to stop the server");
 
             _multicastServer.Start();
 
@@ -61,7 +47,7 @@ namespace Swimbait.Server
             keyHandler.WaitForExit();
 
             webHost1.Dispose();
-            //webHost2.Dispose();
+
             _multicastServer.Dispose();
 
             return Task.FromResult(0);
@@ -87,7 +73,6 @@ namespace Swimbait.Server
                     _multicastService.SendPossiblyConnectUdp2();
                     break;
             }
-
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Swimbait.Server.Controllers
         }
 
         [Route("desc.xml")]
-        //[Produces("application/xml")]
         [HttpGet]
         public IActionResult GetDescription()
         {
@@ -31,9 +30,6 @@ namespace Swimbait.Server.Controllers
             response.Uuid = _musicCastHost.Uuid;
             response.FriendlyName = _musicCastHost.Name;
             response.SerialNumber = _musicCastHost.SerialNumber;
-            //Response.ContentType = "text/xml;";
-            //var result = Ok(response.GetXml());
-            //result.ContentTypes.Add(new MediaTypeHeaderValue("text/xml"));
             return response;
         }
     }

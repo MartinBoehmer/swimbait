@@ -22,7 +22,6 @@ namespace Swimbait.Server.Controllers.Responses
             response.ContentLength = xml.Length;
             using (var stream = StreamService.FromString(xml))
             {
-
                 await stream.CopyToAsync(context.HttpContext.Response.Body);
             }
         }
