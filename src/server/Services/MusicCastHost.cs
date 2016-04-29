@@ -8,12 +8,16 @@ namespace Swimbait.Server.Services
     public class MusicCastHost
     {
         public const int DlnaHostPort = 51123;
-        public const string RelayHost = "192.168.1.213";
-        public string LocationId => "7345174dcfd44df2834f10deadbeef00";
-        public string IpAddress => "192.168.1.3";
-        public string Uuid => "uuid:9ab0c000-f668-11de-9976-00deadbeef00";
 
-        public string SerialNumber => "0F437000";
+        public const string RelayHost = "192.168.1.213";
+
+        public string LocationId => "7345174dcfd44df2834f1d02452cbe3c";
+
+        public string IpAddress => "192.168.1.3";
+
+        public string Uuid => "uuid:9ab0c000-f668-11de-9976-00a0ded0e860";
+
+        public string SerialNumber => "0F437184";
 
         public decimal SystemVersion => 2.09m;
 
@@ -23,7 +27,7 @@ namespace Swimbait.Server.Services
 
         public MusicCastHost()
         {
-            Name = "Swimbait!";
+            Name = "Swimbait";
         }
     }
 }

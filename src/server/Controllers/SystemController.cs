@@ -35,6 +35,116 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetFeatures()
         {
             var response = new FeaturesResponse();
+            response.netusb.preset.num = 40;
+            var zone = new Zone();
+
+            zone.func_list.Add("power");
+            zone.func_list.Add("sleep");
+            zone.func_list.Add("volume");
+            zone.func_list.Add("mute");
+            zone.func_list.Add("equalizer");
+            zone.func_list.Add("prepare_input_change");
+            zone.func_list.Add("link_control");
+
+            response.zone.Add(zone);
+
+            zone.input_list.Add("pandora");
+            zone.input_list.Add("spotify");
+            zone.input_list.Add("airplay");
+            zone.input_list.Add("mc_link");
+            zone.input_list.Add("server");
+            zone.input_list.Add("net_radio");
+            zone.input_list.Add("bluetooth");
+
+            zone.link_control_list.Add("standard");
+            zone.link_control_list.Add("stability");
+
+            zone.id = "main";
+
+            var volumeRangeStep = new RangeStep();
+            volumeRangeStep.id = "volume";
+            volumeRangeStep.min = 0;
+            volumeRangeStep.max = 60;
+            volumeRangeStep.step = 1;
+
+            var equalizerRangeStep = new RangeStep();
+            equalizerRangeStep.id = "equalizer";
+            equalizerRangeStep.min = -10;
+            equalizerRangeStep.max = 10;
+            equalizerRangeStep.step = 1;
+
+            zone.range_step.Add(volumeRangeStep);
+            zone.range_step.Add(equalizerRangeStep);
+
+            response.system.func_list.Add("wired_lan");
+            response.system.func_list.Add("wireless_lan");
+            response.system.func_list.Add("wireless_direct");
+            response.system.func_list.Add("network_standby");
+            response.system.func_list.Add("auto_power_standby");
+            response.system.func_list.Add("bluetooth_tx_setting");
+            response.system.func_list.Add("airplay");
+            response.system.func_list.Add("stereo_pair");
+            
+            response.system.zone_num = 1;
+
+            var pandoraInput = new InputList2();
+            var spotifyInput = new InputList2();
+            var airplayInput = new InputList2();
+            var mcLinkInput = new InputList2();
+            var serverInput = new InputList2();
+            var bluetoothInput = new InputList2();
+            var netRadioInput = new InputList2();
+
+            response.system.input_list.Add(pandoraInput);
+            response.system.input_list.Add(spotifyInput);
+            response.system.input_list.Add(airplayInput);
+            response.system.input_list.Add(mcLinkInput);
+            response.system.input_list.Add(serverInput);
+            response.system.input_list.Add(bluetoothInput);
+            response.system.input_list.Add(netRadioInput);
+
+            pandoraInput.id = "pandora";
+            pandoraInput.distribution_enable = true ;
+            pandoraInput.rename_enable = false      ;
+            pandoraInput.account_enable = true      ;
+            pandoraInput.play_info_type = "netusb"  ;
+            
+            spotifyInput.id = "spotify";
+            spotifyInput.distribution_enable = true;
+            spotifyInput.rename_enable = false;
+            spotifyInput.account_enable = false;
+            spotifyInput.play_info_type = "netusb";
+            
+            airplayInput.id = "airplay";
+            airplayInput.distribution_enable = false;
+            airplayInput.rename_enable = false;
+            airplayInput.account_enable = false;
+            airplayInput.play_info_type = "netusb";
+
+            mcLinkInput.id = "mc_link";
+            mcLinkInput.distribution_enable = false;
+            mcLinkInput.rename_enable = true;
+            mcLinkInput.account_enable = false;
+            mcLinkInput.play_info_type = "netusb";
+
+            serverInput.id = "server";
+            serverInput.distribution_enable = true;
+            serverInput.rename_enable = true;
+            serverInput.account_enable = false;
+            serverInput.play_info_type = "netusb";
+
+            netRadioInput.id = "net_radio";
+            netRadioInput.distribution_enable = true;
+            netRadioInput.rename_enable = true;
+            netRadioInput.account_enable = false;
+            netRadioInput.play_info_type = "netusb";
+
+            bluetoothInput.id = "bluetooth";
+            bluetoothInput.distribution_enable = true;
+            bluetoothInput.rename_enable = false;
+            bluetoothInput.account_enable = false;
+            bluetoothInput.play_info_type = "netusb";
+            
             return new ObjectResult(response);
         }
 
