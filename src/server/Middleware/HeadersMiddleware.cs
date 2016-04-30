@@ -11,7 +11,7 @@ namespace Swimbait.Server
     /// <summary>
     /// Fluent extension
     /// </summary>
-    public static class AppContextExtensions
+    public static class HeadersMiddlewareExtensions
     {
         public static IApplicationBuilder UseHeadersMiddleware(this IApplicationBuilder builder)
         {

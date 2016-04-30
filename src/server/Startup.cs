@@ -100,35 +100,18 @@ namespace Swimbait.Server
 
                 var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
 
-                if (!isFavIcon)
+                if (!isFavIcon )
                 {
-                    using (var httpClient = new HttpClient())
+                    if (context.Response.HasStarted)
                     {
-
-                        // remap the port since windows is using 49154
-                        var relayPort = uri.Port == MusicCastHost.DlnaHostPort ? 49154 : uri.Port;
-
-                        var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + uri.PathAndQuery);
-
-                        var result = await httpClient.GetStringAsync(relayUri);
-
-                        var debugFolder = @"D:\Downloads\swimbait\replay";
-                        Directory.CreateDirectory(debugFolder);
-                        var debugFile = Path.Combine(debugFolder, uri.GetHashCode() + ".txt");
-
-                        var sb = new StringBuilder();
-                        sb.AppendLine($"Request.Url={uri.ToString()}");
-                        sb.AppendLine($"Request.Body:{body}");
-                        sb.Append(result);
-
-                        File.WriteAllText(debugFile, sb.ToString());
-
-                        if (!context.Response.HasStarted)
-                        {
-                            log.LogInformation($"Man in the middle! {relayUri}");
-                            context.Response.StatusCode = 200;
-                            await context.Response.WriteAsync(result);
-                        }
+                        log.LogCritical("Too late");
+                    }
+                    else
+                    {
+                        var manInTheMiddleResponse = LogMiddleware.GetManInTheMiddleResult(uri);
+                        log.LogInformation($"Man in the middle! {manInTheMiddleResponse.RequestUri}");
+                        context.Response.StatusCode = 200;
+                        await context.Response.WriteAsync(manInTheMiddleResponse.ResponseBody);
                     }
                 }
             };
@@ -137,6 +120,7 @@ namespace Swimbait.Server
 
             app.UseHeadersMiddleware();
 
+            app.UseLogMiddleware();
             app.UseMvc();
 
         }
