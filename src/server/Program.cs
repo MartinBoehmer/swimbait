@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +31,10 @@ namespace Swimbait.Server
 
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
-            builder.AddCommandLine(new[] { $"server.urls=http://192.168.1.3:80;http://192.168.1.3:{MusicCastHost.DlnaHostPort};http://192.168.1.3:51100" });
+            var portsToListen = new []{80, MusicCastHost.DlnaHostPort, 51100};
+            var urisToListen = portsToListen.ToList().ConvertAll(p => $"http://{MusicCastHost.ThisIp}:{p}");
+            var uriToListenString = string.Join(";", urisToListen);
+            builder.AddCommandLine(new[] { $"server.urls={uriToListenString}" });
             var config = builder.Build();
 
             var webHost1 = new WebHostBuilder(config)
@@ -37,7 +42,7 @@ namespace Swimbait.Server
                 .Build()
                 .Start();
 
-            Console.WriteLine("Started the server..");
+            Console.WriteLine($"Started the server. Listing on {uriToListenString}");
             Console.WriteLine("Press any key to stop the server");
 
             _multicastServer.Start();
