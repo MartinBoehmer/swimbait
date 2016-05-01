@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace Swimbait.Server.Services
@@ -9,7 +11,7 @@ namespace Swimbait.Server.Services
     {
         public const int DlnaHostPort = 51123;
 
-        public const string ThisIp = "192.168.1.3";
+        public static string ThisIp { get; set; }
 
         public const string RelayHost = "192.168.1.213";
 
@@ -30,6 +32,16 @@ namespace Swimbait.Server.Services
         public MusicCastHost()
         {
             Name = "Swimbait";
+            
+        }
+
+        static MusicCastHost()
+        {
+            ThisIp = Dns
+                        .GetHostEntry(Dns.GetHostName())
+                        .AddressList
+                        .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork)
+                        .ToString();
         }
     }
 }

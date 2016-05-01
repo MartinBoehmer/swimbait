@@ -121,6 +121,7 @@ namespace Swimbait.Server
             app.UseHeadersMiddleware();
 
             app.UseLogMiddleware();
+
             app.UseMvc();
 
         }

@@ -8,8 +8,6 @@ using Microsoft.AspNet.Http;
 using System.Net.Http;
 using Swimbait.Server.Services;
 using Microsoft.ApplicationInsights.AspNet.Extensions;
-using System.IO;
-using Swimbait.Server.Services;
 
 namespace Swimbait.Server
 {
@@ -35,6 +33,15 @@ namespace Swimbait.Server
 
         public Task Invoke(HttpContext context)
         {
+            context.Response.OnCompleted(OnCompleted, context);
+            return next(context);
+        }
+
+
+        private Task OnCompleted(object contextObject)
+        {
+            var context = (HttpContext) contextObject;
+
             var uri = context.Request.GetUri();
 
             var body = "<not decoded>";
@@ -47,14 +54,14 @@ namespace Swimbait.Server
             thisResponseLog.RequestUri = uri;
             thisResponseLog.RequestBody = body;
             thisResponseLog.ResponseBody = context.Response.ToString();
-                
+
             var manInTheMiddleResult = GetManInTheMiddleResult(uri);
 
             var logService = new LogService();
             logService.LogToDisk(thisResponseLog);
             logService.LogToDisk(manInTheMiddleResult);
 
-            return next(context);
+            return Task.FromResult(0);
         }
 
         public static ResponseLog GetManInTheMiddleResult(Uri thisRequest)
