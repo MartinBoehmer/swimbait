@@ -77,11 +77,11 @@ namespace Swimbait.Server
             var result = new ResponseLog();
             using (var httpClient = new HttpClient())
             {
-                // remap the port since windows is using 49154
-                var relayPort = thisRequest.Port == MusicCastHost.DlnaHostPort ? 49154 : thisRequest.Port;
+                var relayPort = MapPortToReal(thisRequest);
                 var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + thisRequest.PathAndQuery);
 
                 result.RequestUri = relayUri;
+
                 try
                 {
                     result.ResponseBody = httpClient.GetStringAsync(relayUri).Result;
@@ -92,6 +92,14 @@ namespace Swimbait.Server
                 }
             }
             return result;
+        }
+
+        public static int MapPortToReal(Uri thisRequest)
+        {
+            // remap the port since windows is using 49154
+            const int realYamahaPort = 49154;
+            var relayPort = thisRequest.Port == MusicCastHost.DlnaHostPort ? realYamahaPort : thisRequest.Port;
+            return relayPort;
         }
     }
 }

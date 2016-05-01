@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,15 +6,6 @@ using System.Threading.Tasks;
 
 namespace Swimbait.Server.Services
 {
-    public class ResponseLog
-    {
-        public Uri RequestUri { get; set; }
-
-        public string RequestBody { get; set; }
-
-        public string ResponseBody { get; set; }
-    }
-
     public class LogService
     {
         public void LogToDisk(ResponseLog log)

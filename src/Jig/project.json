@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0-*",
+  "description": "Jig Console Application",
+  "authors": [ "neutmute" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Common": "1.0.0-*"
+  },
+
+  "commands": {
+    "Jig": "Jig"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}
