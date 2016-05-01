@@ -23,7 +23,8 @@ namespace Swimbait.Server.Services
             var debugFolder = @"D:\Downloads\swimbait\log2Disk";
             Directory.CreateDirectory(debugFolder);
 
-            var filename = log.RequestUri.Host + "_" + log.RequestUri.PathAndQuery.Replace("/", "_").Replace("?", "_");
+            var pathAsSafeFilename = log.RequestUri.PathAndQuery.Replace("/", "_").Replace("?", "_");
+            var filename = pathAsSafeFilename  + "_" + log.RequestUri.Host;
 
             var debugFile = Path.Combine(debugFolder, $"{filename}.txt");
 

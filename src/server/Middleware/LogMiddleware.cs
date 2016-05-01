@@ -8,6 +8,8 @@ using Microsoft.AspNet.Http;
 using System.Net.Http;
 using Swimbait.Server.Services;
 using Microsoft.ApplicationInsights.AspNet.Extensions;
+using System.IO;
+using System.Text;
 
 namespace Swimbait.Server
 {
@@ -53,8 +55,14 @@ namespace Swimbait.Server
             var thisResponseLog = new ResponseLog();
             thisResponseLog.RequestUri = uri;
             thisResponseLog.RequestBody = body;
-            thisResponseLog.ResponseBody = context.Response.ToString();
+            //var bodyStream = context.Response.Body;
 
+            //using (var reader = new StreamReader(bodyStream, Encoding.UTF8))
+            //{
+            //    bodyStream.Seek(0, SeekOrigin.Begin);
+            //    thisResponseLog.ResponseBody = reader.ReadToEnd();
+            //}
+            
             var manInTheMiddleResult = GetManInTheMiddleResult(uri);
 
             var logService = new LogService();
@@ -74,7 +82,14 @@ namespace Swimbait.Server
                 var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + thisRequest.PathAndQuery);
 
                 result.RequestUri = relayUri;
-                result.ResponseBody = httpClient.GetStringAsync(relayUri).Result;
+                try
+                {
+                    result.ResponseBody = httpClient.GetStringAsync(relayUri).Result;
+                }
+                catch(Exception e)
+                {
+                    result.ResponseBody = e.Message;
+                }
             }
             return result;
         }
