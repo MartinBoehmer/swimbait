@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -10,6 +11,7 @@ using Swimbait.Server.Services;
 using Microsoft.ApplicationInsights.AspNet.Extensions;
 using System.IO;
 using System.Text;
+using Swimbait.Common;
 
 namespace Swimbait.Server
 {
@@ -63,7 +65,7 @@ namespace Swimbait.Server
             //    thisResponseLog.ResponseBody = reader.ReadToEnd();
             //}
             
-            var manInTheMiddleResult = GetManInTheMiddleResult(uri);
+            var manInTheMiddleResult = UriService.GetManInTheMiddleResult(uri);
 
             var logService = new LogService();
             logService.LogToDisk(thisResponseLog);
@@ -71,35 +73,6 @@ namespace Swimbait.Server
 
             return Task.FromResult(0);
         }
-
-        public static ResponseLog GetManInTheMiddleResult(Uri thisRequest)
-        {
-            var result = new ResponseLog();
-            using (var httpClient = new HttpClient())
-            {
-                var relayPort = MapPortToReal(thisRequest);
-                var relayUri = new Uri($"http://{MusicCastHost.RelayHost}:{relayPort}" + thisRequest.PathAndQuery);
-
-                result.RequestUri = relayUri;
-
-                try
-                {
-                    result.ResponseBody = httpClient.GetStringAsync(relayUri).Result;
-                }
-                catch(Exception e)
-                {
-                    result.ResponseBody = e.Message;
-                }
-            }
-            return result;
-        }
-
-        public static int MapPortToReal(Uri thisRequest)
-        {
-            // remap the port since windows is using 49154
-            const int realYamahaPort = 49154;
-            var relayPort = thisRequest.Port == MusicCastHost.DlnaHostPort ? realYamahaPort : thisRequest.Port;
-            return relayPort;
-        }
     }
 }
+*/

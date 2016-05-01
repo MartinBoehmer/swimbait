@@ -22,6 +22,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNet.Mvc;
 using Swimbait.Server.Services;
+using Swimbait.Common;
 
 namespace Swimbait.Server
 {
@@ -108,7 +109,7 @@ namespace Swimbait.Server
                     }
                     else
                     {
-                        var manInTheMiddleResponse = LogMiddleware.GetManInTheMiddleResult(uri);
+                        var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(MusicCastHost.RelayHost, uri, ActivityLogMiddleware.MapPortToReal);
                         log.LogInformation($"Man in the middle! {manInTheMiddleResponse.RequestUri}");
                         context.Response.StatusCode = 200;
                         await context.Response.WriteAsync(manInTheMiddleResponse.ResponseBody);

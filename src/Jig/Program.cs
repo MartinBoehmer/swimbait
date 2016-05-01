@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Swimbait.Common;
+using Swimbait.Server.Services;
 
 namespace Jig
 {
@@ -15,17 +17,26 @@ namespace Jig
 
             foreach(var line in activity)
             {
-                var cols = line.Split(',');
-                var actualPort = cols[0];
-                var yamahaPort = cols[1];
-                var method = cols[2];
-                var pathAndQuery = cols[3];
-                var requestBody = cols[4];             
+                var log = RequestLog.FromCsv(line);
 
-
+                if (log.Method == "GET")
+                {
+                    var swimbaitResponse = UriService.GetResponse("192.168.1.3", log.ActualPort, log.PathAndQuery);
+                    var yamahaResponse = UriService.GetResponse("192.168.1.213", log.YamahaPort, log.PathAndQuery);
+                    
+                    var logService = new LogService();
+                    logService.LogToDisk(swimbaitResponse);
+                    logService.LogToDisk(yamahaResponse);
+                }
             }
         }
 
-
+        public static int MapPortToReal(Uri thisRequest)
+        {
+            // remap the port since windows is using 49154
+            const int realYamahaPort = 49154;
+            var relayPort = thisRequest.Port == 51123 ? realYamahaPort : thisRequest.Port;
+            return relayPort;
+        }
     }
 }

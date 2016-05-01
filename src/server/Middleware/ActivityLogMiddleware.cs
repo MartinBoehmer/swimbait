@@ -44,7 +44,7 @@ namespace Swimbait.Server
             var filename = Path.Combine(debugFolder, "activity.txt");
             
             var thisPort = uri.Port;
-            var yamahaPort = LogMiddleware.MapPortToReal(uri);
+            var yamahaPort = MapPortToReal(uri);
 
             var body = "<not decoded>";
             if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post")
@@ -57,6 +57,15 @@ namespace Swimbait.Server
             File.AppendAllText(filename, lineContent);
 
             return next(context);
+        }
+
+
+        public static int MapPortToReal(Uri thisRequest)
+        {
+            // remap the port since windows is using 49154
+            const int realYamahaPort = 49154;
+            var relayPort = thisRequest.Port == MusicCastHost.DlnaHostPort ? realYamahaPort : thisRequest.Port;
+            return relayPort;
         }
     }
 }
