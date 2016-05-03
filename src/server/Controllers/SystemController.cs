@@ -22,6 +22,12 @@ namespace Swimbait.Server.Controllers
             _musicCastHost = musicCastHost;
         }
 
+        [HttpGet("stopInitialJoin")]
+        public IActionResult StopInitialJoin()
+        {
+            return new ObjectResult(new BasicResponse());
+        }
+
         [HttpGet("getFuncStatus")]
         public IActionResult GetFuncStatus()
         {

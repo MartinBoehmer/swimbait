@@ -21,6 +21,18 @@ namespace Swimbait.Server.Controllers
         [HttpGet("getAccountStatus")]
         public IActionResult GetAccountStatus()
         {
+            return DoManInTheMiddle();
+        }
+
+        [HttpGet("getNetworkStatus")]
+        public IActionResult GetNetworkStatus()
+        {
+            return DoManInTheMiddle();
+        }
+
+        private IActionResult DoManInTheMiddle()
+        {
+
             var uri = HttpContext.Request.GetUri();
             var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(MusicCastHost.RelayHost, uri, ActivityLogMiddleware.MapPortToReal);
             return new FileContentResult(manInTheMiddleResponse.ResponseBytes, "application/octet-stream");
