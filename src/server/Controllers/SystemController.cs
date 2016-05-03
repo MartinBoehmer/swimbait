@@ -160,7 +160,16 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetTag()
         {
             var response = new GetTagResponse();
-            response.zone_list.Add(new IntegerInputList {id = "main", tag = 2});
+
+            var mainTag = "-1"; // default
+            if (_musicCastHost.HasTag("main"))
+            {
+                mainTag = _musicCastHost.GetTag("main");
+            }
+            var mainTagAsInt = Convert.ToInt32(mainTag);
+
+            response.zone_list.Add(new IntegerInputList { id = "main", tag = mainTagAsInt });
+
             response.input_list.Add("bluetooth", 0);
             response.input_list.Add("server", 0);
             response.input_list.Add("net_radio", 0);
@@ -205,6 +214,7 @@ namespace Swimbait.Server.Controllers
         public IActionResult SetTag(string id, string tag)
         {
             Log.LogInformation($"Set tag={tag}");
+            _musicCastHost.SetTag(id, tag);
             return MusicCastOk();
         }
 

@@ -9,6 +9,8 @@ namespace Swimbait.Server.Services
 {
     public class MusicCastHost
     {
+        private Dictionary<string, string> _tags;
+
         public const int DlnaHostPort = 51123;
 
         public static string ThisIp { get; set; }
@@ -29,9 +31,11 @@ namespace Swimbait.Server.Services
         
         public string Name { get; set; }
 
+        
         public MusicCastHost()
         {
             Name = "Swimbait";
+            _tags = new Dictionary<string, string>();
         }
 
         static MusicCastHost()
@@ -41,6 +45,35 @@ namespace Swimbait.Server.Services
                         .AddressList
                         .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork)
                         .ToString();
+        }
+
+        public bool HasTag(string key)
+        {
+            return _tags.ContainsKey(key);
+        }
+
+        public string GetTag(string key)
+        {
+            if (HasTag(key))
+            {
+                return _tags[key];
+            }
+            return null;
+        }
+
+        public void SetTag(string key, string value)
+        {
+            if (_tags.ContainsKey(key))
+            {
+                _tags[key] = value;
+            }
+            else
+            {
+                if (value != null)
+                {
+                    _tags.Add(key, value);
+                }
+            }
         }
     }
 }
