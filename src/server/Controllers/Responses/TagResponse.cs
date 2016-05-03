@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Swimbait.Server.Controllers.Responses;
 
 namespace Swimbait.Server.Controllers.Requests
 {
@@ -42,9 +43,8 @@ namespace Swimbait.Server.Controllers.Requests
         public string text { get; set; }
     }
 
-    public class GetTagResponse
+    public class GetTagResponse : BasicResponse
     {
-        public int response_code { get; set; }
         public List<IntegerInputList> zone_list { get; set; }
         public List<IntegerInputList> input_list { get; set; }
 
@@ -52,8 +52,12 @@ namespace Swimbait.Server.Controllers.Requests
         {
             zone_list = new List<IntegerInputList>();
             input_list = new List<IntegerInputList>();
-        }
+        }  
+    }
 
-      
+    public class GetTagResponse2 : BasicResponse
+    {
+        public string id { get; set; }
+        public int tag { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Swimbait.Server.Controllers
             var response = new PlayInfoResponse();
             response.response_code = 0;
             response.input = "mc_link";
-            response.playback = "play";
+            response.playback = "stop"; // play,stop
             response.repeat = "off";
             response.shuffle = "off";
             response.artist= "";

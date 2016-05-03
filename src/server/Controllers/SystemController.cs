@@ -157,26 +157,44 @@ namespace Swimbait.Server.Controllers
         }
 
         [HttpGet("getTag")]
-        public IActionResult GetTag()
+        public IActionResult GetTag(string id = null)
         {
-            var response = new GetTagResponse();
+            object response = null;
 
-            var mainTag = "-1"; // default
-            if (_musicCastHost.HasTag("main"))
+            if (string.IsNullOrEmpty(id))
             {
-                mainTag = _musicCastHost.GetTag("main");
+                var response1 = new GetTagResponse();
+
+                var mainTag = "-1"; // default
+                if (_musicCastHost.HasTag("main"))
+                {
+                    mainTag = _musicCastHost.GetTag("main");
+                }
+                var mainTagAsInt = Convert.ToInt32(mainTag);
+
+                response1.zone_list.Add(new IntegerInputList {id = "main", tag = mainTagAsInt});
+
+                response1.input_list.Add("bluetooth", 0);
+                response1.input_list.Add("server", 0);
+                response1.input_list.Add("net_radio", 0);
+                response1.input_list.Add("pandora", 0);
+                response1.input_list.Add("spotify", 0);
+                response1.input_list.Add("airplay", 0);
+                response1.input_list.Add("mc_link", 0);
+
+                response = response1;
             }
-            var mainTagAsInt = Convert.ToInt32(mainTag);
+            else
+            {
+                var response2 = new GetTagResponse2();
+                response2.id = id;
+                var tagString = _musicCastHost.GetTag(id);
+                var tagInt = Convert.ToInt32(tagString);
+                response2.tag = tagInt;
 
-            response.zone_list.Add(new IntegerInputList { id = "main", tag = mainTagAsInt });
+                response = response2;
+            }
 
-            response.input_list.Add("bluetooth", 0);
-            response.input_list.Add("server", 0);
-            response.input_list.Add("net_radio", 0);
-            response.input_list.Add("pandora", 0);
-            response.input_list.Add("spotify", 0);
-            response.input_list.Add("airplay", 0);
-            response.input_list.Add("mc_link", 0);
             return new ObjectResult(response);
         }
 
