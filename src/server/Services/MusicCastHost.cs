@@ -15,7 +15,7 @@ namespace Swimbait.Server.Services
 
         public const string RelayHost = "192.168.1.213";
 
-        public string LocationId => "7345174dcfd44df2834f1d02452cbe3c";
+        public string LocationId { get; set; }
 
         public string IpAddress => "192.168.1.3";
 
@@ -32,7 +32,6 @@ namespace Swimbait.Server.Services
         public MusicCastHost()
         {
             Name = "Swimbait";
-            
         }
 
         static MusicCastHost()

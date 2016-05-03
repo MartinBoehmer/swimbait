@@ -196,6 +196,7 @@ namespace Swimbait.Server.Controllers
             var json = Request.Form.Keys.First();
             var request = JsonConvert.DeserializeObject<SetLocationIdRequest>(json);
             Log.LogInformation($"Set id={request.id}");
+            _musicCastHost.LocationId = request.id;
             return MusicCastOk();
         }
 

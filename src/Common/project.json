@@ -5,12 +5,16 @@
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
-        "System.Net.Http": "4.0.0.0"
+        "System.Net.Http": "4.0.0.0",
+        "System.Xml.Linq": "4.0.0.0",
+        "System.Xml": "4.0.0.0"
       }
     }
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.3"
   }
 }

@@ -36,7 +36,7 @@ namespace Swimbait.Server.Controllers.Responses
         public string FriendlyName { get; set; }
 
         protected override string BaseXmlTemplate => @"
-<root xmlns = ""urn:schemas-upnp-org:device-1-0"" xmlns:yamaha=""urn:schemas-yamaha-com:device-1-0"">
+<root xmlns=""urn:schemas-upnp-org:device-1-0"" xmlns:yamaha=""urn:schemas-yamaha-com:device-1-0"">
    <specVersion>
       <major>1</major>
       <minor>0</minor>

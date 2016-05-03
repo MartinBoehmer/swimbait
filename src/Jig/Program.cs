@@ -14,7 +14,7 @@ namespace Jig
         {
             const string activityLog = @"D:\Downloads\swimbait\activity.txt";
             var activity = File.ReadAllLines(activityLog);
-
+            int counter = 1;
             foreach(var line in activity)
             {
                 var log = RequestLog.FromCsv(line);
@@ -25,9 +25,11 @@ namespace Jig
                     var yamahaResponse = UriService.GetResponse("192.168.1.213", log.YamahaPort, log.PathAndQuery);
                     
                     var logService = new LogService();
-                    logService.LogToDisk(swimbaitResponse);
-                    logService.LogToDisk(yamahaResponse);
+                    logService.LogToDisk(counter, swimbaitResponse);
+                    logService.LogToDisk(counter, yamahaResponse);
                 }
+
+                counter++;
             }
         }
 

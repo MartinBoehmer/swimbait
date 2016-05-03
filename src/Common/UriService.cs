@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Newtonsoft.Json;
 using Swimbait.Server.Services;
 
 namespace Swimbait.Common
@@ -20,7 +24,20 @@ namespace Swimbait.Common
 
                 try
                 {
-                    result.ResponseBody = httpClient.GetStringAsync(uri).Result;
+                    HttpResponseMessage response = httpClient.GetAsync(uri).Result;
+                    var stream = response.Content.ReadAsStreamAsync().Result;
+
+                    var reader = new StreamReader(stream);
+                    result.ResponseBody = reader.ReadToEnd();
+
+                    if (result.ResponseBody.StartsWith("<"))
+                    {
+                        result.ResponseBody = AsFormattedXml(result.ResponseBody);
+                    }
+                    if (result.ResponseBody.StartsWith("{"))
+                    {
+                        result.ResponseBody = AsFormattedJson(result.ResponseBody);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -37,5 +54,23 @@ namespace Swimbait.Common
             return result;
         }
 
+        static string AsFormattedXml(string xml)
+        {
+            try
+            {
+                var doc = XDocument.Parse(xml);
+                return doc.ToString();
+            }
+            catch (Exception)
+            {
+                return xml;
+            }
+        }
+
+        private static string AsFormattedJson(string json)
+        {
+            dynamic parsedJson = JsonConvert.DeserializeObject(json);
+            return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+        }
     }
 }
