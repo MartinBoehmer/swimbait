@@ -16,6 +16,11 @@ namespace Swimbait.Server.Controllers.Requests
         {
             target.Add(new InputList { id = id, tag = tag });
         }
+
+        public static void AddText(this IList<InputList3> target, string id, string text)
+        {
+            target.Add(new InputList3 { id = id, text = text });
+        }
     }
 
     public class IntegerInputList
@@ -29,6 +34,12 @@ namespace Swimbait.Server.Controllers.Requests
     {
         public string id { get; set; }
         public string tag { get; set; }
+    }
+
+    public class InputList3
+    {
+        public string id { get; set; }
+        public string text { get; set; }
     }
 
     public class GetTagResponse

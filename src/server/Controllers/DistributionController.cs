@@ -23,10 +23,11 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetDistributionInfo()
         {
             var response = new DistributionInfoResponse();
+
             response.response_code = 0;
             response.group_id = "00000000000000000000000000000000";
             response.group_name = _musicCastHost.Name;
-            response.role = "client";
+            response.role = "none";
             
             return new ObjectResult(response);
         }

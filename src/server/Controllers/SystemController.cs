@@ -100,8 +100,8 @@ namespace Swimbait.Server.Controllers
             response.system.input_list.Add(airplayInput);
             response.system.input_list.Add(mcLinkInput);
             response.system.input_list.Add(serverInput);
-            response.system.input_list.Add(bluetoothInput);
             response.system.input_list.Add(netRadioInput);
+            response.system.input_list.Add(bluetoothInput);
 
             pandoraInput.id = "pandora";
             pandoraInput.distribution_enable = true ;
@@ -160,7 +160,7 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetTag()
         {
             var response = new GetTagResponse();
-            response.zone_list.Add(new IntegerInputList {id = "main", tag = 5});
+            response.zone_list.Add(new IntegerInputList {id = "main", tag = 2});
             response.input_list.Add("bluetooth", 0);
             response.input_list.Add("server", 0);
             response.input_list.Add("net_radio", 0);
@@ -214,14 +214,14 @@ namespace Swimbait.Server.Controllers
         public IActionResult GetNameText()
         {
             var response = new NameTextResponse();
-            response.zone_list.Add("main", _musicCastHost.Name);
-            response.input_list.Add("bluetooth", "Bluetooth");
-            response.input_list.Add("server", "Server");
-            response.input_list.Add("net_radio", "Net Radio");
-            response.input_list.Add("pandora", "Pandora");
-            response.input_list.Add("spotify", "Spotify");
-            response.input_list.Add("airplay", "Air Play");
-            response.input_list.Add("mc_link", "MC Link");
+            response.zone_list.AddText("main", _musicCastHost.Name);
+            response.input_list.AddText("bluetooth", "Bluetooth");
+            response.input_list.AddText("server", "Server");
+            response.input_list.AddText("net_radio", "Net Radio");
+            response.input_list.AddText("pandora", "Pandora");
+            response.input_list.AddText("spotify", "Spotify");
+            response.input_list.AddText("airplay", "AirPlay");
+            response.input_list.AddText("mc_link", "MC Link");
             return new ObjectResult(response);
         }
 
@@ -242,7 +242,7 @@ namespace Swimbait.Server.Controllers
             response.system_id = _musicCastHost.SerialNumber;
             response.system_version = _musicCastHost.SystemVersion;
             response.api_version = _musicCastHost.ApiVersion;
-            response.netmodule_version= "0516 ";
+            response.netmodule_version= "0516    ";
             response.netmodule_checksum = "DF4473CE";
             response.system_version = _musicCastHost.SystemVersion;
             response.operation_mode = "normal";
