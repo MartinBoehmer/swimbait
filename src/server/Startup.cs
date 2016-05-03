@@ -113,6 +113,9 @@ namespace Swimbait.Server
                         log.LogInformation($"Man in the middle! {manInTheMiddleResponse.RequestUri}");
                         context.Response.StatusCode = 200;
                         await context.Response.WriteAsync(manInTheMiddleResponse.ResponseBody);
+
+                        var logService = new LogService();
+                        logService.LogToDisk(-1, manInTheMiddleResponse);
                     }
                 }
             };

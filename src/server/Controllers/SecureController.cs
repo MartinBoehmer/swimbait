@@ -24,6 +24,7 @@ namespace Swimbait.Server.Controllers
             return DoManInTheMiddle();
         }
 
+        [Route("YamahaExtendedControl/secure/v1/system")]
         [HttpGet("getNetworkStatus")]
         public IActionResult GetNetworkStatus()
         {
