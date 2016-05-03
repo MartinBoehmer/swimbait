@@ -30,6 +30,9 @@ namespace Swimbait.Common
                     var reader = new StreamReader(stream);
                     result.ResponseBody = reader.ReadToEnd();
 
+                    stream.Seek(0, SeekOrigin.Begin);
+                    result.ResponseBytes = ReadFully(stream);
+                    
                     if (result.ResponseBody.StartsWith("<"))
                     {
                         result.ResponseBody = AsFormattedXml(result.ResponseBody);
@@ -64,6 +67,15 @@ namespace Swimbait.Common
             catch (Exception)
             {
                 return xml;
+            }
+        }
+
+        public static byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
             }
         }
 

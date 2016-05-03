@@ -211,17 +211,29 @@ namespace Swimbait.Server.Controllers
 
 
         [HttpGet("getNameText")]
-        public IActionResult GetNameText()
+        public IActionResult GetNameText(string id = null)
         {
-            var response = new NameTextResponse();
-            response.zone_list.AddText("main", _musicCastHost.Name);
-            response.input_list.AddText("bluetooth", "Bluetooth");
-            response.input_list.AddText("server", "Server");
-            response.input_list.AddText("net_radio", "Net Radio");
-            response.input_list.AddText("pandora", "Pandora");
-            response.input_list.AddText("spotify", "Spotify");
-            response.input_list.AddText("airplay", "AirPlay");
-            response.input_list.AddText("mc_link", "MC Link");
+            object response;
+            if (string.IsNullOrEmpty(id))
+            {
+                var response1 = new NameTextResponse();
+                response1.zone_list.AddText("main", _musicCastHost.Name);
+                response1.input_list.AddText("bluetooth", "Bluetooth");
+                response1.input_list.AddText("server", "Server");
+                response1.input_list.AddText("net_radio", "Net Radio");
+                response1.input_list.AddText("pandora", "Pandora");
+                response1.input_list.AddText("spotify", "Spotify");
+                response1.input_list.AddText("airplay", "AirPlay");
+                response1.input_list.AddText("mc_link", "MC Link");
+                response = response1;
+            }
+            else
+            {
+                var response2 = new NameTextResponse2();
+                response2.id = id;
+                response2.text = _musicCastHost.Name;
+                response = response2;
+            }
             return new ObjectResult(response);
         }
 

@@ -119,7 +119,7 @@ namespace Swimbait.Server.Controllers.Responses
          <yamaha:X_service>
             <yamaha:X_specType>urn:schemas-yamaha-com:service:X_YamahaExtendedControl:1</yamaha:X_specType>
             <yamaha:X_yxcControlURL>/YamahaExtendedControl/v1/</yamaha:X_yxcControlURL>
-            <yamaha:X_yxcVersion>0516</yamaha:X_yxcVersion>
+            <yamaha:X_yxcVersion>0516    </yamaha:X_yxcVersion>
          </yamaha:X_service>
       </yamaha:X_serviceList>
    </yamaha:X_device>
