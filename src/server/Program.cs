@@ -70,12 +70,12 @@ namespace Swimbait.Server
                     _multicastServer.JoinGroup();
                     break;
                 case ConsoleKey.C:
-                    Console.WriteLine("SendPossiblyConnectUdp");
-                    _multicastService.SendPossiblyConnectUdp();
+                    Console.WriteLine("SendConnectUdp");
+                    _multicastService.SendConnectUdp();
                     break;
                 case ConsoleKey.V:
-                    Console.WriteLine("SendPossiblyConnectUdp2");
-                    _multicastService.SendPossiblyConnectUdp2();
+                    Console.WriteLine("SendNotSureWhatThisDoesUdp");
+                    _multicastService.SendNotSureWhatThisDoesUdp();
                     break;
             }
         }

@@ -27,6 +27,7 @@ namespace Swimbait.Server
     public class ActivityLogMiddleware
     {
         private readonly RequestDelegate next;
+        static object _lockObject = new object();
 
         public ActivityLogMiddleware(RequestDelegate next)
         {
@@ -54,7 +55,10 @@ namespace Swimbait.Server
 
             var lineContent = $"{thisPort},{yamahaPort},{request.Method},{path},{body},{Environment.NewLine}";
 
-            File.AppendAllText(filename, lineContent);
+            lock (_lockObject)
+            {
+                File.AppendAllText(filename, lineContent);
+            }
 
             return next(context);
         }

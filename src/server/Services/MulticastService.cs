@@ -19,7 +19,7 @@ namespace Swimbait.Server.Services
             _sender = new MulticastSender();
         }
 
-        public void SendPossiblyConnectUdp()
+        public void SendNotSureWhatThisDoesUdp()
         {
             var message = new MulticastRequest("{\"main\":{\"power\":\"on\"}}{\"netusb\":{\"play_info_updated\":true}}{\"system\":{\"location_info_updated\":true,\"stereo_pair_info_updated\":true},\"netusb\":{\"account_updated\":true,\"play_info_updated\":true}}{\"system\":{\"stereo_pair_info_updated\":true}}{\"system\":{\"location_info_updated\":true},\"netusb\":{\"play_info_updated\":true}}{\"system\":{\"name_text_updated\":true}}");
             
@@ -32,7 +32,7 @@ namespace Swimbait.Server.Services
             s.SendTo(bytes, bytes.Length, SocketFlags.None, RemoteEndPoint);
         }
 
-        public void SendPossiblyConnectUdp2()
+        public void SendConnectUdp()
         {
             var data = "{\"location\":\"http://!!IP!!:!!DlnaHostPort!!/MediaRenderer/desc.xml\",\"ack\":\"http://!!IP!!:!!DlnaHostPort!!/MusicCastNetwork/InitialJoinComplete\"}".Replace("!!DlnaHostPort!!", MusicCastHost.DlnaHostPort.ToString());
 

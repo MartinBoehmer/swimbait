@@ -34,7 +34,7 @@ namespace Swimbait.Server.Services
         
         public MusicCastHost()
         {
-            Name = "Swimbait";
+            Name = Environment.MachineName;
             _tags = new Dictionary<string, string>();
         }
 

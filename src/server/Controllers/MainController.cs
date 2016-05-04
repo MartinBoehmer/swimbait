@@ -19,13 +19,6 @@ namespace Swimbait.Server.Controllers
             _musicCastHost = musicCastHost;
         }
 
-        [HttpGet("getPresetInfo")]
-        public IActionResult getPresetInfo()
-        {
-            var response = new PresetInfoResponse();
-            return new ObjectResult(response);
-        }
-
         [HttpGet("setInput")]
         public IActionResult setInput(string input)
         {
