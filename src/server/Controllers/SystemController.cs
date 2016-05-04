@@ -21,6 +21,15 @@ namespace Swimbait.Server.Controllers
         {
             _musicCastHost = musicCastHost;
         }
+        
+
+        [HttpGet("IsNewFirmwareAvailable")]
+        public IActionResult IsNewFirmwareAvailable()
+        {
+            var r = new IsNewFirmwareAvailableResponse();
+            r.available = false;
+            return new ObjectResult(r);
+        }
 
         [HttpGet("stopInitialJoin")]
         public IActionResult StopInitialJoin()

@@ -21,6 +21,7 @@ namespace Swimbait.Server.Services
             var sb = new StringBuilder();
             sb.AppendLine($"Request.Url={log.RequestUri}");
             sb.AppendLine($"Request.Body:{log.RequestBody}");
+            sb.AppendLine($"Request.Method:{log.RequestMethod}");
             sb.Append(log.ResponseBody);
 
             File.WriteAllText(debugFile, sb.ToString());
