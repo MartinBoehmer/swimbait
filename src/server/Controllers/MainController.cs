@@ -18,6 +18,14 @@ namespace Swimbait.Server.Controllers
         {
             _musicCastHost = musicCastHost;
         }
+        
+        /// <param name="power">standby</param>
+        [HttpGet("setInput")]
+        public IActionResult setPower(string power)
+        {
+            var response = new BasicResponse();
+            return new ObjectResult(response);
+        }
 
         [HttpGet("setInput")]
         public IActionResult setInput(string input)
