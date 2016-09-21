@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Features;
-using Microsoft.AspNet.Server.Features;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -10,28 +10,27 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Net.Http.Server;
 using System;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.ApplicationInsights.AspNet.Extensions;
-using Microsoft.AspNet.Diagnostics;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 using System.IO;
 using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNet.Mvc;
+
 using Swimbait.Server.Services;
 using Swimbait.Common;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 
 namespace Swimbait.Server
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env)
         {
             var configBuilder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
             Configuration = configBuilder.Build();
@@ -43,8 +42,8 @@ namespace Swimbait.Server
         {
             services.AddMvc();
 
-            services.Configure<MvcOptions>(options => {});
-            
+            services.Configure<MvcOptions>(options => { });
+
             var serviceProvider = BuildIoC(services);
 
             return serviceProvider;
@@ -54,7 +53,7 @@ namespace Swimbait.Server
         private IServiceProvider BuildIoC(IServiceCollection services)
         {
             var builder = new ContainerBuilder();
-            
+
             builder.RegisterModule(new SwimbaitModule());
 
             builder
@@ -73,20 +72,13 @@ namespace Swimbait.Server
         {
             var webListenerInfo = app.ServerFeatures.Get<WebListener>();
             if (webListenerInfo != null)
-            {
-                webListenerInfo.AuthenticationManager.AuthenticationSchemes = AuthenticationSchemes.AllowAnonymous;
-            }
+                webListenerInfo.Settings.Authentication.Schemes = AuthenticationSchemes.None;
 
-            var loggingConfiguration = new ConfigurationBuilder()
-                .AddJsonFile("logging.json")
-                .Build();
-
-            loggerFactory.AddConsole(loggingConfiguration);
-            loggingConfiguration.ReloadOnChanged("logging.json");
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
             var o = new StatusCodePagesOptions();
-            o.HandleAsync = async statusCodeContext =>
-            {
+            o.HandleAsync = async statusCodeContext => {
                 var request = statusCodeContext.HttpContext.Request;
                 var context = statusCodeContext.HttpContext;
                 var log = loggerFactory.CreateLogger<Startup>();
@@ -94,21 +86,16 @@ namespace Swimbait.Server
                 var uri = request.GetUri();
 
                 var body = "<not decoded>";
-                if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post")
-                {
+                if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post") {
                     body = request.Form.Keys.First();
                 }
 
                 var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
 
-                if (!isFavIcon )
-                {
-                    if (context.Response.HasStarted)
-                    {
+                if (!isFavIcon) {
+                    if (context.Response.HasStarted) {
                         log.LogCritical("Too late");
-                    }
-                    else
-                    {
+                    } else {
                         var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(MusicCastHost.RelayHost, uri, ActivityLogMiddleware.MapPortToReal);
                         log.LogInformation($"Man in the middle! {manInTheMiddleResponse.RequestUri}");
                         context.Response.StatusCode = 200;
@@ -125,7 +112,7 @@ namespace Swimbait.Server
             app.UseHeadersMiddleware();
 
             app.UseActivityLogMiddleware();
-
+            app.UseStaticFiles();
             app.UseMvc();
 
         }

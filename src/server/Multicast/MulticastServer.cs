@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -105,7 +103,8 @@ namespace Swimbait.Server.Multicast
 
             if (disposing)
             {
-                _udpSocket.Close();
+                //_udpSocket.Close();
+                _udpSocket.Shutdown(SocketShutdown.Both);
                 _udpSocket.Dispose();
             }
             

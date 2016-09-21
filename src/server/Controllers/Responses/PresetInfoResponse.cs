@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Swimbait.Server.Controllers.Responses
 {
@@ -21,8 +19,7 @@ namespace Swimbait.Server.Controllers.Responses
         {
             preset_info = Enumerable
                             .Range(1, 40)
-                            .ToList()
-                            .ConvertAll(i => new PresetInfo {input = "unknown"});
+                            .Select(i => new PresetInfo {input = "unknown"}).ToList();
         }
     }
 }

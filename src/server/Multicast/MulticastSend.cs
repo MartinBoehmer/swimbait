@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using Swimbait.Server.Multicast.Requests;
 
 namespace Swimbait.Server.Multicast
@@ -30,7 +26,8 @@ namespace Swimbait.Server.Multicast
             s.Connect(ipEndPoint);
             var bytes = request.AsBytes();
             s.Send(bytes, bytes.Length, SocketFlags.None);
-            s.Close();
+            //s.Close();
+            s.Shutdown(SocketShutdown.Both);
         }
 
 

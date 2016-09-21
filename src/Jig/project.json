@@ -1,24 +1,20 @@
 {
-  "version": "1.0.0-*",
-  "description": "Jig Console Application",
   "authors": [ "neutmute" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true
   },
-
-  "dependencies": {
-    "Common": "1.0.0-*"
-  },
-
   "commands": {
     "Jig": "Jig"
   },
-
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Common": "1.0.0-*"
+  },
+  "description": "Jig Console Application",
   "frameworks": {
-    "dnx451": { }
-  }
+    "netstandard1.6": {
+      "imports": "dnxcore50,portable-net45+win8"
+    }
+  },
+  "version": "1.0.0-*"
 }

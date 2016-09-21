@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Swimbait.Server.Controllers
@@ -21,7 +21,7 @@ namespace Swimbait.Server.Controllers
             Log.LogInformation($"404: {Request.Path}");
             //logic to generate status code response
 
-            return new HttpNotFoundResult();
+            return new NotFoundResult();
         }
     }
 }

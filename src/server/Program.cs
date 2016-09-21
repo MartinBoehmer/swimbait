@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNet.Builder;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNet.Server.Kestrel;
 using Swimbait.Server.Multicast;
 using Swimbait.Server.Services;
 
@@ -32,15 +28,17 @@ namespace Swimbait.Server
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
             var portsToListen = new []{80, MusicCastHost.DlnaHostPort, 51100};
-            var urisToListen = portsToListen.ToList().ConvertAll(p => $"http://{MusicCastHost.ThisIp}:{p}");
+            var urisToListen = portsToListen.ToList().Select(p => $"http://{MusicCastHost.ThisIp}:{p}");
             var uriToListenString = string.Join(";", urisToListen);
             builder.AddCommandLine(new[] { $"server.urls={uriToListenString}" });
             var config = builder.Build();
 
-            var webHost1 = new WebHostBuilder(config)
-                .UseServer("Microsoft.AspNet.Server.Kestrel")
-                .Build()
-                .Start();
+            var webHost1 = new WebHostBuilder().Build();
+           
+            webHost1.Start();
+                //.UseServer("Microsoft.AspNet.Server.Kestrel")
+                //.Build()
+                //.Start();
 
             Console.WriteLine($"Started the server. Listing on {uriToListenString}");
             Console.WriteLine("Press any key to stop the server");
