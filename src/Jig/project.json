@@ -6,14 +6,19 @@
   "commands": {
     "Jig": "Jig"
   },
-  "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "Common": "1.0.0-*"
-  },
+
   "description": "Jig Console Application",
+  "dependencies": {
+    "Common": "1.0.0-*",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    }
+  },
+
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50,portable-net45+win8"
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
     }
   },
   "version": "1.0.0-*"
