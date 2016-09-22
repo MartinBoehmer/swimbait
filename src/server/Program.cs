@@ -48,7 +48,7 @@ namespace Swimbait.Server
                 .Build();
 
             Console.WriteLine($"Started the server. Listing on {uriToListenString}");
-            Console.WriteLine("Press any key to stop the server");
+            Console.WriteLine("Press 'Q' to stop the server");
 
             _multicastServer.Start();
 
