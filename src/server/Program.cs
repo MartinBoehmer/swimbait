@@ -18,13 +18,15 @@ namespace Swimbait.Server
         public Program(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _multicastService = new MulticastService();
         }
 
         public static void Main(string[] args)
         {
             var keyHandler = new KeyHandler();
+
+            // todo: IOC
             _multicastServer = new MulticastServer();
+            _multicastService = new MulticastService();
 
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
