@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Net.Http.Server;
 using Newtonsoft.Json;
 using Swimbait.Server.Controllers.Requests;
-using Swimbait.Server.Controllers.Responses;
 using Swimbait.Server.Services;
+using YamahaExtendedControl.Responses;
 
 namespace Swimbait.Server.Controllers
 {

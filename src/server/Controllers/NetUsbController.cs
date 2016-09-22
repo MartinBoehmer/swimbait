@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Swimbait.Server.Controllers.Responses;
 using Swimbait.Server.Services;
+using YamahaExtendedControl.Responses;
 
 namespace Swimbait.Server.Controllers
 {

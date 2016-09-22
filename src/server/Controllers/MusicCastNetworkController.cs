@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Swimbait.Server.Controllers.Responses;
+using YamahaExtendedControl.Responses;
 
 namespace Swimbait.Server.Controllers
 {
-   
+
 
     [Route("MusicCastNetwork")]
     public class MusicCastNetworkController : Controller

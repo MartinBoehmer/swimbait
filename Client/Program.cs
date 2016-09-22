@@ -66,7 +66,7 @@ namespace Client
             case ConsoleKey.C: {
                     Console.WriteLine("SendConnect");
                     var sucess = await _yamahaService.ConnectAsync();
-                    Console.WriteLine($"Connection  {(sucess ? "ok" : "faile")}");
+                    Console.WriteLine($"Connection  {(sucess ? "ok" : "fail")}");
                     break;
                 }
 
