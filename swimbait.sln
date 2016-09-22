@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7EA899B-4F92-46F0-B55D-943B93B81770}"
 	ProjectSection(SolutionItems) = preProject
 		src\Common\global.json = src\Common\global.json
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Server", "src\server\Server.xproj", "{FE7F936A-3F5E-4DC1-83D1-5CE758CBEF46}"
@@ -13,6 +14,10 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Jig", "src\Jig\Jig.xproj", "{C4ACB073-B126-4BA1-8E09-37E171D58B10}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Common", "src\Common\Common.xproj", "{C6F327DD-6E90-4A95-805E-7D0B58C5FF75}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Client", "Client\Client.xproj", "{8DFD273B-AA94-4E8C-BFF8-ACF91B07767E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "YamahaExtendedControl", "YamahaExtendedControl\YamahaExtendedControl.xproj", "{C520F00A-11BA-4A15-A706-CED0BC3B702F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +37,14 @@ Global
 		{C6F327DD-6E90-4A95-805E-7D0B58C5FF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6F327DD-6E90-4A95-805E-7D0B58C5FF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6F327DD-6E90-4A95-805E-7D0B58C5FF75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFD273B-AA94-4E8C-BFF8-ACF91B07767E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFD273B-AA94-4E8C-BFF8-ACF91B07767E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFD273B-AA94-4E8C-BFF8-ACF91B07767E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFD273B-AA94-4E8C-BFF8-ACF91B07767E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C520F00A-11BA-4A15-A706-CED0BC3B702F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C520F00A-11BA-4A15-A706-CED0BC3B702F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C520F00A-11BA-4A15-A706-CED0BC3B702F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C520F00A-11BA-4A15-A706-CED0BC3B702F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace Swimbait.Server.Controllers.Responses
+﻿namespace YamahaExtendedControl.Responses
 {
     public class Equalizer
     {

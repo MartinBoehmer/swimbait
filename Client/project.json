@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Common": "1.0.0-*",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0-alpha1-22144",
+    "Microsoft.AspNetCore.Hosting": "1.1.0-alpha1-22144",
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0-alpha1-22144",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0-alpha1-22144",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0-alpha1-22144",
+    "Microsoft.Extensions.Configuration": "1.1.0-alpha1-22144",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.1.0-alpha1-22144",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Logging.Console": "1.1.0-alpha1-22144",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0",
+    "Autofac.Extensions.DependencyInjection": "4.0.0",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "YamahaExtendedControl": "1.0.0-*",
+    "Newtonsoft.Json": "9.0.1"
+  },
+  "commands": {
+    "run": "run server.urls=http://localhost:5003"
+  },
+
+   "frameworks": {
+        "netcoreapp1.0": {
+          "imports": [
+            "dotnet5.6",
+            "portable-net45+win8"
+          ]
+        }
+    }
+}

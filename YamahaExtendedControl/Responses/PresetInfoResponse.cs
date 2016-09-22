@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Swimbait.Server.Controllers.Responses
+namespace YamahaExtendedControl.Responses
 {
     public class PresetInfo
     {

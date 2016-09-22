@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Swimbait.Server.Controllers.Responses
+namespace YamahaExtendedControl.Responses
 {
     public class DistributionInfoResponse
     {
