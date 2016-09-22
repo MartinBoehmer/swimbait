@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Swimbait.Server.Multicast;
 using Swimbait.Server.Services;
+using System.IO;
 
 namespace Swimbait.Server
 {
@@ -30,16 +31,19 @@ namespace Swimbait.Server
             var portsToListen = new []{80, MusicCastHost.DlnaHostPort, 51100};
             var urisToListen = portsToListen.ToList().Select(p => $"http://{MusicCastHost.ThisIp}:{p}");
             var uriToListenString = string.Join(";", urisToListen);
-            builder.AddCommandLine(new[] { $"server.urls={uriToListenString}" });
-            var config = builder.Build();
+        
+            var config = builder
+                .AddCommandLine(new[] { $"server.urls={uriToListenString}" })
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+                .Build();
 
-            var webHost1 = new WebHostBuilder().Build();
-           
-            webHost1.Start();
-            webHost1.
-                //.UseServer("Microsoft.AspNet.Server.Kestrel")
-                //.Build()
-                //.Start();
+            var host = new WebHostBuilder()
+                .UseConfiguration(config)
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
 
             Console.WriteLine($"Started the server. Listing on {uriToListenString}");
             Console.WriteLine("Press any key to stop the server");
@@ -50,7 +54,7 @@ namespace Swimbait.Server
 
             keyHandler.WaitForExit();
 
-            webHost1.Dispose();
+            host.Dispose();
 
             _multicastServer.Dispose();
 
