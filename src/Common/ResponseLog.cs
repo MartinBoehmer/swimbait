@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Swimbait.Server.Services
+namespace Swimbait.Common
 {
     public class ResponseLog
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 
 namespace Swimbait.Server.Services
 {
@@ -28,10 +27,10 @@ namespace Swimbait.Server.Services
         public decimal SystemVersion => 2.09m;
 
         public decimal ApiVersion => 1.11m;
-        
+
         public string Name { get; set; }
 
-        
+
         public MusicCastHost()
         {
             Name = Environment.MachineName;
@@ -40,11 +39,9 @@ namespace Swimbait.Server.Services
 
         static MusicCastHost()
         {
-            ThisIp = Dns
-                        .GetHostEntry(Dns.GetHostName())
-                        .AddressList
-                        .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork)
-                        .ToString();
+            Dns.GetHostEntryAsync(Dns.GetHostName()).ContinueWith(
+                   r => ThisIp = r.Result.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString()
+            );
         }
 
         public bool HasTag(string key)
@@ -54,8 +51,7 @@ namespace Swimbait.Server.Services
 
         public string GetTag(string key)
         {
-            if (HasTag(key))
-            {
+            if (HasTag(key)) {
                 return _tags[key];
             }
             return null;
@@ -63,14 +59,10 @@ namespace Swimbait.Server.Services
 
         public void SetTag(string key, string value)
         {
-            if (_tags.ContainsKey(key))
-            {
+            if (_tags.ContainsKey(key)) {
                 _tags[key] = value;
-            }
-            else
-            {
-                if (value != null)
-                {
+            } else {
+                if (value != null) {
                     _tags.Add(key, value);
                 }
             }

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
-using System.Net.Http;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Swimbait.Server.Services;
-using Microsoft.ApplicationInsights.AspNet.Extensions;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using System.IO;
-using System.Text;
 
 namespace Swimbait.Server
 {
