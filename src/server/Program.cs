@@ -11,8 +11,8 @@ namespace Swimbait.Server
     public class Program
     {
         private readonly IServiceProvider _serviceProvider;
-        private MulticastServer _multicastServer;
-        private MulticastService _multicastService;
+        private static MulticastServer _multicastServer;
+        private static MulticastService _multicastService;
 
         public Program(IServiceProvider serviceProvider)
         {
@@ -20,7 +20,7 @@ namespace Swimbait.Server
             _multicastService = new MulticastService();
         }
 
-        public Task<int> Main(string[] args)
+        public static void Main(string[] args)
         {
             var keyHandler = new KeyHandler();
             _multicastServer = new MulticastServer();
@@ -36,6 +36,7 @@ namespace Swimbait.Server
             var webHost1 = new WebHostBuilder().Build();
            
             webHost1.Start();
+            webHost1.
                 //.UseServer("Microsoft.AspNet.Server.Kestrel")
                 //.Build()
                 //.Start();
@@ -53,10 +54,9 @@ namespace Swimbait.Server
 
             _multicastServer.Dispose();
 
-            return Task.FromResult(0);
         }
 
-        private void KeyHandler_KeyEvent(object sender, ConsoleKeyEventArgs e)
+        private static void KeyHandler_KeyEvent(object sender, ConsoleKeyEventArgs e)
         {
             switch (e.KeyInfo.Key)
             {
