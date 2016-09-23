@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Swimbait.Server.Controllers.Requests;
 
-namespace Swimbait.Server.Controllers.Responses
+namespace YamahaExtendedControl.Responses
 {
     public class NameTextResponse2 : BasicResponse
     {

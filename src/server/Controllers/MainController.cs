@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Swimbait.Server.Controllers.Responses;
 using Swimbait.Server.Services;
+using YamahaExtendedControl.Responses;
 
 namespace Swimbait.Server.Controllers
 {
@@ -20,7 +16,7 @@ namespace Swimbait.Server.Controllers
         }
         
         /// <param name="power">standby</param>
-        [HttpGet("setInput")]
+        [HttpGet("setPower")]
         public IActionResult setPower(string power)
         {
             var response = new BasicResponse();
