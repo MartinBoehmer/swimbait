@@ -1,10 +1,7 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "Common Class Library",
+  "description": "Common code for swimbait server",
   "authors": [ "neutmute" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50,portable-net45+win8"

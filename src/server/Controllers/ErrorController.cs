@@ -11,8 +11,11 @@ namespace Swimbait.Server.Controllers
             
         }
 
+        /// <summary>
+        /// "StatusCode" is already in a base class
+        /// </summary>
         [Route("Status/{statusCode}")]
-        public IActionResult StatusCode(int statusCode)
+        public IActionResult MusicCastStatus(int statusCode)
         {
             Log.LogInformation($"404: {Request.Path}");
             //logic to generate status code response
