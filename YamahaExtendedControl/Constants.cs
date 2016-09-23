@@ -10,5 +10,8 @@ namespace YamahaExtendedControl
         public const string IRCODE_OFF = "78877f80";
         public const string IRCODE_ON = "78877e81";
 
+        public const string ON = "on";
+        public const string OFF = "standby";
+
     }
 }

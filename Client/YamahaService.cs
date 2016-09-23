@@ -42,7 +42,16 @@ namespace Client
 
         public async Task<bool> SetPowerAsync(bool on)
         {
-            var s = await _client.GetStringAsync($"system/sendIrCode?code={(on ? Constants.IRCODE_ON : Constants.IRCODE_OFF)}");
+            var s = await _client.GetStringAsync($"main/setPower?power={(on ? Constants.ON : Constants.OFF)}");
+            if (string.IsNullOrEmpty(s))
+                return false;
+            var j = Newtonsoft.Json.JsonConvert.DeserializeObject<BasicResponse>(s);
+            return j.response_code == 0;
+        }
+
+        public async Task<bool> SetPowerAsync(string code)
+        {
+            var s = await _client.GetStringAsync($"system/sendIrCode?code={code}");
             if (string.IsNullOrEmpty(s))
                 return false;
             var j = Newtonsoft.Json.JsonConvert.DeserializeObject<BasicResponse>(s);
