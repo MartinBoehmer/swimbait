@@ -5,6 +5,8 @@ Definition:
 
 An ASP.NET Core application that emulates the Yamaha MusicCast protocol. 
 
+[![swimbait MyGet Build Status](https://www.myget.org/BuildSource/Badge/swimbait?identifier=dfa0a82e-57fe-4328-a97a-932c467510d3)](https://www.myget.org/)
+
 ## Projects
 ### Server
 Emulates a Yamaha MusicCast speaker by serving and responding REST HTTP on multiple ports and UDP.
