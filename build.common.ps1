@@ -11,6 +11,14 @@ $Global:asciiArtBuild = @"
  
 "@
 
+$Global:asciiArtRestore = @"
+  ____           _                 
+ |  _ \ ___  ___| |_ ___  _ __ ___ 
+ | |_) / _ \/ __| __/ _ \| '__/ _ \
+ |  _ <  __/\__ \ || (_) | | |  __/
+ |_| \_\___||___/\__\___/|_|  \___| 
+"@
+
 if(!$Global:ColorScheme) {
     $Global:ColorScheme = @{
         "Banner"=[ConsoleColor]::Cyan
