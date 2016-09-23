@@ -16,7 +16,7 @@ namespace Swimbait.Server.Controllers
         }
         
         /// <param name="power">standby</param>
-        [HttpGet("setInput")]
+        [HttpGet("setPower")]
         public IActionResult setPower(string power)
         {
             var response = new BasicResponse();

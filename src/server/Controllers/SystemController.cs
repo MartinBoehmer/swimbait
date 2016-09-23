@@ -302,5 +302,12 @@ namespace Swimbait.Server.Controllers
 
             return new ObjectResult(response);
         }
+
+        [HttpGet("sendIrCode")]
+        public IActionResult SendIRCode(string code)
+        {
+             var response = new BasicResponse();
+             return new ObjectResult(response);
+        }
     }
 }

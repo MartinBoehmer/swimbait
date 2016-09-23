@@ -42,6 +42,8 @@ namespace Client
                 .Build();
 
             Console.WriteLine($"Started the client. Connecting to {uriToListenString}...");
+            Console.WriteLine("Press 'C' to connect and turn on");
+            Console.WriteLine("Press 'D' to turn off");
             Console.WriteLine("Press 'Q' to quit");
 
 
@@ -63,10 +65,31 @@ namespace Client
             case ConsoleKey.J:
                 Console.WriteLine("JoinGroup");
                 break;
+            case ConsoleKey.D: {
+                    Console.WriteLine("SendDisconnectConnect");
+                    var status = await _yamahaService.GetStatusAsync();
+                    Console.WriteLine($"Status  power is {status.power}");
+                    if (status.power == "on") {
+                        Console.WriteLine($"Turning off");
+                        await _yamahaService.SetPowerAsync(false);
+                        status = await _yamahaService.GetStatusAsync();
+                        Console.WriteLine($"Status  power is now {status.power}");
+                    }
+                    break;
+                }
             case ConsoleKey.C: {
                     Console.WriteLine("SendConnect");
                     var sucess = await _yamahaService.ConnectAsync();
                     Console.WriteLine($"Connection  {(sucess ? "ok" : "fail")}");
+
+                    var status = await _yamahaService.GetStatusAsync();
+                    Console.WriteLine($"Status  power is {status.power}");
+                    if (status.power == "standby") {
+                        Console.WriteLine($"Turning on");
+                        await _yamahaService.SetPowerAsync(true);
+                        status = await _yamahaService.GetStatusAsync();
+                        Console.WriteLine($"Status  power is now {status.power}");
+                    }
                     break;
                 }
 

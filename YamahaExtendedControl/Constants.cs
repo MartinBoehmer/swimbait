@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace YamahaExtendedControl
 {
-    public class Class1
+    public static class Constants
     {
-        public Class1()
-        {
-        }
+        public const string IRCODE_OFF = "78877f80";
+        public const string IRCODE_ON = "78877e81";
+
     }
 }
