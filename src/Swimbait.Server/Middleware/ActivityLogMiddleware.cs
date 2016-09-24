@@ -47,7 +47,7 @@ namespace Swimbait.Server
             var body = "<not decoded>";
             if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post")
             {
-                body = request.Form.Keys.First();
+                body = request.Form.Keys.FirstOrDefault();
             }
 
             var lineContent = $"{thisPort},{yamahaPort},{request.Method},{path},{body},{Environment.NewLine}";
