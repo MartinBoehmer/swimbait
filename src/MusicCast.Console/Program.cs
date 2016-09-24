@@ -21,27 +21,24 @@ namespace MusicCast.ConsoleApp
         public static void Main(string[] args)
         {
             var keyHandler = new KeyHandler();
-            //Add command line configuration source to read command line parameters.
+
             var builder = new ConfigurationBuilder();
-            var speakerUrl = "http://192.168.1.7";
+            builder.AddEnvironmentVariables();
+            var config = builder.Build();
+
+            /*
+            * Reboot after setting this to be the IP of a real Yamaha MusicCast device on your network
+            * Powershell below:
+            [Environment]::SetEnvironmentVariable("Swimbait.RelayHost", "192.168.1.213", "Machine") 
+            */
+            var musicCastSpeaker = config["Swimbait.RelayHost"];
+
+
+            var speakerUrl = $"http://{musicCastSpeaker}";
             _musicCastClient = new MusicCastClient(speakerUrl);
 
-            //var config = builder
-            //    .AddCommandLine(new[] { $"server.urls={speakerUrl}" })
-            //    .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-            //    .Build();
-
-            //var host = new WebHostBuilder()
-            //    .UseConfiguration(config)
-            //    .UseKestrel()
-            //    .UseContentRoot(Directory.GetCurrentDirectory())
-            //    .UseIISIntegration()
-            //    .UseStartup<Startup>()
-            //    .Build();
-
             Console.WriteLine($"Started the client. Connecting to {speakerUrl}...");
-            Console.WriteLine("Press 'C' to connect and turn on");
-            Console.WriteLine("Press 'D' to turn off");
+            Console.WriteLine("Press 'P' for power toggle");
             Console.WriteLine("Press 'Q' to quit");
 
 
@@ -49,51 +46,27 @@ namespace MusicCast.ConsoleApp
 
             keyHandler.WaitForExit();
 
-            //host.Dispose();
-
-            //_multicastServer.Dispose();
-
         }
 
         private static async void KeyHandler_KeyEvent(object sender, ConsoleKeyEventArgs e)
         {
-            switch (e.KeyInfo.Key) {
-            case ConsoleKey.M:
-                break;
-            case ConsoleKey.J:
-                Console.WriteLine("JoinGroup");
-                break;
-            case ConsoleKey.D: {
-                    Console.WriteLine("SendDisconnectConnect");
+            switch (e.KeyInfo.Key)
+            {
+                case ConsoleKey.P:
                     var status = await _musicCastClient.GetStatusAsync();
-                    Console.WriteLine($"Status  power is {status.power}");
-                    if (status.power == "on") {
-                        Console.WriteLine($"Turning off");
-                        await _musicCastClient.SetPowerAsync(false);
-                        status = await _musicCastClient.GetStatusAsync();
-                        Console.WriteLine($"Status  power is now {status.power}");
+                    Console.WriteLine($"Status is {status}");
+                    switch (status.power)
+                    {
+                        case "on":
+                            await _musicCastClient.SetPowerAsync(false);
+                            break;
+                        default:
+                            await _musicCastClient.SetPowerAsync(true);
+                            break;
                     }
+                    status = await _musicCastClient.GetStatusAsync();
+                    Console.WriteLine($"Status is now {status.power}");
                     break;
-                }
-            case ConsoleKey.C: {
-                    Console.WriteLine("SendConnect");
-                    var sucess = await _musicCastClient.ConnectAsync();
-                    Console.WriteLine($"Connection  {(sucess ? "ok" : "fail")}");
-
-                    var status = await _musicCastClient.GetStatusAsync();
-                    Console.WriteLine($"Status  power is {status.power}");
-                    if (status.power == "standby") {
-                        Console.WriteLine($"Turning on");
-                        await _musicCastClient.SetPowerAsync(true);
-                        status = await _musicCastClient.GetStatusAsync();
-                        Console.WriteLine($"Status  power is now {status.power}");
-                    }
-                    break;
-                }
-
-            case ConsoleKey.V:
-                Console.WriteLine("SendNotSureWhatThisDoesUdp");
-                break;
             }
         }
     }

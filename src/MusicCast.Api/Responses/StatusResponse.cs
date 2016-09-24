@@ -7,9 +7,9 @@
         public int high { get; set; }
     }
 
-    public class StatusResponse
+    public class StatusResponse : BasicResponse
     {
-        public int response_code { get; set; }
+        
         public string power { get; set; }
         public int sleep { get; set; }
         public int volume { get; set; }
@@ -20,5 +20,10 @@
         public Equalizer equalizer { get; set; }
         public string link_control { get; set; }
         public int disable_flags { get; set; }
+
+        public override string ToString()
+        {
+            return $"power={power}";
+        }
     }
 }

@@ -8,5 +8,9 @@
         {
             response_code = 0;
         }
+        public override string ToString()
+        {
+            return $"response_code={response_code}";
+        }
     }
 }
