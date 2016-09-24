@@ -20,6 +20,7 @@ using Swimbait.Server.Services;
 using Swimbait.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Swimbait.Server
 {
@@ -74,8 +75,13 @@ namespace Swimbait.Server
             if (webListenerInfo != null)
                 webListenerInfo.Settings.Authentication.Schemes = AuthenticationSchemes.None;
 
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole();
             loggerFactory.AddDebug();
+
+            var log2 = loggerFactory.CreateLogger("test");
+            log2.LogWarning("log test");
+
 
             var o = new StatusCodePagesOptions();
             o.HandleAsync = async statusCodeContext => {

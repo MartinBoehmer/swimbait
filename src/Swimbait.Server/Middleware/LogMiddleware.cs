@@ -1,16 +1,19 @@
 ﻿/*
+ * Replaced with ActivityLogMiddlware
+ * 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
 using System.Net.Http;
 using Swimbait.Server.Services;
-using Microsoft.ApplicationInsights.AspNet.Extensions;
 using System.IO;
 using System.Text;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Swimbait.Common;
 
 namespace Swimbait.Server
@@ -65,7 +68,7 @@ namespace Swimbait.Server
             //    thisResponseLog.ResponseBody = reader.ReadToEnd();
             //}
             
-            var manInTheMiddleResult = UriService.GetManInTheMiddleResult(uri);
+            var manInTheMiddleResult = UriService.GetManInTheMiddleResult(uri, ActivityLogMiddleware.MapPortToReal);
 
             var logService = new LogService();
             logService.LogToDisk(thisResponseLog);
