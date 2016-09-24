@@ -7,6 +7,26 @@ function restore{
 	dotnet restore $project
 }
 
+function nugetPack{
+    _WriteOut -ForegroundColor $ColorScheme.Banner $asciiArtNugetPack
+	
+	$projectsToPack = @(
+        ".\src\musiccast.api";
+    )
+	
+	foreach($project in $projectsToPack) {
+            
+        _WriteConfig "Build" "$project"
+        dotnet pack $project
+	
+	    if (!$LastExitCode -eq 0)
+	    {
+		    Write-Host "Build failed for '$project'"
+		    exit 1
+	    }
+    }
+}
+
 function build{
 
     $projectsToBuild = @(
@@ -33,3 +53,4 @@ function build{
 
 restore
 build
+nugetPack
