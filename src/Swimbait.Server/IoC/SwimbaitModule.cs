@@ -12,12 +12,21 @@ namespace Swimbait.Server
         {
 
             var services = new List<Type>();
-            services.Add(typeof(EnvironmentService));
+            //services.Add(typeof(EnvironmentService));
+            //services.Add(typeof(MusicCastHost));
 
             RegisterTypes(builder, "Services", services);
+            
+            var environmentService = new EnvironmentService();
+            var musicCastHost = new MusicCastHost(environmentService);
 
-            builder
-                .Register(context => context.Resolve<MusicCastHost>())
+            builder.RegisterInstance<EnvironmentService>(environmentService)
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterInstance<MusicCastHost>(musicCastHost)
+                .AsImplementedInterfaces()
+                .AsSelf()
                 .SingleInstance();
         }
     }

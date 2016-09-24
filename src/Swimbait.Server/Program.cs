@@ -44,18 +44,18 @@ namespace Swimbait.Server
         
             var config = builder
                 .AddCommandLine(new[] { $"server.urls={uriToListenString}" })
-                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+                .AddEnvironmentVariables()
                 .Build();
 
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
                 .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+            
+            Console.WriteLine($"Starting the server. Listening on {uriToListenString}");
+            host.Start();
 
-            Console.WriteLine($"Started the server. Listing on {uriToListenString}");
             Console.WriteLine("Press 'Q' to stop the server");
 
             _multicastServer.Start();
