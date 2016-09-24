@@ -21,7 +21,7 @@ namespace Swimbait.Server.Services
         {
             var message = new MulticastRequest("{\"main\":{\"power\":\"on\"}}{\"netusb\":{\"play_info_updated\":true}}{\"system\":{\"location_info_updated\":true,\"stereo_pair_info_updated\":true},\"netusb\":{\"account_updated\":true,\"play_info_updated\":true}}{\"system\":{\"stereo_pair_info_updated\":true}}{\"system\":{\"location_info_updated\":true},\"netusb\":{\"play_info_updated\":true}}{\"system\":{\"name_text_updated\":true}}");
 
-            const string controllerIp = "192.168.1.181";
+            const string controllerIp = "192.168.1.181"; // this is hardcoded yes but doesn't seem to be used in hookup
             IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Parse(controllerIp), 41100);
 
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);

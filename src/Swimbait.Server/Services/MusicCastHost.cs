@@ -16,10 +16,9 @@ namespace Swimbait.Server.Services
         
         /// <summary>
         /// Should be the IP of a real MusicCast speaker (read in via config?) so that man in the middle relays work
-        /// 
         /// ie: If this server doesn't know how to handle a request, it relays it to the real musicCast speaker and replays that back to the client
         /// </summary>
-        public const string RelayHost = "192.168.1.213";
+        public string RelayHost { get; set; }
 
         public string LocationId { get; set; }
         

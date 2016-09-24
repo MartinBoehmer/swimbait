@@ -47,6 +47,14 @@ namespace Swimbait.Server
                 .AddEnvironmentVariables()
                 .Build();
 
+            /*
+             * Reboot after setting this to be the IP of a real Yamaha MusicCast device on your network
+             * Powershell below:
+             [Environment]::SetEnvironmentVariable("Swimbait.RelayHost", "192.168.1.213", "Machine") 
+             */
+            _musicCastHost.RelayHost = config["Swimbait.RelayHost"];
+            Startup._relayHost = _musicCastHost.RelayHost;
+
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
                 .UseKestrel()

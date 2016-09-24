@@ -26,6 +26,11 @@ namespace Swimbait.Server
 {
     public class Startup
     {
+        /// <summary>
+        /// this is a really dirty hack while i work out how to DI into StatusPAges
+        /// </summary>
+        internal static string _relayHost;
+
         public Startup(IHostingEnvironment env)
         {
             var configBuilder = new ConfigurationBuilder()
@@ -65,6 +70,7 @@ namespace Swimbait.Server
 
             var container = builder.Build();
 
+            
             // Resolve and return the service provider
             return container.Resolve<IServiceProvider>();
         }
@@ -97,12 +103,14 @@ namespace Swimbait.Server
                 }
 
                 var isFavIcon = uri.AbsolutePath.EndsWith("favicon.ico");
+                
+                //not the singleton instance var musicCastHost = (MusicCastHost) app.ApplicationServices.GetService(typeof (MusicCastHost));
 
                 if (!isFavIcon) {
                     if (context.Response.HasStarted) {
                         log.LogCritical("Too late");
                     } else {
-                        var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(MusicCastHost.RelayHost, uri, ActivityLogMiddleware.MapPortToReal);
+                        var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(_relayHost, uri, ActivityLogMiddleware.MapPortToReal);
                         log.LogInformation($"Man in the middle! {manInTheMiddleResponse.RequestUri}");
                         context.Response.StatusCode = 200;
                         await context.Response.WriteAsync(manInTheMiddleResponse.ResponseBody);
