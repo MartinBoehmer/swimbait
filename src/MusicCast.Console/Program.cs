@@ -10,7 +10,7 @@ namespace MusicCast.ConsoleApp
     public class Program
     {
         private readonly IServiceProvider _serviceProvider;
-        private static YamahaService _yamahaService;
+        private static MusicCastClient _musicCastClient;
         //private static MulticastService _multicastService;
 
         public Program(IServiceProvider serviceProvider)
@@ -23,11 +23,11 @@ namespace MusicCast.ConsoleApp
             var keyHandler = new KeyHandler();
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
-            var uriToListenString = "http://192.168.1.7";
-            _yamahaService = new YamahaService(uriToListenString);
+            var speakerUrl = "http://192.168.1.7";
+            _musicCastClient = new MusicCastClient(speakerUrl);
 
             var config = builder
-                .AddCommandLine(new[] { $"server.urls={uriToListenString}" })
+                .AddCommandLine(new[] { $"server.urls={speakerUrl}" })
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
 
@@ -39,7 +39,7 @@ namespace MusicCast.ConsoleApp
                 .UseStartup<Startup>()
                 .Build();
 
-            Console.WriteLine($"Started the client. Connecting to {uriToListenString}...");
+            Console.WriteLine($"Started the client. Connecting to {speakerUrl}...");
             Console.WriteLine("Press 'C' to connect and turn on");
             Console.WriteLine("Press 'D' to turn off");
             Console.WriteLine("Press 'Q' to quit");
@@ -65,27 +65,27 @@ namespace MusicCast.ConsoleApp
                 break;
             case ConsoleKey.D: {
                     Console.WriteLine("SendDisconnectConnect");
-                    var status = await _yamahaService.GetStatusAsync();
+                    var status = await _musicCastClient.GetStatusAsync();
                     Console.WriteLine($"Status  power is {status.power}");
                     if (status.power == "on") {
                         Console.WriteLine($"Turning off");
-                        await _yamahaService.SetPowerAsync(false);
-                        status = await _yamahaService.GetStatusAsync();
+                        await _musicCastClient.SetPowerAsync(false);
+                        status = await _musicCastClient.GetStatusAsync();
                         Console.WriteLine($"Status  power is now {status.power}");
                     }
                     break;
                 }
             case ConsoleKey.C: {
                     Console.WriteLine("SendConnect");
-                    var sucess = await _yamahaService.ConnectAsync();
+                    var sucess = await _musicCastClient.ConnectAsync();
                     Console.WriteLine($"Connection  {(sucess ? "ok" : "fail")}");
 
-                    var status = await _yamahaService.GetStatusAsync();
+                    var status = await _musicCastClient.GetStatusAsync();
                     Console.WriteLine($"Status  power is {status.power}");
                     if (status.power == "standby") {
                         Console.WriteLine($"Turning on");
-                        await _yamahaService.SetPowerAsync(true);
-                        status = await _yamahaService.GetStatusAsync();
+                        await _musicCastClient.SetPowerAsync(true);
+                        status = await _musicCastClient.GetStatusAsync();
                         Console.WriteLine($"Status  power is now {status.power}");
                     }
                     break;

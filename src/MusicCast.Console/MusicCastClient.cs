@@ -8,14 +8,20 @@ using MusicCast.Responses;
 
 namespace MusicCast
 {
-    public class YamahaService
+    
+    public class MusicCastClient
     {
         string _baseUrl;
         const string _baseApiUrl = "YamahaExtendedControl";
         const string _apiVersion = "v1";
 
         HttpClient _client;
-        public YamahaService(string url)
+
+        /// <summary>
+        /// This should probably take a dictionary of device names and their endpoints
+        /// It will want to send commands to multiple devies to command them to pair up as one say
+        /// </summary>
+        public MusicCastClient(string url)
         {
             _baseUrl = $"{url}/{_baseApiUrl}/{_apiVersion}/";
             _client = new HttpClient();
