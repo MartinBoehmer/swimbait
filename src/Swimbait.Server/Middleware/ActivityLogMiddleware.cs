@@ -39,7 +39,7 @@ namespace Swimbait.Server
             var uri = request.GetUri();
             var path = uri.PathAndQuery;
             
-            Directory.CreateDirectory(environmentService.LogFolderReplayRoot);
+            Directory.CreateDirectory(environmentService.ReplayLogFolder);
             
             var thisPort = uri.Port;
             var yamahaPort = MapPortToReal(uri);

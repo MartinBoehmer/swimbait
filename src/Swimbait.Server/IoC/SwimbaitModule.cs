@@ -8,6 +8,16 @@ namespace Swimbait.Server
 {
     public class SwimbaitModule : BaseModule
     {
+        /// <summary>
+        /// temp hack - shouldn't be internal
+        /// </summary>
+        internal static EnvironmentService GetEnvironmentService()
+        {
+            var config = SwimbaitConfig.Get();
+            var environmentService = new EnvironmentService(config);
+            return environmentService;
+        }
+
         protected override void Load(ContainerBuilder builder)
         {
 
@@ -16,8 +26,8 @@ namespace Swimbait.Server
             //services.Add(typeof(MusicCastHost));
 
             RegisterTypes(builder, "Services", services);
-            
-            var environmentService = new EnvironmentService();
+
+            var environmentService = GetEnvironmentService();
             var musicCastHost = new MusicCastHost(environmentService);
 
             builder.RegisterInstance<EnvironmentService>(environmentService)

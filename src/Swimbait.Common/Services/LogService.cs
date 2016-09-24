@@ -15,7 +15,7 @@ namespace Swimbait.Common
 
         public void LogToDisk(int sequence, ResponseLog log)
         {
-            var debugFolder = Path.Combine(_environmentService.LogFolderReplayRoot, @"log2Disk");
+            var debugFolder = Path.Combine(_environmentService.ReplayLogFolder, @"log2Disk");
             Directory.CreateDirectory(debugFolder);
 
             var pathAsSafeFilename = log.RequestUri.PathAndQuery.Replace("/", "_").Replace("?", "_");

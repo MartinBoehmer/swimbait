@@ -20,18 +20,20 @@ namespace MusicCast.ConsoleApp
 
         public static void Main(string[] args)
         {
-            var keyHandler = new KeyHandler();
+            var builder = new ConfigurationBuilder()
+                                .AddEnvironmentVariables();
 
-            var builder = new ConfigurationBuilder();
-            builder.AddEnvironmentVariables();
             var config = builder.Build();
+         
+            var keyHandler = new KeyHandler();
+            
 
             /*
-            * Reboot after setting this to be the IP of a real Yamaha MusicCast device on your network
+            * Restart VS after setting this to be the IP of a real Yamaha MusicCast device on your network
             * Powershell below:
-            [Environment]::SetEnvironmentVariable("Swimbait.RelayHost", "192.168.1.213", "Machine") 
+            [Environment]::SetEnvironmentVariable("Swimbait:RelayHost", "192.168.1.213", "User") 
             */
-            var musicCastSpeaker = config["Swimbait.RelayHost"];
+            var musicCastSpeaker = config["Swimbait:RelayHost"];
 
 
             var speakerUrl = $"http://{musicCastSpeaker}";

@@ -10,8 +10,14 @@ namespace Swimbait.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            var environmentService = new EnvironmentService();
-            
+            var config = SwimbaitConfig.Get();
+            var environmentService = new EnvironmentService(config);
+
+            //var swimbaitConfig = config.GetSection("Swimbait");
+
+            //var s = swimbaitConfig["RelayHost"];
+
+
             var activity = File.ReadAllLines(environmentService.ActivityLogFilename);
             int counter = 1;
             foreach(var line in activity)

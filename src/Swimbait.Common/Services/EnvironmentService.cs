@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Swimbait.Common.Services
 {
@@ -18,7 +19,7 @@ namespace Swimbait.Common.Services
         /// <summary>
         /// For debug purposes, logging and replaying requests to the swimbait server
         /// </summary>
-        string LogFolderReplayRoot { get; set; }
+        string ReplayLogFolder { get; set; }
 
         string ActivityLogFilename { get; }
     }
@@ -33,19 +34,18 @@ namespace Swimbait.Common.Services
 
         public IPAddress SubnetBroadcastIp { get; set; }
 
-        public string LogFolderReplayRoot { get; set; }
+        public string ReplayLogFolder { get; set; }
 
-        public string ActivityLogFilename => Path.Combine(LogFolderReplayRoot, "activity.txt");
+        public string ActivityLogFilename => Path.Combine(ReplayLogFolder, "activity.txt");
 
-        public EnvironmentService()
+        public EnvironmentService(IConfigurationSection configSection)
         {
             var ipHostEntry = Dns.GetHostEntryAsync(Dns.GetHostName()).Result;
             IpAddress = ipHostEntry.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
             
             SubnetBroadcastIp = GetBroadcastIP();
-
-            //todo: read from configuration
-            LogFolderReplayRoot = @"D:\Downloads\Swimbait";
+            
+            ReplayLogFolder = configSection["ReplayLogFolder"];
         }
 
         /// <summary>

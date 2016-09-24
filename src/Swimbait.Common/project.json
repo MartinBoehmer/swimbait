@@ -11,6 +11,11 @@
     "Newtonsoft.Json": "9.0.1",
     "NETStandard.Library": "1.6.0",
     "System.Net.NameResolution": "4.0.0",
-    "System.Net.NetworkInformation": "4.1.0"
+    "System.Net.NetworkInformation": "4.1.0",
+    "Microsoft.Extensions.Configuration": "1.1.0-alpha1-22144",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.1.0-alpha1-22144",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0"
   }
 }
