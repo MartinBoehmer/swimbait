@@ -29,9 +29,6 @@
     "Swimbait.Common": "1.0.0-*"
   },
 
-    "commands": {
-        "run": "run server.urls=http://localhost:5003"
-    },
     "buildOptions": {
         "emitEntryPoint": true,
         "preserveCompilationContext": true

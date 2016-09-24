@@ -83,7 +83,7 @@ namespace Swimbait.Server.Multicast
 
             while (true)
             {
-                if (_udpSocket.Available > 0)
+                if (!_disposed && _udpSocket.Available > 0)
                 {
                     var receivedBytes = _udpSocket.Receive(receiveBuffer, SocketFlags.None);
 
