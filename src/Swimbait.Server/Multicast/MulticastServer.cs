@@ -4,17 +4,25 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Swimbait.Server.Multicast.Requests;
+using Swimbait.Server.Services;
 
 namespace Swimbait.Server.Multicast
 {
     public class MulticastServer : IDisposable
     {
+        private readonly IEnvironmentService _environmentService;
         private Socket _udpSocket;
         bool _disposed = false;
         const int _endpointPort = 1900;
         const int _sourcePort = 44075;
-        const string _endpointIp = "239.255.255.250";
+        const string _ssdpMulticastIp = "239.255.255.250";
+        const string multiCastEndpoint = "224.0.0.22";
         private IPEndPoint _multicastEndPoint;
+
+        public MulticastServer(IEnvironmentService environmentService)
+        {
+            _environmentService = environmentService;
+        }
 
         public Task Start()
         {
@@ -25,16 +33,15 @@ namespace Swimbait.Server.Multicast
 
         public void SsdpDiscover()
         {
-            var message = new SsdpDiscover(_endpointIp, _endpointPort);
+            var message = new SsdpDiscover(_ssdpMulticastIp, _endpointPort);
             Send(message);
             Console.WriteLine("M-Search sent...\r\n");
         }
 
         public void JoinGroup()
         {
-            //var multicastIp = IPAddress.Parse(_endpointIp);
-            var multicastIp = IPAddress.Parse("224.0.0.22");
-            var sourceIp = IPAddress.Parse("192.168.1.10");
+            var multicastIp = IPAddress.Parse(multiCastEndpoint);
+            var sourceIp = IPAddress.Parse(_environmentService.IpAddress);
             var localIp = IPAddress.Parse("0.0.0.0");
 
             byte[] membershipAddresses = new byte[12]; // 3 IPs * 4 bytes (IPv4)
@@ -60,7 +67,7 @@ namespace Swimbait.Server.Multicast
         {
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, _sourcePort);
 
-             var multicastIp = IPAddress.Parse(_endpointIp);
+             var multicastIp = IPAddress.Parse(_ssdpMulticastIp);
             _multicastEndPoint = new IPEndPoint(multicastIp, _endpointPort);
 
             _udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);

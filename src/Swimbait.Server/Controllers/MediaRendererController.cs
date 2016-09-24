@@ -8,9 +8,11 @@ namespace Swimbait.Server.Controllers
     [Route("MediaRenderer")]
     public class MediaRendererController : BaseController
     {
-        private MusicCastHost _musicCastHost;
+        private readonly MusicCastHost _musicCastHost;
 
-        public MediaRendererController(ILoggerFactory loggerFactory, MusicCastHost musicCastHost) : base(loggerFactory)
+        public MediaRendererController(
+            ILoggerFactory loggerFactory
+            , MusicCastHost musicCastHost) : base(loggerFactory)
         {
             _musicCastHost = musicCastHost;
         }

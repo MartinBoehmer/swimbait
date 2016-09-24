@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Swimbait.Server.Multicast;
 using Swimbait.Server.Services;
 using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Swimbait.Server
 {
@@ -25,13 +26,19 @@ namespace Swimbait.Server
             var keyHandler = new KeyHandler();
 
             // todo: IOC
-            _multicastServer = new MulticastServer();
-            _multicastService = new MulticastService();
-
+            var environmentService = new EnvironmentService();
+            _multicastServer = new MulticastServer(environmentService);
+            _multicastService = new MulticastService(environmentService);
+            var _musicCastHost = new MusicCastHost(environmentService);
+            
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
             var portsToListen = new []{80, MusicCastHost.DlnaHostPort, 51100};
-            var urisToListen = portsToListen.ToList().Select(p => $"http://192.168.1.1:{p}");
+
+            var urisToListen = portsToListen
+                                .ToList()
+                                .Select(p => $"http://{environmentService.IpAddress}:{p}");
+
             var uriToListenString = string.Join(";", urisToListen);
         
             var config = builder

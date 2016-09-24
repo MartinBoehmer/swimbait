@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System;
+using System.Collections.Generic;
+using Autofac;
 using Swimbait.Server.Services;
 
 namespace Swimbait.Server
@@ -7,8 +9,14 @@ namespace Swimbait.Server
     {
         protected override void Load(ContainerBuilder builder)
         {
+
+            var services = new List<Type>();
+            services.Add(typeof(EnvironmentService));
+
+            RegisterTypes(builder, "Services", services);
+
             builder
-                .Register(context => new MusicCastHost())
+                .Register(context => context.Resolve<MusicCastHost>())
                 .SingleInstance();
         }
     }
