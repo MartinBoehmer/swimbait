@@ -25,7 +25,7 @@ namespace Swimbait.Server
     {
         private readonly RequestDelegate next;
         static object _lockObject = new object();
-
+        
         public ActivityLogMiddleware(RequestDelegate next)
         {
             this.next = next;
@@ -33,13 +33,13 @@ namespace Swimbait.Server
 
         public Task Invoke(HttpContext context)
         {
+            var environmentService = (EnvironmentService) context.RequestServices.GetService(typeof (EnvironmentService));
+
             var request = context.Request;
             var uri = request.GetUri();
             var path = uri.PathAndQuery;
-
-            var debugFolder = @"D:\Downloads\swimbait";
-            Directory.CreateDirectory(debugFolder);
-            var filename = Path.Combine(debugFolder, "activity.txt");
+            
+            Directory.CreateDirectory(environmentService.LogFolderReplayRoot);
             
             var thisPort = uri.Port;
             var yamahaPort = MapPortToReal(uri);
@@ -54,7 +54,7 @@ namespace Swimbait.Server
 
             lock (_lockObject)
             {
-                File.AppendAllText(filename, lineContent);
+                File.AppendAllText(environmentService.ActivityLogFilename, lineContent);
             }
 
             return next(context);

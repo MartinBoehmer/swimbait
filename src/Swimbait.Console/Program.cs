@@ -10,11 +10,9 @@ namespace Swimbait.ConsoleApp
     {
         public static void Main(string[] args)
         {
-
             var environmentService = new EnvironmentService();
-
-            const string activityLog = @"D:\Downloads\swimbait\activity.txt";
-            var activity = File.ReadAllLines(activityLog);
+            
+            var activity = File.ReadAllLines(environmentService.ActivityLogFilename);
             int counter = 1;
             foreach(var line in activity)
             {
@@ -25,7 +23,7 @@ namespace Swimbait.ConsoleApp
                     var swimbaitResponse = UriService.GetResponse(environmentService.IpAddress, log.ActualPort, log.PathAndQuery);
                     var yamahaResponse = UriService.GetResponse(IPAddress.Parse("192.168.1.213"), log.YamahaPort, log.PathAndQuery);
                     
-                    var logService = new LogService();
+                    var logService = new LogService(environmentService);
                     logService.LogToDisk(counter, swimbaitResponse);
                     logService.LogToDisk(counter, yamahaResponse);
                 }

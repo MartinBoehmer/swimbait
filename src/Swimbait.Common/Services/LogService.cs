@@ -1,13 +1,21 @@
 ﻿using System.IO;
 using System.Text;
+using Swimbait.Common.Services;
 
 namespace Swimbait.Common
 {
     public class LogService
     {
+        private readonly IEnvironmentService _environmentService;
+
+        public LogService(IEnvironmentService environmentService)
+        {
+            _environmentService = environmentService;
+        }
+
         public void LogToDisk(int sequence, ResponseLog log)
         {
-            var debugFolder = @"D:\Downloads\swimbait\log2Disk";
+            var debugFolder = Path.Combine(_environmentService.LogFolderReplayRoot, @"log2Disk");
             Directory.CreateDirectory(debugFolder);
 
             var pathAsSafeFilename = log.RequestUri.PathAndQuery.Replace("/", "_").Replace("?", "_");

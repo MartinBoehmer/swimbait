@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -10,9 +11,16 @@ namespace Swimbait.Common.Services
 {
     public interface IEnvironmentService
     {
-        IPAddress IpAddress { get;  }
+        IPAddress IpAddress { get; }
 
         IPAddress SubnetBroadcastIp { get; }
+
+        /// <summary>
+        /// For debug purposes, logging and replaying requests to the swimbait server
+        /// </summary>
+        string LogFolderReplayRoot { get; set; }
+
+        string ActivityLogFilename { get; }
     }
 
     public class EnvironmentService : IEnvironmentService
@@ -25,12 +33,19 @@ namespace Swimbait.Common.Services
 
         public IPAddress SubnetBroadcastIp { get; set; }
 
+        public string LogFolderReplayRoot { get; set; }
+
+        public string ActivityLogFilename => Path.Combine(LogFolderReplayRoot, "activity.txt");
+
         public EnvironmentService()
         {
             var ipHostEntry = Dns.GetHostEntryAsync(Dns.GetHostName()).Result;
             IpAddress = ipHostEntry.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
             
             SubnetBroadcastIp = GetBroadcastIP();
+
+            //todo: read from configuration
+            LogFolderReplayRoot = @"D:\Downloads\Swimbait";
         }
 
         /// <summary>

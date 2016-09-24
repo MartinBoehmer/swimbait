@@ -54,7 +54,10 @@ namespace Swimbait.Server
              [Environment]::SetEnvironmentVariable("Swimbait.RelayHost", "192.168.1.213", "Machine") 
              */
             _musicCastHost.RelayHost = IPAddress.Parse(config["Swimbait.RelayHost"]);
-            Startup._relayHost = _musicCastHost.RelayHost;
+
+            // Dirty DI
+            Startup._environmentService = environmentService;
+            Startup._musicCastHost = _musicCastHost;
 
             var host = new WebHostBuilder()
                 .UseConfiguration(config)

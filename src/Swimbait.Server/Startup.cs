@@ -19,6 +19,7 @@ using Autofac.Extensions.DependencyInjection;
 
 using Swimbait.Server.Services;
 using Swimbait.Common;
+using Swimbait.Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.Extensions.Logging.Console;
@@ -30,7 +31,12 @@ namespace Swimbait.Server
         /// <summary>
         /// this is a really dirty hack while i work out how to DI into StatusPAges
         /// </summary>
-        internal static IPAddress _relayHost;
+        internal static IEnvironmentService _environmentService;
+
+        /// <summary>
+        /// another dirty hack
+        /// </summary>
+        internal static MusicCastHost _musicCastHost;
 
         public Startup(IHostingEnvironment env)
         {
@@ -111,12 +117,12 @@ namespace Swimbait.Server
                     if (context.Response.HasStarted) {
                         log.LogCritical("Too late");
                     } else {
-                        var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(_relayHost, uri, ActivityLogMiddleware.MapPortToReal);
+                        var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(_musicCastHost.RelayHost, uri, ActivityLogMiddleware.MapPortToReal);
                         log.LogInformation($"Man in the middle! {manInTheMiddleResponse.RequestUri}");
                         context.Response.StatusCode = 200;
                         await context.Response.WriteAsync(manInTheMiddleResponse.ResponseBody);
 
-                        var logService = new LogService();
+                        var logService = new LogService(_environmentService);
                         logService.LogToDisk(-1, manInTheMiddleResponse);
                     }
                 }

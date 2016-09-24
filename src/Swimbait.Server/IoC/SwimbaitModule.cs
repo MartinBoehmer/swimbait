@@ -22,6 +22,7 @@ namespace Swimbait.Server
 
             builder.RegisterInstance<EnvironmentService>(environmentService)
                 .AsImplementedInterfaces()
+                .AsSelf()
                 .SingleInstance();
 
             builder.RegisterInstance<MusicCastHost>(musicCastHost)
