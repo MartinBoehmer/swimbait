@@ -2,7 +2,7 @@
 using System.IO;
 using Swimbait.Common;
 
-namespace Jig
+namespace Swimbait.ConsoleApp
 {
     public class Program
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace YamahaExtendedControl.Responses
+namespace MusicCast.Responses
 {
     public class IsNewFirmwareAvailableResponse : BasicResponse
     {

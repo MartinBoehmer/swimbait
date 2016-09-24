@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Swimbait.Server.Controllers.Requests;
 using Swimbait.Server.Services;
-using YamahaExtendedControl.Responses;
+using MusicCast.Responses;
 
 namespace Swimbait.Server.Controllers
 {

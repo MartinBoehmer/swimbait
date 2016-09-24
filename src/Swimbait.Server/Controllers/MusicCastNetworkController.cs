@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using YamahaExtendedControl.Responses;
+using MusicCast.Responses;
 
 namespace Swimbait.Server.Controllers
 {

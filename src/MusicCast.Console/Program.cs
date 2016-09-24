@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using MusicCast;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Swimbait.Common;
-using System.IO;
 
-namespace Client
+namespace MusicCast.ConsoleApp
 {
     public class Program
     {

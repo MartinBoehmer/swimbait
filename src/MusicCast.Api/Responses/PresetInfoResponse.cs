@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace YamahaExtendedControl.Responses
+namespace MusicCast.Responses
 {
     public class PresetInfo
     {

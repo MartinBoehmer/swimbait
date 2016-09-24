@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Swimbait.Server.Controllers.Responses;
 using Swimbait.Server.Services;
-using YamahaExtendedControl.Responses;
+using MusicCast.Responses;
 
 namespace Swimbait.Server.Controllers
 {

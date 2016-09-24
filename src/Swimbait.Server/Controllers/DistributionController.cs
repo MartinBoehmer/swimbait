@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swimbait.Server.Services;
-using YamahaExtendedControl.Responses;
+using MusicCast.Responses;
 
 namespace Swimbait.Server.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace YamahaExtendedControl.Responses
+namespace MusicCast.Responses
 {
     public class InputList2
     {

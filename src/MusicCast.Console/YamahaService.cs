@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using YamahaExtendedControl;
-using YamahaExtendedControl.Responses;
+using MusicCast;
+using MusicCast.Responses;
 
-namespace Client
+namespace MusicCast
 {
     public class YamahaService
     {
