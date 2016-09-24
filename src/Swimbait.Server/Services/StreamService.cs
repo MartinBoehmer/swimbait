@@ -13,5 +13,13 @@ namespace Swimbait.Server.Services
             stream.Position = 0;
             return stream;
         }
+
+        public static string ReadText(Stream stream)
+        {
+            StreamReader reader = new StreamReader(stream);
+            string text = reader.ReadToEnd();
+            return text;
+        }
+
     }
 }

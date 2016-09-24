@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -223,8 +224,13 @@ namespace Swimbait.Server.Controllers
         [HttpPost("SetLocationName")]
         public IActionResult SetLocationName()
         {
-            var json = Request.Form.Keys.First();
+            
+            var json = ReadBody();
             var request = JsonConvert.DeserializeObject<SetLocationNameRequest>(json);
+            if (request == null)
+            {
+                return Ok();
+            }
             Log.LogInformation($"Set name={request.name}");
             return MusicCastOk();
         }
@@ -232,8 +238,12 @@ namespace Swimbait.Server.Controllers
         [HttpPost("SetLocationId")]
         public IActionResult SetLocationId()
         {
-            var json = Request.Form.Keys.First();
+            var json = ReadBody();
             var request = JsonConvert.DeserializeObject<SetLocationIdRequest>(json);
+            if (request == null)
+            {
+                return Ok();
+            }
             Log.LogInformation($"Set id={request.id}");
             _musicCastHost.LocationId = request.id;
             return MusicCastOk();

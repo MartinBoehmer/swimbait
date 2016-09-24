@@ -57,6 +57,8 @@ namespace Swimbait.Server
             host.Start();
 
             Console.WriteLine("Press 'Q' to stop the server");
+            Console.WriteLine("Press 'M' to send SSDP Multicast discovery");
+            Console.WriteLine("Press 'C' when ready to connect to the MusicCast app");
 
             _multicastServer.Start();
 
