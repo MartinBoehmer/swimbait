@@ -8,7 +8,7 @@ An ASP.NET Core application that emulates the Yamaha MusicCast protocol.
 [![swimbait MyGet Build Status](https://www.myget.org/BuildSource/Badge/swimbait?identifier=dfa0a82e-57fe-4328-a97a-932c467510d3)](https://www.myget.org/)
 
 ## Projects
-### Server
+### Swimbait.Server
 Emulates a Yamaha MusicCast speaker by serving and responding REST HTTP on multiple ports and UDP.
 
 Current status is
@@ -16,8 +16,8 @@ Current status is
 * `[done]` ios MusicCast app can see the fake Swimbait server 
 * `[todo]` swimbait server can respond to and receive requests to stream audio 
 
-### Jig
-Hastily named Test Jig. See its [readme file](https://github.com/neutmute/swimbait/tree/master/src/Jig)
+### Swimbait.Console
+See its [readme file](https://github.com/neutmute/swimbait/tree/master/src/Swimbait.Console)
 
 
 ## Blog 
