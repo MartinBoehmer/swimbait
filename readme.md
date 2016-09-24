@@ -22,11 +22,26 @@ See its [readme file](https://github.com/neutmute/swimbait/tree/master/src/Swimb
 ### MusicCast.Console
 Client for controlling a MusicCast speaker
 
-## Usage
-Swimbait requires some environment variables. 
-        
-	 [Environment]::SetEnvironmentVariable("Swimbait:RelayHost", "192.168.1.213", "User") # IP Address of real MusicCast speaker. Used for man in the middle replays. 
-	 [Environment]::SetEnvironmentVariable("Swimbait:ReplayLogFolder", "D:\Downloads\Swimbait", "User") # Folder for activity log 
+## Setup
+Swimbait requires some environment variables:
+
+###### Windows Powershell
+Restart Visual Studio after setting these in a powershell prompt 
+
+	 # IP Address of real MusicCast speaker. Used for man in the middle replays. 
+	 [Environment]::SetEnvironmentVariable("Swimbait:RelayHost", "192.168.1.213", "User") 
+
+	 # Folder for activity log 
+	 [Environment]::SetEnvironmentVariable("Swimbait:ReplayLogFolder", "D:\Downloads\Swimbait", "User")
+
+## Swimbait.Server Execution
+1. Run the `Swimbait.Server` project
+1. Test the HTTP server by browsing to `http://<your-machines-IP>/MediaRenderer/desc.xml`
+1. Open the MusicCast app on your phone
+2. Connect to a new device
+3. Press `C` a few times into the server console while the app is waiting for a connection
+4. The MusicCast app should think it has found a MusicCast speaker
+5. The app will respond with an error. (More work required)
 
 ## Blog 
 There is some more reading on this [blog entry](http://blog.turbine51.net/2016/04/04/Yamaha-Musiccast-Protocol/)

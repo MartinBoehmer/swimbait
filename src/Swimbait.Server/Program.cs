@@ -60,7 +60,7 @@ namespace Swimbait.Server
                 .UseStartup<Startup>()
                 .Build();
             
-            Console.WriteLine($"Starting the server. Listening on {uriToListenString}. Udp broadcastinto to {environmentService.SubnetBroadcastIp}");
+            Console.WriteLine($"Starting the server. Listening on {uriToListenString}. Udp broadcasting to {environmentService.SubnetBroadcastIp}");
             host.Start();
 
             Console.WriteLine("Press 'Q' to stop the server");
