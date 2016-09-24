@@ -7,6 +7,7 @@ using Swimbait.Server.Multicast;
 using Swimbait.Server.Services;
 using Swimbait.Common.Services;
 using System.IO;
+using System.Net;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Swimbait.Server
@@ -52,7 +53,7 @@ namespace Swimbait.Server
              * Powershell below:
              [Environment]::SetEnvironmentVariable("Swimbait.RelayHost", "192.168.1.213", "Machine") 
              */
-            _musicCastHost.RelayHost = config["Swimbait.RelayHost"];
+            _musicCastHost.RelayHost = IPAddress.Parse(config["Swimbait.RelayHost"]);
             Startup._relayHost = _musicCastHost.RelayHost;
 
             var host = new WebHostBuilder()
@@ -61,7 +62,7 @@ namespace Swimbait.Server
                 .UseStartup<Startup>()
                 .Build();
             
-            Console.WriteLine($"Starting the server. Listening on {uriToListenString}");
+            Console.WriteLine($"Starting the server. Listening on {uriToListenString}. Udp broadcastinto to {environmentService.SubnetBroadcastIp}");
             host.Start();
 
             Console.WriteLine("Press 'Q' to stop the server");

@@ -30,17 +30,20 @@ namespace Swimbait.Server.Services
             s.SendTo(bytes, bytes.Length, SocketFlags.None, RemoteEndPoint);
         }
 
+        /// <summary>
+        /// When the IOS MusicCast app is waiting for a connect from a device, this is the message that should be sent for discovery
+        /// </summary>
         public void SendConnectUdp()
         {
             var data = "{\"location\":\"http://!!IP!!:!!DlnaHostPort!!/MediaRenderer/desc.xml\",\"ack\":\"http://!!IP!!:!!DlnaHostPort!!/MusicCastNetwork/InitialJoinComplete\"}".Replace("!!DlnaHostPort!!", EnvironmentService.SwimbaitDlnaPort.ToString());
 
             data = data
-                     .Replace("!!IP!!", _environmentService.IpAddress)
+                     .Replace("!!IP!!", _environmentService.IpAddress.ToString())
                      .Replace("!!DlnaHostPort!!", EnvironmentService.SwimbaitDlnaPort.ToString());
 
             var message = new MulticastRequest(data);
 
-            IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse(_environmentService.SubnetBroadcastIp), 51100);
+            IPEndPoint remoteEndPoint = new IPEndPoint(_environmentService.SubnetBroadcastIp, 51100);
 
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 

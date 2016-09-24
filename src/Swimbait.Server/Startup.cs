@@ -12,6 +12,7 @@ using System;
 using System.Linq;
 using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 using System.IO;
+using System.Net;
 using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -29,7 +30,7 @@ namespace Swimbait.Server
         /// <summary>
         /// this is a really dirty hack while i work out how to DI into StatusPAges
         /// </summary>
-        internal static string _relayHost;
+        internal static IPAddress _relayHost;
 
         public Startup(IHostingEnvironment env)
         {

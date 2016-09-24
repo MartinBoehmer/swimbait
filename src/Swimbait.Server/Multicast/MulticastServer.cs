@@ -41,7 +41,7 @@ namespace Swimbait.Server.Multicast
         public void JoinGroup()
         {
             var multicastIp = IPAddress.Parse(multiCastEndpoint);
-            var sourceIp = IPAddress.Parse(_environmentService.IpAddress);
+            var sourceIp = _environmentService.IpAddress;
             var localIp = IPAddress.Parse("0.0.0.0");
 
             byte[] membershipAddresses = new byte[12]; // 3 IPs * 4 bytes (IPv4)

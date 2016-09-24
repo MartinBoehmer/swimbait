@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Xml.Linq;
 using Newtonsoft.Json;
@@ -8,7 +9,7 @@ namespace Swimbait.Common
 {
     public class UriService
     {
-        public static ResponseLog GetResponse(string targetIp, int port, string pathAndQuery)
+        public static ResponseLog GetResponse(IPAddress targetIp, int port, string pathAndQuery)
         {
             var result = new ResponseLog();
             using (var httpClient = new HttpClient())
@@ -45,7 +46,7 @@ namespace Swimbait.Common
             return result;
         }
 
-        public static ResponseLog GetManInTheMiddleResult(string targetIp, Uri thisRequest, Func<Uri,int> portRemap)
+        public static ResponseLog GetManInTheMiddleResult(IPAddress targetIp, Uri thisRequest, Func<Uri,int> portRemap)
         {
             var relayPort = portRemap(thisRequest);
             var result = GetResponse(targetIp, relayPort, thisRequest.PathAndQuery);

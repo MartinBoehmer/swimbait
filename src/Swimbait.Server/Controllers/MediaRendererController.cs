@@ -24,7 +24,7 @@ namespace Swimbait.Server.Controllers
             Log.LogInformation("Log works");
 
             var response = new MediaDescriptionResponse();
-            response.IpAddress = _musicCastHost.IpAddress;
+            response.IpAddress = _musicCastHost.IpAddress.ToString();
             response.Uuid = _musicCastHost.Uuid;
             response.FriendlyName = _musicCastHost.Name;
             response.SerialNumber = _musicCastHost.SerialNumber;

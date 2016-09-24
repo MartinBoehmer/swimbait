@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using Swimbait.Common;
 using Swimbait.Common.Services;
 
@@ -22,7 +23,7 @@ namespace Swimbait.ConsoleApp
                 if (log.Method == "GET")
                 {
                     var swimbaitResponse = UriService.GetResponse(environmentService.IpAddress, log.ActualPort, log.PathAndQuery);
-                    var yamahaResponse = UriService.GetResponse("192.168.1.213", log.YamahaPort, log.PathAndQuery);
+                    var yamahaResponse = UriService.GetResponse(IPAddress.Parse("192.168.1.213"), log.YamahaPort, log.PathAndQuery);
                     
                     var logService = new LogService();
                     logService.LogToDisk(counter, swimbaitResponse);

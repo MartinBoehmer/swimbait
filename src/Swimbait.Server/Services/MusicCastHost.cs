@@ -18,7 +18,7 @@ namespace Swimbait.Server.Services
         /// Should be the IP of a real MusicCast speaker (read in via config?) so that man in the middle relays work
         /// ie: If this server doesn't know how to handle a request, it relays it to the real musicCast speaker and replays that back to the client
         /// </summary>
-        public string RelayHost { get; set; }
+        public IPAddress RelayHost { get; set; }
 
         public string LocationId { get; set; }
         
@@ -33,7 +33,7 @@ namespace Swimbait.Server.Services
 
         public string Name { get; set; }
 
-        public string IpAddress => _environmentService.IpAddress;
+        public IPAddress IpAddress => _environmentService.IpAddress;
 
         public MusicCastHost(IEnvironmentService environmentService)
         {

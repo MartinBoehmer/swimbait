@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -9,9 +10,9 @@ namespace Swimbait.Common.Services
 {
     public interface IEnvironmentService
     {
-        string IpAddress { get;  }
+        IPAddress IpAddress { get;  }
 
-        string SubnetBroadcastIp { get; }
+        IPAddress SubnetBroadcastIp { get; }
     }
 
     public class EnvironmentService : IEnvironmentService
@@ -20,16 +21,61 @@ namespace Swimbait.Common.Services
         
         public const int SwimbaitDlnaPort = 51123;
 
-        public string IpAddress { get; set; }
+        public IPAddress IpAddress { get; set; }
 
-        public string SubnetBroadcastIp { get; set; }
+        public IPAddress SubnetBroadcastIp { get; set; }
 
         public EnvironmentService()
         {
             var ipHostEntry = Dns.GetHostEntryAsync(Dns.GetHostName()).Result;
-            IpAddress = ipHostEntry.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
+            IpAddress = ipHostEntry.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+            
+            SubnetBroadcastIp = GetBroadcastIP();
+        }
 
-            SubnetBroadcastIp = "192.168.1.255";
+        /// <summary>
+        /// http://www.java2s.com/Code/CSharp/Network/GetSubnetMask.htm
+        /// </summary>
+        private static IPAddress GetSubnetMask(IPAddress address)
+        {
+            foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                foreach (UnicastIPAddressInformation unicastIPAddressInformation in adapter.GetIPProperties().UnicastAddresses)
+                {
+                    if (unicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        if (address.Equals(unicastIPAddressInformation.Address))
+                        {
+                            return unicastIPAddressInformation.IPv4Mask;
+                        }
+                    }
+                }
+            }
+            throw new ArgumentException(string.Format("Can't find subnetmask for IP address '{0}'", address));
+        }
+
+        /// <summary>
+        /// http://stackoverflow.com/questions/18551686/how-do-you-get-hosts-broadcast-address-of-the-default-network-adapter-c-sharp
+        /// </summary>
+        private IPAddress GetBroadcastIP()
+        {
+            IPAddress maskIP = GetSubnetMask(IpAddress);
+            IPAddress hostIP = IpAddress;
+
+            if (maskIP == null || hostIP == null)
+                return null;
+
+            byte[] complementedMaskBytes = new byte[4];
+            byte[] broadcastIPBytes = new byte[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                complementedMaskBytes[i] = (byte)~(maskIP.GetAddressBytes().ElementAt(i));
+                broadcastIPBytes[i] = (byte)((hostIP.GetAddressBytes().ElementAt(i)) | complementedMaskBytes[i]);
+            }
+
+            return new IPAddress(broadcastIPBytes);
+
         }
     }
 }
