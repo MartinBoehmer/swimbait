@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Swimbait.Server.Multicast;
 using Swimbait.Server.Services;
+using Swimbait.Common.Services;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 

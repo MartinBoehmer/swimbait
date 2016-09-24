@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using Swimbait.Server.Multicast;
 using Swimbait.Server.Multicast.Requests;
+using Swimbait.Common.Services;
 
 namespace Swimbait.Server.Services
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Swimbait.Common;
+using Swimbait.Common.Services;
 
 namespace Swimbait.ConsoleApp
 {
@@ -8,6 +9,9 @@ namespace Swimbait.ConsoleApp
     {
         public static void Main(string[] args)
         {
+
+            var evironmentService = new EnvironmentService();
+
             const string activityLog = @"D:\Downloads\swimbait\activity.txt";
             var activity = File.ReadAllLines(activityLog);
             int counter = 1;

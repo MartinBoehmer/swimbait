@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Autofac;
 using Swimbait.Server.Services;
+using Swimbait.Common.Services;
 
 namespace Swimbait.Server
 {

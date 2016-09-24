@@ -26,18 +26,18 @@ namespace MusicCast.ConsoleApp
             var speakerUrl = "http://192.168.1.7";
             _musicCastClient = new MusicCastClient(speakerUrl);
 
-            var config = builder
-                .AddCommandLine(new[] { $"server.urls={speakerUrl}" })
-                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-                .Build();
+            //var config = builder
+            //    .AddCommandLine(new[] { $"server.urls={speakerUrl}" })
+            //    .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+            //    .Build();
 
-            var host = new WebHostBuilder()
-                .UseConfiguration(config)
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+            //var host = new WebHostBuilder()
+            //    .UseConfiguration(config)
+            //    .UseKestrel()
+            //    .UseContentRoot(Directory.GetCurrentDirectory())
+            //    .UseIISIntegration()
+            //    .UseStartup<Startup>()
+            //    .Build();
 
             Console.WriteLine($"Started the client. Connecting to {speakerUrl}...");
             Console.WriteLine("Press 'C' to connect and turn on");
