@@ -14,8 +14,6 @@ namespace Swimbait.Server.Services
 
     public class KeyHandler
     {
-        //protected static ILog Log = LogManager.GetCurrentClassLogger();
-
         public event EventHandler<ConsoleKeyEventArgs> KeyEvent;
 
         public void WaitForExit()
@@ -30,10 +28,7 @@ namespace Swimbait.Server.Services
                         exit = true;
                         break;
                     default:
-                        if (KeyEvent != null)
-                        {
-                            KeyEvent(this, new ConsoleKeyEventArgs(key));
-                        }
+                        KeyEvent?.Invoke(this, new ConsoleKeyEventArgs(key));
                         break;
                 }
             }

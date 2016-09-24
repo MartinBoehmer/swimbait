@@ -3,9 +3,6 @@
   "buildOptions": {
     "emitEntryPoint": true
   },
-  "commands": {
-    "Jig": "Jig"
-  },
 
   "description": "Jig Console Application",
   "dependencies": {

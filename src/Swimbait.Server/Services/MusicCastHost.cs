@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using Swimbait.Common.Services;
 
 namespace Swimbait.Server.Services
 {
     public class MusicCastHost
     {
+        private readonly IEnvironmentService _environmentService;
         private Dictionary<string, string> _tags;
 
-        public const int DlnaHostPort = 51123;
-
-        public static string ThisIp { get; set; }
-
+        public int DlnaHostPort => EnvironmentService.SwimbaitDlnaPort;
+        
         /// <summary>
         /// Should be the IP of a real MusicCast speaker (read in via config?) so that man in the middle relays work
         /// 
@@ -22,11 +22,7 @@ namespace Swimbait.Server.Services
         public const string RelayHost = "192.168.1.213";
 
         public string LocationId { get; set; }
-
-        /// <summary>
-        /// Should probably be 'ThisIp' so it works on more than just my machine
-        /// </summary>
-        public string IpAddress => "192.168.1.3";
+        
 
         public string Uuid => "uuid:9ab0c000-f668-11de-9976-00a0ded0e860";
 
@@ -38,19 +34,15 @@ namespace Swimbait.Server.Services
 
         public string Name { get; set; }
 
+        public string IpAddress => _environmentService.IpAddress;
 
-        public MusicCastHost()
+        public MusicCastHost(IEnvironmentService environmentService)
         {
+            _environmentService = environmentService;
             Name = Environment.MachineName;
             _tags = new Dictionary<string, string>();
         }
-
-        static MusicCastHost()
-        {
-            Dns.GetHostEntryAsync(Dns.GetHostName()).ContinueWith(
-                   r => ThisIp = r.Result.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString()
-            );
-        }
+        
 
         public bool HasTag(string key)
         {

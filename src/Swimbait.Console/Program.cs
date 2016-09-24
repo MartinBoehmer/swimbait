@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Swimbait.Common;
+using Swimbait.Common.Services;
 
 namespace Swimbait.ConsoleApp
 {
@@ -8,6 +9,9 @@ namespace Swimbait.ConsoleApp
     {
         public static void Main(string[] args)
         {
+
+            var environmentService = new EnvironmentService();
+
             const string activityLog = @"D:\Downloads\swimbait\activity.txt";
             var activity = File.ReadAllLines(activityLog);
             int counter = 1;
@@ -17,7 +21,7 @@ namespace Swimbait.ConsoleApp
 
                 if (log.Method == "GET")
                 {
-                    var swimbaitResponse = UriService.GetResponse("192.168.1.3", log.ActualPort, log.PathAndQuery);
+                    var swimbaitResponse = UriService.GetResponse(environmentService.IpAddress, log.ActualPort, log.PathAndQuery);
                     var yamahaResponse = UriService.GetResponse("192.168.1.213", log.YamahaPort, log.PathAndQuery);
                     
                     var logService = new LogService();
@@ -31,9 +35,8 @@ namespace Swimbait.ConsoleApp
 
         public static int MapPortToReal(Uri thisRequest)
         {
-            // remap the port since windows is using 49154
-            const int realYamahaPort = 49154;
-            var relayPort = thisRequest.Port == 51123 ? realYamahaPort : thisRequest.Port;
+            // remap the port since windows is using the port Yamaha uses
+            var relayPort = thisRequest.Port == 51123 ? EnvironmentService.YamahaDlnaPort : thisRequest.Port;
             return relayPort;
         }
     }
