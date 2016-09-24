@@ -12,7 +12,7 @@ namespace Swimbait.Server.Services
         private readonly IEnvironmentService _environmentService;
         private Dictionary<string, string> _tags;
 
-        public const int DlnaHostPort = 51123;
+        public int DlnaHostPort => EnvironmentService.SwimbaitDlnaPort;
         
         /// <summary>
         /// Should be the IP of a real MusicCast speaker (read in via config?) so that man in the middle relays work

@@ -16,6 +16,10 @@ namespace Swimbait.Common.Services
 
     public class EnvironmentService : IEnvironmentService
     {
+        public const int YamahaDlnaPort = 49154;
+        
+        public const int SwimbaitDlnaPort = 51123;
+
         public string IpAddress { get; set; }
 
         public string SubnetBroadcastIp { get; set; }

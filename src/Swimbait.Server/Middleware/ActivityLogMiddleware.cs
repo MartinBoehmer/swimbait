@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Swimbait.Server.Services;
+using Swimbait.Common.Services;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using System.IO;
 
@@ -62,9 +63,8 @@ namespace Swimbait.Server
 
         public static int MapPortToReal(Uri thisRequest)
         {
-            // remap the port since windows is using 49154
-            const int realYamahaPort = 49154;
-            var relayPort = thisRequest.Port == MusicCastHost.DlnaHostPort ? realYamahaPort : thisRequest.Port;
+            // remap the port since windows is using the port Yamaha uses
+            var relayPort = thisRequest.Port == EnvironmentService.SwimbaitDlnaPort ? EnvironmentService.YamahaDlnaPort : thisRequest.Port;
             return relayPort;
         }
     }

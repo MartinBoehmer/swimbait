@@ -32,11 +32,11 @@ namespace Swimbait.Server.Services
 
         public void SendConnectUdp()
         {
-            var data = "{\"location\":\"http://!!IP!!:!!DlnaHostPort!!/MediaRenderer/desc.xml\",\"ack\":\"http://!!IP!!:!!DlnaHostPort!!/MusicCastNetwork/InitialJoinComplete\"}".Replace("!!DlnaHostPort!!", MusicCastHost.DlnaHostPort.ToString());
+            var data = "{\"location\":\"http://!!IP!!:!!DlnaHostPort!!/MediaRenderer/desc.xml\",\"ack\":\"http://!!IP!!:!!DlnaHostPort!!/MusicCastNetwork/InitialJoinComplete\"}".Replace("!!DlnaHostPort!!", EnvironmentService.SwimbaitDlnaPort.ToString());
 
             data = data
                      .Replace("!!IP!!", _environmentService.IpAddress)
-                     .Replace("!!DlnaHostPort!!", MusicCastHost.DlnaHostPort.ToString());
+                     .Replace("!!DlnaHostPort!!", EnvironmentService.SwimbaitDlnaPort.ToString());
 
             var message = new MulticastRequest(data);
 

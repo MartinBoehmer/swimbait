@@ -34,7 +34,7 @@ namespace Swimbait.Server
             
             //Add command line configuration source to read command line parameters.
             var builder = new ConfigurationBuilder();
-            var portsToListen = new []{80, MusicCastHost.DlnaHostPort, 51100};
+            var portsToListen = new []{80, EnvironmentService.SwimbaitDlnaPort, 51100};
 
             var urisToListen = portsToListen
                                 .ToList()
