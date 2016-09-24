@@ -10,10 +10,9 @@ function restore{
 function build{
 
     $projectsToBuild = @(
-		".\src\server";
-        ".\src\common";
-	    ".\src\jig";
-        ".\client";
+		".\src\swimbait.server";
+	    ".\src\swimbait.console";
+        ".\src\musiccast.console";
     )
 
     _WriteOut -ForegroundColor $ColorScheme.Banner $asciiArtBuild
