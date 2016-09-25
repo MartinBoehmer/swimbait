@@ -101,7 +101,7 @@ namespace Swimbait.Server
                 var request = statusCodeContext.HttpContext.Request;
                 var context = statusCodeContext.HttpContext;
                 var log = loggerFactory.CreateLogger<Startup>();
-                log.LogWarning(request.Path);
+                log.LogWarning($"{request.Path} wasn't handled.");
                 var uri = request.GetUri();
 
                 var body = "<not decoded>";
