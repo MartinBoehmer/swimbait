@@ -31,7 +31,6 @@ namespace Swimbait.Server.Controllers
 
         private IActionResult DoManInTheMiddle()
         {
-
             var uri = HttpContext.Request.GetUri();
             var manInTheMiddleResponse = UriService.GetManInTheMiddleResult(_musicCastHost.RelayHost, uri, ActivityLogMiddleware.MapPortToReal);
             return new FileContentResult(manInTheMiddleResponse.ResponseBytes, "application/octet-stream");

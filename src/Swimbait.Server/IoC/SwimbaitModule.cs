@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Autofac;
 using Swimbait.Server.Services;
 using Swimbait.Common.Services;
@@ -24,11 +25,15 @@ namespace Swimbait.Server
             var services = new List<Type>();
             //services.Add(typeof(EnvironmentService));
             //services.Add(typeof(MusicCastHost));
+            var swimbaitConfig = SwimbaitConfig.Get();
 
             RegisterTypes(builder, "Services", services);
 
             var environmentService = GetEnvironmentService();
             var musicCastHost = new MusicCastHost(environmentService);
+
+            musicCastHost.RelayHost = IPAddress.Parse(swimbaitConfig["RelayHost"]);
+
 
             builder.RegisterInstance<EnvironmentService>(environmentService)
                 .AsImplementedInterfaces()

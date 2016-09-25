@@ -212,10 +212,15 @@ namespace Swimbait.Server.Controllers
         }
 
         [HttpPost("SetNameText")]
-        public IActionResult SetNameText()
+        public IActionResult SetNameText([FromBody] string text)
         {
-            var json = Request.Form.Keys.First();
+            var json = ReadBody();
             var request = JsonConvert.DeserializeObject<SetNameTextRequest>(json);
+            if (request == null)
+            {
+                Log.LogWarning("Failed to read body");
+                return MusicCastOk();
+            }
             _musicCastHost.Name = request.text;
             Log.LogInformation($"Set nameText={request.text}");
             return MusicCastOk();
@@ -229,7 +234,8 @@ namespace Swimbait.Server.Controllers
             var request = JsonConvert.DeserializeObject<SetLocationNameRequest>(json);
             if (request == null)
             {
-                return Ok();
+                Log.LogWarning("Failed to read body");
+                return MusicCastOk();
             }
             Log.LogInformation($"Set name={request.name}");
             return MusicCastOk();
@@ -242,7 +248,8 @@ namespace Swimbait.Server.Controllers
             var request = JsonConvert.DeserializeObject<SetLocationIdRequest>(json);
             if (request == null)
             {
-                return Ok();
+                Log.LogWarning("Failed to read body");
+                return MusicCastOk();
             }
             Log.LogInformation($"Set id={request.id}");
             _musicCastHost.LocationId = request.id;
