@@ -19,7 +19,7 @@ namespace MusicCast.Responses
         {
             preset_info = Enumerable
                             .Range(1, 40)
-                            .Select(i => new PresetInfo {input = "unknown"}).ToList();
+                            .Select(i => new PresetInfo {input = "unknown", text=""}).ToList();
         }
     }
 }
