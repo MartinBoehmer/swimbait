@@ -212,7 +212,7 @@ namespace Swimbait.Server.Controllers
         }
 
         [HttpPost("SetNameText")]
-        public IActionResult SetNameText([FromBody] string text)
+        public IActionResult SetNameText()
         {
             var json = ReadBody();
             var request = JsonConvert.DeserializeObject<SetNameTextRequest>(json);
