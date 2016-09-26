@@ -23,4 +23,4 @@ It writes the responses to two different files in a manner that makes comparison
 
 By using the file diff it makes it easier and faster to see where a particular response from the Swimbait server is noncompliant. 
 
-It also illustrates which requests have not yet been emulated correctly.  
+It also illustrates which requests have not yet been emulated correctly by writing any man-in-the-middled responses to disk with a sequence of `-1`  

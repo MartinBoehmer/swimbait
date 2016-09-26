@@ -41,6 +41,7 @@ namespace Swimbait.Server.Services
             _environmentService = environmentService;
             Name = Environment.MachineName;
             _tags = new Dictionary<string, string>();
+            LocationId = "7345174dcfd44df2834f1d02452cbe3c";
         }
         
 
