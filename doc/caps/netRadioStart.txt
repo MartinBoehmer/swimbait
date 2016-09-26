@@ -1,0 +1,175 @@
+GET /YamahaExtendedControl/v1/netusb/getListInfo?list_id=main&input=net_radio&size=8&lang=en HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 465
+
+{"response_code":0,"menu_layer":0,"max_line":7,"index":0,"playing_index":-1,"menu_name":"NET RADIO","list_info":[{"text":"Bookmarks","thumbnail":"","attribute":2},{"text":"Locations","thumbnail":"","attribute":2},{"text":"Genres","thumbnail":"","attribute":2},{"text":"New Stations","thumbnail":"","attribute":2},{"text":"Popular Stations","thumbnail":"","attribute":2},{"text":"Podcasts","thumbnail":"","attribute":2},{"text":"Help","thumbnail":"","attribute":2}]}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 133
+
+{"response_code":0,"group_id":"00000000000000000000000000000000","group_name":"(Linked) Office-chewy","role":"none","client_list":[]}GET /YamahaExtendedControl/v1/netusb/setListControl?list_id=main&type=select&index=0&zone=main HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/netusb/getListInfo?list_id=main&input=net_radio&size=8&lang=en HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 168
+
+{"response_code":0,"menu_layer":1,"max_line":1,"index":0,"playing_index":-1,"menu_name":"Bookmarks","list_info":[{"text":"My__Favorites","thumbnail":"","attribute":2}]}GET /YamahaExtendedControl/v1/netusb/setListControl?list_id=main&type=select&index=0&zone=main HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/netusb/getListInfo?list_id=main&input=net_radio&size=8&lang=en HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 188
+
+{"response_code":0,"menu_layer":2,"max_line":1,"index":0,"playing_index":-1,"menu_name":"My__Favorites","list_info":[{"text":"ABC Classic FM 92.9 Sydney","thumbnail":"","attribute":1044}]}GET /YamahaExtendedControl/v1/netusb/setListControl?list_id=main&type=play&index=0&zone=main HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 255
+
+{"response_code":0,"input":"net_radio","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":16,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16785411}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 255
+
+{"response_code":0,"input":"net_radio","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":16,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16785411}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 255
+
+{"response_code":0,"input":"net_radio","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":16,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16785411}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 281
+
+{"response_code":0,"input":"net_radio","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"ABC Classic FM 92.9 Sydney","album":"","track":"","albumart_url":"","albumart_id":16,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16785411}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.213:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (WX-030)
+Content-Type: application/json
+Content-Length: 281
+
+{"response_code":0,"input":"net_radio","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"ABC Classic FM 92.9 Sydney","album":"","track":"","albumart_url":"","albumart_id":16,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16785411}

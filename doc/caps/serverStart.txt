@@ -1,0 +1,276 @@
+GET /YamahaExtendedControl/v1/netusb/setListControl?list_id=main&type=play&index=4&zone=main HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 19
+
+{"response_code":0}GET /YamahaExtendedControl/v1/main/getSignalInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 59
+
+{"response_code":0,"audio":{"error":0,"format":"","fs":""}}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 253
+
+{"response_code":0,"input":"server","playback":"stop","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":136,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 253
+
+{"response_code":0,"input":"server","playback":"stop","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":136,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 253
+
+{"response_code":0,"input":"server","playback":"stop","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"","album":"","track":"","albumart_url":"","albumart_id":136,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaExtendedControl/v1/tuner/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 138
+
+{"response_code":0,"band":"fm","auto_scan":false,"am":{"preset":0,"freq":1080,"tuned":false},"fm":{"preset":0,"freq":98100,"tuned":false}}GET /YamahaExtendedControl/v1/main/getSignalInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 70
+
+{"response_code":0,"audio":{"error":0,"format":"PCM","fs":"44.1 kHz"}}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 298
+
+{"response_code":0,"input":"server","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"Bach","album":"A Masterpiece Collection","track":"Bouree In E Minor","albumart_url":"","albumart_id":138,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaExtendedControl/v1/main/getSignalInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 70
+
+{"response_code":0,"audio":{"error":0,"format":"MP3","fs":"44.1 kHz"}}GET /YamahaExtendedControl/v1/main/getSignalInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 70
+
+{"response_code":0,"audio":{"error":0,"format":"MP3","fs":"44.1 kHz"}}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 340
+
+{"response_code":0,"input":"server","playback":"play","repeat":"off","shuffle":"off","play_time":0,"total_time":0,"artist":"Bach","album":"A Masterpiece Collection","track":"Bouree In E Minor","albumart_url":"/YamahaRemoteControl/AlbumART/AlbumART.ymf","albumart_id":139,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaRemoteControl/AlbumART/AlbumART.ymf HTTP/1.1
+Host: 192.168.1.146
+Accept: */*
+Accept-Language: en-au
+Connection: keep-alive
+Accept-Encoding: gzip, deflate
+User-Agent: MusicCast/1.50 CFNetwork/758.5.3 Darwin/15.6.0
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: image/x-ymf
+Content-Length: 3952
+
+1...............*Q8w....26Y ....0 D......Y........XR..d$$3.!kK~zJd.N..KEs...W..A.Sc...f'.j..`......i..........f...."...L.H...Y.M.X|.h
+
+1......z...3.D..2
+....}4.?....#.[".>.^...L. ..X....yr.;..}..|t.........g.ts....8..3.b6.p.[.c.....).....A.......
+.MC.u.PA.0y.*.T.x..5RH._0;.....
+.0.D....s..........t...-.Lv:.......W.o..dw~l..$hE...."...I.S..~.......=....?l...........zpPb.6}.. ..G/S..P.o4Y...CR..b*\..R.!.ElK...v..1......+b.B.B
+...z..*......
+......(...a.>8
+.K\....p.h..........U.....J..x)...{p..|.....M.W.X..;H.,........U..M......?..-...t..f@:KD..E.}..F...r....fF....3..I.
+.l..o..R4..Wd.5.Es..e..[..B....,..^...!..s;d..dk<.....,....D....$.....D_.JX}&.)....1...eESc..g@..BU
+R...t.%.#.U...u6..................^.
+Q..n.....9.......+......].z.0..n...k."(]...%......AH.4[e.Yg:.Y.
+.M...[..T..H...r..z.G....>..<..ItI{!../D..-....@.o..$............ct.DV/..&.&.0.m...vq.A....x..'d....a*.2.1?..V......8Vc}}bl...&.4.dH).....+.G.-G.....o....9...M...-.a .[CL(y....b........r
+.3...p......oL ........3%Q]g.......t..r9./
+..l..].......{@69.H9..L.V.......C!.P......rk_.T.b).....L.= t).....E..L:...b,.aTk........./..X..H.........H...>.Z.w{x
+d.%..f.v......K..H.}..]..Q.FYPZm?m........h..lg........9fs....X......K....W.....>=b.G.l..[XD3..9..........E%)......c...T..m...{.%.=.%r...&..D...v....#.*....2...C.d.3.	..T..d.57...
+T..V.$.m..#...v\....1..Xp6
+.../._ y;*..%......9.x...e..........S....i.>...j.vb.6...'p..M...Q..P..F.l.L%...%cy.........\R.xC.v
+.S..A.*........O.....GMZ..Ua......W..3..
+EH....Kj.sv..Y.A...Y..P..`._.d9....... ..$U.Q..W4...V..X#.].U.....h......_2(}........z.....'.d.R..N.5..	.Q....Y*... ...Y.........x.:....l...pa..N..
+o.F.$..`.p$Up<.,,...u7.}..x][.R..fE.#..q..3.].x.9p...w<.@.._F.(R.hZ....~.......z.`d#.....%..........N...F..4*.e3.......q..;E.3..k.G\..z..V.:.M..'@&A8..b.}K..^p.Rm...& -..w...{.Sc...d....DA.........T-\..P.!z.i......Y..O.y.B..}c"..3[".Z..........(y..I.......S'dU~.,.Ow-!.."................~....r.)............@....$.e...j;jD..t....V.V9.L&r.4J.x=..z+/D.}.."D.i:...$......<..+..$*..U<>........L.......	...o..e..a...36.,.............@."%Cj.m.,.."....Gqx.....I..p.......&...2.l
+...3R.[.s........%Lj..0.vm.8..."
+lm6.-).mk.....yh...
+}*.......b>%`..7x.........>S..Se.T<.O...C.......X.....-..YB.^...].....u.....0.....*/E.L.t.>.............-.R..$.....r.6.....cFB....6..........t.....h..@.l..M....	.	.Dd\|......y..ba*k...g...bT.._...O.qYX...A.....R.-...f......_.N..].vX...:+...N....[.....l
+*......
+[...F.^.Xr..\......n...c.Q$..t......AP5.*y..D..nS...l....z.........C.2....Hi.......E.H..H.T....s..L.l..u....p..4.N....
+....1b.&.x.O|............0y<.o.q...&.y2E	......X.....x`.S.dUC.\-6...P...Q....NLY..X..j..U.9Jl=7..B.Gb....i.'O...I.......).......N....;...'&.N...$.aQ......X.......D..
+.p.P..../J..H.2-..kt.......I....	c...tL
+..... ...AB......3%`...1.['..-0.Do...._....l....+k.8..$.S).<..2.I1......W6%E..=6..~..........D.p.6T[..&....(..b
+.	....c.....xW.CU
+..P.).\..</..-.........Bq+5....}.Y.D...E.v'.~+hUa....4..V..+.....bB..{.
+....a..v...*.8.;....{.Om.!....=%....^.......b0..B..Xr..6........a.I#......;..5..s..b.9....En...P.a....U.....2.
+.......8EG.Ll.7l..@*..<................s .	.PO...c...w......":.......wo..6Q.@.9=..k.....\.Qi"..c(..p &...-.K..F~U...29m.('...=F..........T...U...wr......\.Q|..5.paf......V..<R..dv..d{...``g.7.u.....d..q(......ax....+...tm..tL+...C.g.i9z.a.;.o......z*.....4..y..z..&..im..2.#r....=......j8naZ.g.(&....../|.u.....k.Q....W.....%..u.".J.........:.Ftj1.....\ZeK.....i.g..y.j .u*\.
+....SL....v.(...@.^
+....|X.R~]z?..$.Z..B..h_.G/..O......."}_..M}....].Nf.P.....i..$.=........^n._.Vy...u.......Q....L.a6.....p%.....~.j.N..6..%Rw}..S....^...t...7,<.W.9....S).{!...B..H>.-W]..m#
+0.T-;.. .a...4.U/.....m..D.
+....g3.3.......^.)..n.i........e.ia.........7........)^'.LI....j..f(t..(.....`.....o'(...a<!....H.u*~..H....?..2O. ..^..._.......>...H...@..g...4..h.O|...J.8&>..,k%..'q.vd..n.?..."....X.......}............7.S.....}..m8'.......W.:r.....9....Q	^...^..P..+...`4g~l
+C..@....S.6....C*N....f...!.....
+...y.4.Ha...q....Q!GET /YamahaExtendedControl/v1/main/getStatus HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 303
+
+{"response_code":0,"power":"on","sleep":0,"volume":23,"mute":false,"max_volume":161,"input":"server","distribution_enable":true,"sound_program":"5ch_stereo","direct":false,"enhancer":true,"tone_control":{"bass":-12,"treble":-12},"link_control":"standard","link_audio_delay":"lip_sync","disable_flags":0}GET /YamahaExtendedControl/v1/dist/getDistributionInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 127
+
+{"response_code":0,"group_id":"00000000000000000000000000000000","group_name":"(Linked) Lounge","role":"none","client_list":[]}GET /YamahaExtendedControl/v1/netusb/getPlayInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 340
+
+{"response_code":0,"input":"server","playback":"play","repeat":"off","shuffle":"off","play_time":2,"total_time":0,"artist":"Bach","album":"A Masterpiece Collection","track":"Bouree In E Minor","albumart_url":"/YamahaRemoteControl/AlbumART/AlbumART.ymf","albumart_id":139,"usb_devicetype":"unknown","auto_stopped":false,"attribute":16777727}GET /YamahaExtendedControl/v1/system/getLocationInfo HTTP/1.1
+Host: 192.168.1.146:80
+X-AppName: MusicCast/1.50(iOS)
+X-AppPort: 41100
+Accept: */*
+User-Agent: MusicCast/1.50(iOS)
+Accept-Language: en-au
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: Network_Module/1.0 (RX-V479)
+Content-Type: application/json
+Content-Length: 99
+
+{"response_code":0,"id":"7345174dcfd44df2834f1d02452cbe3c","name":"Home","zone_list":{"main":true}}
