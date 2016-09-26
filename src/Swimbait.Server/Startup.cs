@@ -22,6 +22,7 @@ using Swimbait.Common;
 using Swimbait.Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Logging.Console;
 
 namespace Swimbait.Server
@@ -127,6 +128,9 @@ namespace Swimbait.Server
                     }
                 }
             };
+
+            // So we can decode the formurlencoded content that isn't properly encoded
+            app.Use((context, next) => { context.Request.EnableRewind(); return next(); });
 
             app.UseStatusCodePages(o);
 

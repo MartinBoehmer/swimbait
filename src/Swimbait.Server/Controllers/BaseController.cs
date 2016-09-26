@@ -25,25 +25,12 @@ namespace Swimbait.Server.Controllers
             return new ObjectResult(new BasicResponse());
         }
 
+        /// <summary>
+        /// The iOS app POSTs the data application/formurlencoded and not application/json which basically stuffs model binding
+        /// </summary>
         public string ReadBody()
         {
-            //var text = StreamService.ReadText(Request.Body);
-            //return text;
-
-            var prebody = Request.Body;
-            Request.EnableRewind();
-            var body = Request.Body;
-            string result = string.Empty;
-            if (Request.ContentLength != null && Request.ContentLength > 0)
-            {
-                byte[] buffer = new byte[Request.ContentLength.Value];
-                body.ReadAsync(buffer, 0, (int)Request.ContentLength.Value).Wait();
-                result = System.Text.Encoding.UTF8.GetString(buffer);
-                
-            }
-            // Add this
-            Request.Body = prebody;
-            return result;
+            return StreamService.ReadText(Request.Body);
         }
     }
 }

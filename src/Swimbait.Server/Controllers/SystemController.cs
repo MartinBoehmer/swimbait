@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -229,7 +230,6 @@ namespace Swimbait.Server.Controllers
         [HttpPost("SetLocationName")]
         public IActionResult SetLocationName()
         {
-            
             var json = ReadBody();
             var request = JsonConvert.DeserializeObject<SetLocationNameRequest>(json);
             if (request == null)

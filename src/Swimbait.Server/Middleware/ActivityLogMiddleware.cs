@@ -47,10 +47,10 @@ namespace Swimbait.Server
             var body = "<not decoded>";
             if (!uri.ToString().Contains("secure") && request.Method.ToLower() == "post")
             {
-                body = request.Form.Keys.FirstOrDefault();
+                body = StreamService.ReadText(request.Body);
             }
 
-            var lineContent = $"{thisPort},{yamahaPort},{request.Method},{path},{body},{Environment.NewLine}";
+            var lineContent = $"{DateTime.Now.ToString("hh:mm:ss.ff")},{thisPort},{yamahaPort},{request.Method},{path},{body},{Environment.NewLine}";
 
             lock (_lockObject)
             {

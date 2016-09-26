@@ -19,7 +19,7 @@ namespace Swimbait.Common
             Directory.CreateDirectory(debugFolder);
 
             var pathAsSafeFilename = log.RequestUri.PathAndQuery.Replace("/", "_").Replace("?", "_");
-            var filename = sequence + "_" + pathAsSafeFilename + "_" + log.RequestUri.Host;
+            var filename = sequence.ToString().PadLeft(2, '0') + "_" + pathAsSafeFilename + "_" + log.RequestUri.Host;
 
             var debugFile = Path.Combine(debugFolder, $"{filename}.txt");
 

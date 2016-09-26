@@ -23,11 +23,12 @@ namespace Swimbait.Common
         {
             var cols = csv.Split(',');
             var log = new RequestLog();
-            log.ActualPort = Convert.ToInt32(cols[0]);
-            log.YamahaPort = Convert.ToInt32(cols[1]);
-            log.Method = cols[2];
-            log.PathAndQuery = cols[3];
-            log.RequestBody = cols[4];
+            // 0 = time
+            log.ActualPort = Convert.ToInt32(cols[1]);
+            log.YamahaPort = Convert.ToInt32(cols[2]);
+            log.Method = cols[3];
+            log.PathAndQuery = cols[4];
+            log.RequestBody = cols[5];
             return log;
         }
     }
