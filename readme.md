@@ -44,7 +44,7 @@ Restart Visual Studio after setting these in a powershell prompt
 5. The app will respond with an error. (More work required)
 
 ## Documentation
-The [doc](https://github.com/neutmute/swimbait/tree/master/doc) folder contains various captures and collected information, including the Yamaha authored [Yamaha Extended Control API Specification (Basic) PDF](https://github.com/neutmute/swimbait/raw/master/doc/yamaha/YXC_API_Spec_Basic.pdf) which describes much of the MusicCast REST API.  
+The [doc](https://github.com/neutmute/swimbait/tree/master/doc) folder contains various captures and collected information, including the Yamaha authored [Yamaha Extended Control API Specification (Basic) and (Advanced)](https://github.com/neutmute/swimbait/raw/master/doc/yamaha) and which describes much of the MusicCast REST API.  
 
 ### Blog 
 There is some more reading at this [blog entry](http://blog.turbine51.net/2016/04/04/Yamaha-Musiccast-Protocol/)
